@@ -3,7 +3,7 @@ A system that facilitate the management of projects using the agile process fram
 
 Backlog
 
-| ID | As a.. | I want to be able to | So that | Risk | Sprint | Status |
+| ID | As a.. | I want to be able to | So that | Difficulty | Sprint | Status |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | US01 | User | to sign-up by providing my name(20 chars max), email and password(min length 8) and clicking on the button "sign-up" | I will have my own dashboard | High | 1 | TODO |
 | US02 | User | to sign-in by providing my email and password and clicking on the button "sign-in" | I can access to my dashboard | High | 1 | TODO |
