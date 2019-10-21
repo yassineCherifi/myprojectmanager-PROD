@@ -6,7 +6,7 @@ Backlog
 | ID | As a.. | I want to be able to | So that | Difficulty | Sprint | Status |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | US01 | User | to sign-up by providing my name(20 chars max), email and password(min length 8) and clicking on the button "sign-up" | I will have my own dashboard | 1 | 1 | TODO |
-| US02 | User | to sign-in by providing my email and password and clicking on the button "sign-in" | I can access to my dashboard | High | 3 | TODO |
+| US02 | User | to sign-in by providing my email and password and clicking on the button "sign-in" | I can access to my dashboard | 3 | 1 | TODO |
 | US03 | User | to logout by clicking on the button "logout" in the dashboard|  can get out of my dashboard | 1 | 1 | TODO |
 | US04 | User | to edit my profile (name, email, password) by clicking on the button "edit profile" in the dashboard and modifying the fields(name(20 chars max), email, password(min length 8) and confirm on the button "OK" the changes or cancel by clicking on the button "cancel" | I can secure my profile | 1 | 1 | TODO |
 | US05 | Project manager | to create a new project by clicking on the button "New project" in the dashboard and giving (name(20 chars max) , description(100 chars max), status(En cours, terminé)) and confirming by clicking on the button "Ok" or cancelling on the button "cancel" | I can start working on it | 1 | 1 | TODO |
