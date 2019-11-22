@@ -56,4 +56,4 @@ Taks list :
 
 | ID_issue | task_description |  Definition of Done | cost (day) | Developer | Status |
 | :-: | :-: | :-: | :-: | :-: | :-: |
-| US13 | Install packages : selenium web driver, mocha and chai and configure them, Add E2E tests for login,register, get/add projects and issues | All the packages have been installed, files : register.login.test.js, projects.test.js & issues.test.js have been added and runned | 0.5 | CHERIFI | DONE | 
+| Tests | Install packages : selenium web driver, mocha and chai and configure them, Add E2E tests for login,register, get/add projects and issues | All the packages have been installed, files : register.login.test.js, projects.test.js & issues.test.js have been added and runned | 0.5 | CHERIFI | DONE | 
