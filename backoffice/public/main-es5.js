@@ -39,7 +39,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div id=\"viewport\">\n  <!-- Sidebar -->\n  <div *ngIf=\"userInfos\" id=\"sidebar\">\n    <header>\n        <p style=\"text-align: center\"><span class=\"badge badge-secondary\"> Bienvenue {{ userInfos.name}}</span></p>\n\n      </header>\n\n    <ul class=\"nav\">\n      <li>\n        <a routerLink=\"projects\">\n          <i class=\"zmdi zmdi-view-dashboard\"></i> Mes projets\n        </a>\n      </li>\n      <li>\n        <a routerLink=\"projects\" >\n          <i class=\"zmdi zmdi-view-dashboard\"></i> Mes collaborateurs\n        </a>\n      </li>\n      <li>\n        <a routerLink=\"projects\" >\n          <i class=\"zmdi zmdi-view-dashboard\"></i> Paramètres\n        </a>\n      </li>\n      <li>\n        <a href=\"javascript:void(0)\" (click)=\"logout()\">\n          <i class=\"zmdi zmdi-view-dashboard\"></i> Déconnexion\n        </a>\n      </li>\n    </ul>\n  </div>\n  <!-- Content -->\n  <div id=\"content\">\n    <div class=\"container-fluid\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div id=\"viewport\">\n  <!-- Sidebar -->\n  <div *ngIf=\"userInfos\" id=\"sidebar\">\n    <header>\n        <p style=\"text-align: center\"><span class=\"badge badge-secondary\"> Bienvenue {{ userInfos.name}}</span></p>\n\n      </header>\n\n    <ul class=\"nav\">\n      <li>\n        <a routerLink=\"projects\">\n          <em class=\"zmdi zmdi-view-dashboard\"></em> Mes projets\n        </a>\n      </li>\n      <li>\n        <a routerLink=\"projects\" >\n          <em class=\"zmdi zmdi-view-dashboard\"></em> Mes collaborateurs\n        </a>\n      </li>\n      <li>\n        <a routerLink=\"edit\" >\n          <em class=\"zmdi zmdi-view-dashboard\"></em> Mon profil\n        </a>\n      </li>\n      <li>\n        <a href=\"javascript:void(0)\" (click)=\"logout()\">\n          <em class=\"zmdi zmdi-view-dashboard\"></em> Déconnexion\n        </a>\n      </li>\n    </ul>\n  </div>\n  <!-- Content -->\n  <div id=\"content\">\n    <div class=\"container-fluid\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/detailprojet.component.html": 
@@ -50,7 +50,62 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card w-100\">\n    <div class=\"card-body\">\n        <h4 class=\"card-title\">{{ project?.title }}</h4>\n        <p class=\"card-text\" style=\"color: gray;\">{{ project?.description }}</p>\n        <a *ngIf=\"isCreator\" class=\"btn btn-primary\" data-toggle=\"collapse\" href=\"#editproject\" role=\"button\"\n            aria-expanded=\"false\" aria-controls=\"editproject\">Editer <i class=\"fa fa-pencil\"></i></a>\n    </div>\n\n    <div class=\"collapse multi-collapse\" id=\"editproject\">\n        <div class=\"card card-body\">\n            <div class=\"col-md-5\">\n                <fieldset>\n                    <form #editproject=\"ngForm\" (ngSubmit)=\"editProject(editproject)\">\n                        <div class=\"form-group\">\n                            <input style=\"width: 100%;\" required type=\"email\" [(ngModel)]=\"modelproject.title\"\n                                class=\"form-control\" name=\"title\" id=\"title\" ng-init=\"myText='Hello World!'\">\n                        </div>\n                        <div class=\"form-group\">\n                            <textarea class=\"form-control\" required style=\"width: 100%;resize: none;\"\n                                [(ngModel)]=\"modelproject.description\" id=\"description\" name=\"description\"\n                                rows=\"4\">{{project?.description}}</textarea>\n                        </div>\n                        <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#editproject\" role=\"button\"\n                            (click)=\"editProject(editproject)\" aria-expanded=\"false\"\n                            aria-controls=\"editproject\">Confirmer</a>\n                    </form>\n                </fieldset>\n            </div>\n        </div>\n    </div>\n</div><br>\n<ul class=\"nav nav-tabs\" id=\"myTab\" role=\"tablist\">\n    <li class=\"nav-item\">\n        <a class=\"nav-link active\" id=\"home-tab\" data-toggle=\"tab\" href=\"#home\" role=\"tab\" aria-controls=\"home\"\n            aria-selected=\"true\">Issues</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"taches-tab\" data-toggle=\"tab\" href=\"#taches\" role=\"tab\" aria-controls=\"taches\"\n            aria-selected=\"false\">Tâches</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" href=\"#tests\" role=\"tab\" aria-controls=\"profile\"\n            aria-selected=\"false\">Tests</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"sprints-tab\" data-toggle=\"tab\" href=\"#sprints\" role=\"tab\" aria-controls=\"sprints\"\n            aria-selected=\"false\">Sprints</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"releases-tab\" data-toggle=\"tab\" href=\"#releases\" role=\"tab\" aria-controls=\"releases\"\n            aria-selected=\"false\">Releases</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"documentations-tab\" data-toggle=\"tab\" href=\"#documentations\" role=\"tab\"\n            aria-controls=\"documentations\" aria-selected=\"false\">Documentations</a>\n    </li>\n</ul>\n\n<div class=\"tab-content\">\n    <div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\n        <div class=\"card-body\">\n            <h5 class=\"card-title\">Liste des issues</h5>\n            <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#addIssue\" role=\"button\" aria-expanded=\"false\"\n                aria-controls=\"addIssue\">Ajouter <i class=\"fa fa-plus\"></i></a>\n        </div>\n\n        <div class=\"collapse multi-collapse\" id=\"addIssue\">\n            <div class=\"card card-body\">\n                <div class=\"col-md-6\">\n                    <fieldset>\n                        <form #newIssue=\"ngForm\" (ngSubmit)=\"newIssue.valid\">\n                            <div class=\"from row\">\n                                <div class=\"form-group col-md-12\">\n                                    <textarea class=\"form-control\" placeholder=\"Décrire votre issue\"\n                                        style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                        [(ngModel)]=\"modelIssue.description\" rows=\"4\"></textarea>\n                                </div>\n                            </div>\n                            <div class=\"from row\">\n                                <div class=\"form-group col\">\n                                    <input type=\"email\" class=\"form-control\" placeholder=\"ID\" name=\"issueID\"\n                                        id=\"issueID\" rows=\"3\" [(ngModel)]=\"modelIssue.issueID\">\n                                </div>\n                                <div class=\"form-group col\">\n                                    <input type=\"email\" class=\"form-control\" placeholder=\"Priorité\" name=\"priorite\"\n                                        id=\"priorite\" rows=\"3\" [(ngModel)]=\"modelIssue.priorite\">\n                                </div>\n                                <div class=\"form-group col\">\n                                    <select class=\"custom-select\" id=\"difficulte\" name=\"difficulte\"\n                                        [(ngModel)]=\"modelIssue.difficulte\">\n                                        <option disabled value='0'>Difficulté</option>\n                                        <option>Basse</option>\n                                        <option>Moyenne</option>\n                                        <option>Elevée</option>\n                                    </select>\n                                </div>\n                                <div class=\"form-group col\">\n                                    <select (change)=\"ChangingValue($event)\" class=\"custom-select\" id=\"status\"\n                                        name=\"status\" [(ngModel)]=\"modelIssue.status\" [value]='0'>\n                                        <option disabled value='0'>Status</option>\n                                        <option>En cours</option>\n                                        <option>Terminé</option>\n                                    </select>\n\n                                </div>\n                            </div>\n                            <a class=\"btn btn-success\" (click)=\"onSubmitIssue(newIssue)\" data-toggle=\"collapse\"\n                                href=\"#addIssue\" role=\"button\" aria-expanded=\"false\"\n                                aria-controls=\"addIssue\">Ajouter</a>\n                        </form>\n                    </fieldset>\n                </div>\n            </div>\n        </div>\n\n        <table class=\"table table-striped\">\n            <thead class=\"thead\">\n                <tr>\n                    <th scope=\"col\">ID</th>\n                    <th scope=\"col\">Description</th>\n                    <th scope=\"col\">Priorité </th>\n                    <th scope=\"col\">Difficulté </th>\n                    <th scope=\"col\">Status </th>\n                    <th></th>\n                </tr>\n            </thead>\n\n            <tbody>\n                <tr *ngFor=\"let issue of project?.issues\">\n                    <td>{{issue?.issueID}}</td>\n                    <td style=\"width: 40%;\">{{issue?.description}}</td>\n                    <td>{{issue?.priorite}}</td>\n                    <td>{{issue?.difficulte}}</td>\n                    <td>{{issue?.status}}</td>\n\n                    <td>\n                        <button type=\"button\" (click)=\"updateModalEditIssue(issue)\" data-toggle=\"modal\"\n                            data-target=\"#editIssueModal\" class=\"btn btn-info\"><i class=\"fa fa-edit\"></i></button>&nbsp;\n                        <button type=\"button\" (click)=\"removeIssue(issue._id)\" class=\"btn btn-danger\"><i\n                                class=\"fa fa-trash-o\"></i></button>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n    <div class=\"modal fade\" id=\"editIssueModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n        aria-hidden=\"true\">\n        <div class=\"modal-dialog modal-lg\" role=\"document\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer issue</h5>\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                </div>\n                <div class=\"modal-body\">\n                    <form #editIssue=\"ngForm\" (ngSubmit)=\"editIssue.valid\">\n                        <div class=\"from row\">\n                            <div class=\"form-group col-md-12\">\n                                <textarea class=\"form-control\" placeholder=\"Décrire votre issue\"\n                                    style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                    [(ngModel)]=\"modelIssueEdit.description\" rows=\"4\"></textarea>\n                            </div>\n                        </div>\n                        <div class=\"from row\">\n                            <div class=\"form-group col\">\n                                <input type=\"email\" class=\"form-control\" placeholder=\"ID\" name=\"issueID\" id=\"issueID\"\n                                    rows=\"3\" [(ngModel)]=\"modelIssueEdit.issueID\">\n                            </div>\n                            <div class=\"form-group col\">\n                                <input type=\"email\" class=\"form-control\" placeholder=\"Priorité\" name=\"priorite\"\n                                    id=\"priorite\" rows=\"3\" [(ngModel)]=\"modelIssueEdit.priorite\">\n                            </div>\n                            <div class=\"form-group col\">\n                                <select class=\"custom-select\" id=\"difficulte\" name=\"difficulte\"\n                                    [(ngModel)]=\"modelIssueEdit.difficulte\">\n                                    <option disabled value='0'>Difficulté</option>\n                                    <option>Basse</option>\n                                    <option>Moyenne</option>\n                                    <option>Elevée</option>\n                                </select>\n                            </div>\n                            <div class=\"form-group col\">\n                                <select (change)=\"ChangingValue($event)\" class=\"custom-select\" id=\"status\" name=\"status\"\n                                    [(ngModel)]=\"modelIssueEdit.status\" [value]='0'>\n                                    <option disabled value='0'>Status</option>\n                                    <option>En cours</option>\n                                    <option>Terminé</option>\n                                </select>\n\n                            </div>\n                        </div>\n                    </form>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                    <button type=\"button\" (click)=\"onSubmitEditIssue(editIssue)\" data-dismiss=\"modal\"\n                        class=\"btn btn-primary\">Confirmer</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div id=\"taches\" class=\"tab-pane fade\">\n\n        <div class=\"card-body\">\n            <h5 class=\"card-title\">Liste des tâches</h5>\n            <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#multiCollapseExample2\" role=\"button\"\n                aria-expanded=\"false\" aria-controls=\"multiCollapseExample2\">Ajouter <i class=\"fa fa-plus\"></i></a>\n        </div>\n        <div class=\"collapse multi-collapse\" id=\"multiCollapseExample2\">\n            <div class=\"card card-body\">\n                <div class=\"col-md-5\">\n                    <fieldset>\n                        <form #newTask=\"ngForm\" (ngSubmit)=\"newTask.valid\">\n                            <div class=\"from row\">\n                                <div class=\"form-group col\">\n                                    <select class=\"custom-select\" id=\"idIssues\" name=\"idIssues\"\n                                        [(ngModel)]=\"modelTask.issue\">\n                                        <option disabled value='0'>Choisir l'issue</option>\n                                        <option [value]='issue?.issueID' *ngFor=\"let issue of project?.issues\">\n                                            {{issue?.issueID}} / {{issue?.description}}\n                                        </option>\n                                    </select>\n                                </div>\n                            </div>\n                            <div class=\"from row\">\n                                <div class=\"form-group col-md-12\">\n                                    <textarea class=\"form-control\" placeholder=\"Décrire votre tâche\"\n                                        style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                        [(ngModel)]=\"modelTask.description\" rows=\"4\"></textarea>\n                                </div>\n                            </div>\n                            <div class=\"from row\">\n                                <div class=\"form-group col\">\n                                    <input type=\"email\" class=\"form-control\" placeholder=\"Côut\" name=\"cout\" id=\"cout\"\n                                        rows=\"3\" [(ngModel)]=\"modelTask.cout\">\n                                </div>\n                                <div class=\"form-group col\">\n                                    <select class=\"custom-select\" id=\"developer\" name=\"developer\"\n                                        [(ngModel)]=\"modelTask.developer\">\n                                        <option disabled value='0'>Choisir le développeur</option>\n                                        <option *ngFor=\"let user of users\">\n                                            {{user?.name}} / {{user?.email}}\n                                        </option>\n                                    </select>\n                                </div>\n                            </div>\n                            <a class=\"btn btn-success\" (click)=\"onSubmitTask(newTask)\" data-toggle=\"collapse\"\n                                href=\"#multiCollapseExample2\" role=\"button\" aria-expanded=\"false\"\n                                aria-controls=\"multiCollapseExample2\">Confirmer</a>\n                        </form>\n                    </fieldset>\n                </div>\n            </div>\n        </div>\n\n        <table class=\"table table-striped\">\n            <thead class=\"thead\">\n                <tr>\n                    <th scope=\"col\">Issues</th>\n                    <th scope=\"col\">Description</th>\n                    <th scope=\"col\">Coût</th>\n                    <th scope=\"col\">Développeur</th>\n                    <th></th>\n                </tr>\n            </thead>\n\n            <tbody>\n                <tr *ngFor=\"let task of project?.tasks\">\n                    <td>\n                        <p *ngFor=\"let issue of task?.idIssues\">[ {{issue}} ]</p>\n                    </td>\n                    <td style=\"width: 40%;\">{{task?.description}}</td>\n                    <td>{{task?.cout}}</td>\n                    <td>{{task?.developer}}</td>\n\n                    <td>\n                            <button type=\"button\" (click)=\"updateModalEditTask(task)\" data-toggle=\"modal\"\n                            data-target=\"#editTaskModal\" class=\"btn btn-info\"><i class=\"fa fa-edit\"></i></button>&nbsp;\n                        <button type=\"button\" (click)=\"removeTask(task._id)\" class=\"btn btn-danger\"><i\n                                class=\"fa fa-trash-o\"></i></button>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n\n    <div class=\"modal fade\" id=\"editTaskModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n        aria-hidden=\"true\">\n        <div class=\"modal-dialog modal-lg\" role=\"document\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer tâche</h5>\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                </div>\n                <div class=\"modal-body\">\n                    <form #editTask=\"ngForm\" (ngSubmit)=\"editTask.valid\">\n                        <div class=\"from row\">\n                            <div class=\"form-group col\">\n                                <select class=\"custom-select\" id=\"idIssues\" name=\"idIssues\"\n                                    [(ngModel)]=\"modelTaskEdit.issue\">\n                                    <option disabled value='0'>Choisir l'issue</option>\n                                    <option [value]='issue?.issueID' *ngFor=\"let issue of project?.issues\">\n                                        {{issue?.issueID}} / {{issue?.description}}\n                                    </option>\n                                </select>\n                            </div>\n                        </div>\n                        <div class=\"from row\">\n                            <div class=\"form-group col-md-12\">\n                                <textarea class=\"form-control\" placeholder=\"Décrire votre tâche\"\n                                    style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                    [(ngModel)]=\"modelTaskEdit.description\" rows=\"4\"></textarea>\n                            </div>\n                        </div>\n                        <div class=\"from row\">\n                            <div class=\"form-group col\">\n                                <input type=\"email\" class=\"form-control\" placeholder=\"Côut\" name=\"cout\" id=\"cout\"\n                                    rows=\"3\" [(ngModel)]=\"modelTaskEdit.cout\">\n                            </div>\n                            <div class=\"form-group col\">\n                                <select class=\"custom-select\" id=\"developer\" name=\"developer\"\n                                    [(ngModel)]=\"modelTaskEdit.developer\">\n                                    <option disabled value='0'>Choisir le développeur</option>\n                                    <option *ngFor=\"let user of users\">\n                                        {{user?.name}} / {{user?.email}}\n                                    </option>\n                                </select>\n                            </div>\n                        </div>\n                    </form>\n                </div>\n                <div class=\"modal-footer\">\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                    <button type=\"button\" (click)=\"onSubmitEditTask(editTask)\" data-dismiss=\"modal\"\n                        class=\"btn btn-primary\">Confirmer</button>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div id=\"tests\" class=\"tab-pane fade\">\n        <h3>Liste des tests</h3>\n        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,\n            totam rem\n            aperiam.</p>\n    </div>\n    <div id=\"sprints\" class=\"tab-pane fade\">\n        <h3>Liste des sprints</h3>\n        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt\n            explicabo.</p>\n    </div>\n    <div id=\"releases\" class=\"tab-pane fade\">\n        <h3>Liste des releases</h3>\n        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt\n            explicabo.</p>\n    </div>\n    <div id=\"documentations\" class=\"tab-pane fade\">\n        <h3>Liste des documentations</h3>\n        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt\n            explicabo.</p>\n    </div>\n\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card w-100\">\n    <div class=\"card-body\">\n        <h4 class=\"card-title\">{{ project?.title }}</h4>\n        <p class=\"card-text\" style=\"color: gray;\">{{ project?.description }}</p>\n        <a *ngIf=\"isCreator\" class=\"btn btn-primary\" data-toggle=\"collapse\" href=\"#editproject\" role=\"button\"\n            aria-expanded=\"false\" aria-controls=\"editproject\">Editer <em class=\"fa fa-pencil\"></em></a>\n    </div>\n\n    <div class=\"collapse multi-collapse\" id=\"editproject\">\n        <div class=\"card card-body\">\n            <div class=\"col-md-5\">\n                <fieldset>\n                    <legend>Modifier le projet</legend>\n                    <form #editproject=\"ngForm\" (ngSubmit)=\"editProject(editproject)\">\n                        <div class=\"form-group\">\n                            <input style=\"width: 100%;\" required type=\"email\" [(ngModel)]=\"modelproject.title\"\n                                class=\"form-control\" name=\"title\" id=\"title\" ng-init=\"myText='Hello World!'\">\n                        </div>\n                        <div class=\"form-group\">\n                            <textarea class=\"form-control\" required style=\"width: 100%;resize: none;\"\n                                [(ngModel)]=\"modelproject.description\" id=\"description\" name=\"description\"\n                                rows=\"4\">{{project?.description}}</textarea>\n                        </div>\n                        <div class=\"form-group\">\n                            <select style=\"width: 100%;\" class=\"custom-select\" id=\"status\" name=\"status\" [(ngModel)]=\"modelproject.status\"\n                                [value]='0'>\n                                <option disabled value='0'>Status</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n                        <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#editproject\" role=\"button\"\n                            (click)=\"editProject(editproject)\" aria-expanded=\"false\"\n                            aria-controls=\"editproject\">Confirmer</a>\n                    </form>\n                </fieldset>\n            </div>\n        </div>\n    </div>\n</div><br>\n<ul class=\"nav nav-tabs\" id=\"myTab\" role=\"tablist\">\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"home-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='issues' role=\"tab\" aria-controls=\"home\"\n            aria-selected=\"true\">Issues</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"taches-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='tasks' role=\"tab\" aria-controls=\"taches\"\n            aria-selected=\"false\">Tâches</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"sprints-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='sprints' role=\"tab\" aria-controls=\"sprints\"\n            aria-selected=\"false\">Sprints</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='tests' role=\"tab\" aria-controls=\"tests\"\n            aria-selected=\"false\">Tests</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"releases-tab\" data-toggle=\"tab\" role=\"tab\" aria-controls=\"releases\"\n            aria-selected=\"false\">Releases</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"documentations-tab\" data-toggle=\"tab\" role=\"tab\" aria-controls=\"documentations\"\n            aria-selected=\"false\">Documentations</a>\n    </li>\n</ul>\n\n<div class=\"tab-content\">\n    <div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\n\n        <app-root></app-root>\n    </div>\n</div>");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/detailsprint/detailsprint.component.html": 
+        /*!**********************************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/detailsprint/detailsprint.component.html ***!
+          \**********************************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<br>\n<div class=\"card\">\n    <div class=\"card-body\">\n        <h4 class=\"card-title\">{{sprint?.title}} <span class=\"badge badge-secondary\">{{sprint?.status}}</span></h4>\n        <h5><span class=\"badge badge-info\">{{sprint?.startDate}} au {{sprint?.endDate}}</span></h5>\n        <p>Nombre d'issues: <span class=\"badge badge-dark\">{{sprint?.issues.length}}</span></p>\n        <p>Difficultés totales: <span class=\"badge badge-danger\">{{nbrDifficulte}}</span></p>\n        <p>Difficultés résolues: <span class=\"badge badge-success\">{{nbrDifficulteRes}}</span></p>\n    </div>\n</div>\n<div class=\"card\">\n    <div class=\"card-body\">\n        <h5 class=\"card-title\">Issues</h5>\n        <div class=\"form-group\">\n            <ng-select (add)=\"onAdd($event)\" class=\"custom\" placeholder=\"+ Ajouter des issues\" [(ngModel)]=\"selectedItems\" [multiple]=\"true\">\n                <ng-option *ngFor=\"let issue of issues\" [value]=\"issue?._id\" >{{issue?.issueID}} - {{issue?.description}}</ng-option>\n            </ng-select>\n        </div>\n        <table class=\"table table-striped\">\n            <caption>Liste des issues du sprint</caption>\n            <thead class=\"thead\">\n                <tr>\n                    <th scope=\"col\">ID</th>\n                    <th scope=\"col\">Description</th>\n                    <th scope=\"col\">Priorité </th>\n                    <th scope=\"col\">Difficulté </th>\n                    <th scope=\"col\">Status </th>\n                    <th scope=\"col\"></th>\n                </tr>\n            </thead>\n\n            <tbody>\n                <tr *ngFor=\"let issue of sprint?.issues\">\n                    <td>#{{issue?.issueID}}</td>\n                    <td style=\"width: 40%;\">{{issue?.description}}</td>\n                    <td>{{issue?.priorite}}</td>\n                    <td>{{issue?.difficulte}}</td>\n                    <td>{{issue?.status}}</td>\n\n                    <td>\n                        <button type=\"button\" (click)=\"updateModalEditIssue(issue)\" data-toggle=\"modal\"\n                            data-target=\"#editIssueModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                        <button type=\"button\" (click)=\"removeIssueFromSprint(issue?._id)\" class=\"btn btn-danger\"><em\n                                class=\"fa fa-trash-o\"></em></button>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n</div>\n\n<div class=\"modal fade\" id=\"editIssueModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\naria-hidden=\"true\">\n<div class=\"modal-dialog modal-lg\" role=\"document\">\n    <div class=\"modal-content\">\n        <div class=\"modal-header\">\n            <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer issue</h5>\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n        </div>\n        <div class=\"modal-body\">\n            <form #editIssue=\"ngForm\" (ngSubmit)=\"editIssue.valid\">\n                <div class=\"from row\">\n                    <div class=\"form-group col-md-12\">\n                        <textarea class=\"form-control\" placeholder=\"Décrire votre issue\"\n                            style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                            [(ngModel)]=\"modelIssueEdit.description\" rows=\"4\"></textarea>\n                    </div>\n                </div>\n                <div class=\"from row\">\n                    <div class=\"form-group col\">\n                        <input type=\"email\" class=\"form-control\" placeholder=\"ID\" name=\"issueID\" id=\"issueID\"\n                            rows=\"3\" [(ngModel)]=\"modelIssueEdit.issueID\">\n                    </div>\n\n                    <div class=\"form-group col\">\n                        <select class=\"custom-select\" id=\"priorite\" name=\"priorite\"\n                            [(ngModel)]=\"modelIssueEdit.priorite\">\n                            <option disabled value='0'>Priorité</option>\n                            <option>Basse</option>\n                            <option>Moyenne</option>\n                            <option>Elevée</option>\n                        </select>\n                    </div>\n\n                    <div class=\"form-group col\">\n                        <input type=\"email\" class=\"form-control\" placeholder=\"Difficulté\" name=\"difficulte\"\n                            id=\"difficulte\" rows=\"3\" [(ngModel)]=\"modelIssueEdit.difficulte\">\n                    </div>\n                    <div class=\"form-group col\">\n                        <select (change)=\"ChangingValue($event)\" class=\"custom-select\" id=\"status\" name=\"status\"\n                            [(ngModel)]=\"modelIssueEdit.status\" [value]='0'>\n                            <option disabled value='0'>Status</option>\n                            <option>En cours</option>\n                            <option>Terminé</option>\n                        </select>\n\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n            <button type=\"button\" (click)=\"onSubmitEditIssue(editIssue)\" data-dismiss=\"modal\"\n                class=\"btn btn-primary\">Confirmer</button>\n        </div>\n    </div>\n</div>\n</div>");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/issue/issue.component.html": 
+        /*!********************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/issue/issue.component.html ***!
+          \********************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste des issues</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#addIssue\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"addIssue\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n\n<div class=\"collapse multi-collapse\" id=\"addIssue\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-6\">\n            <fieldset>\n                <legend>Nouvelle issue</legend>\n                <form #newIssue=\"ngForm\" (ngSubmit)=\"newIssue.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre issue\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelIssue.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"number\" class=\"form-control\" placeholder=\"ID\" name=\"issueID\" id=\"issueID\"\n                                rows=\"3\" [(ngModel)]=\"modelIssue.issueID\">\n                        </div>\n\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"priorite\" name=\"priorite\"\n                                [(ngModel)]=\"modelIssue.priorite\">\n                                <option disabled value=\"\">Priorité</option>\n                                <option>Basse</option>\n                                <option>Moyenne</option>\n                                <option>Elevée</option>\n                            </select>\n                        </div>\n                        <div class=\"form-group col\">\n                            <input type=\"number\" class=\"form-control\" placeholder=\"Difficulté\" name=\"difficulte\"\n                                id=\"difficulte\" rows=\"3\" [(ngModel)]=\"modelIssue.difficulte\">\n                        </div>\n                        <div class=\"form-group col\">\n                            <select (change)=\"ChangingValue($event)\" class=\"custom-select\" id=\"status\" name=\"status\"\n                                [(ngModel)]=\"modelIssue.status\" [value]='0'>\n                                <option disabled value='0'>Status</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n\n                        </div>\n                    </div>\n                    <a class=\"btn btn-success\" (click)=\"onSubmitIssue(newIssue)\" data-toggle=\"collapse\" href=\"#addIssue\"\n                        role=\"button\" aria-expanded=\"false\" aria-controls=\"addIssue\">Ajouter</a>\n                </form>\n            </fieldset>\n        </div>\n    </div>\n</div>\n<div class=\"row justify-content-center\">\n    <div class=\"form-group col-md-3\">\n        <ng-select (change)=\"sort($event)\" (clear)=\"getIssues()\" [searchable]=\"false\" class=\"custom\" [(ngModel)]=\"selectedItem\" placeholder=\"Trier par\">\n            <ng-option [value]=\"issueID\" >ID</ng-option>\n            <ng-option [value]=\"priorite\">Priorité</ng-option>\n            <ng-option [value]=\"difficulte\">Difficulté</ng-option>\n        </ng-select>\n    </div>\n</div>\n<table class=\"table table-striped\">\n    <caption>Liste des issues</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">ID</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Priorité </th>\n            <th scope=\"col\">Difficulté </th>\n            <th scope=\"col\">Status </th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let issue of issues\">\n            <td>#{{issue?.issueID}}</td>\n            <td style=\"width: 40%;\">{{issue?.description}}</td>\n            <td>{{issue?.priorite}}</td>\n            <td>{{issue?.difficulte}}</td>\n            <td>{{issue?.status}}</td>\n\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditIssue(issue)\" data-toggle=\"modal\"\n                    data-target=\"#editIssueModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeIssue(issue._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n\n<div class=\"modal fade\" id=\"editIssueModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer issue</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editIssue=\"ngForm\" (ngSubmit)=\"editIssue.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre issue\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelIssueEdit.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"ID\" name=\"issueID\" id=\"issueID\"\n                                rows=\"3\" [(ngModel)]=\"modelIssueEdit.issueID\">\n                        </div>\n\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"priorite\" name=\"priorite\"\n                                [(ngModel)]=\"modelIssueEdit.priorite\">\n                                <option disabled value='0'>Priorité</option>\n                                <option>Basse</option>\n                                <option>Moyenne</option>\n                                <option>Elevée</option>\n                            </select>\n                        </div>\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Difficulté\" name=\"difficulte\"\n                                id=\"difficulte\" rows=\"3\" [(ngModel)]=\"modelIssueEdit.difficulte\">\n                        </div>\n                        <div class=\"form-group col\">\n                            <select (change)=\"ChangingValue($event)\" class=\"custom-select\" id=\"status\" name=\"status\"\n                                [(ngModel)]=\"modelIssueEdit.status\" [value]='0'>\n                                <option disabled value='0'>Status</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditIssue(editIssue)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>\n");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/sprint/sprint.component.html": 
+        /*!**********************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/sprint/sprint.component.html ***!
+          \**********************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste des sprints</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#multiCollapseExample3\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"multiCollapseExample3\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n<div class=\"collapse multi-collapse\" id=\"multiCollapseExample3\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-5\">\n            <fieldset>\n                <legend>Nouveau sprint</legend>\n                <form #newSprint=\"ngForm\" (ngSubmit)=\"newSprint.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelSprint.title\">\n                        </div>\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date du début\" name=\"dp1\"\n                                    [(ngModel)]=\"modelSprint.startDate\" ngbDatepicker #d=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\" (click)=\"d.toggle()\"\n                                        type=\"button\"></button>\n                                </div>\n                            </div>\n\n                        </div>\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date de fin\" name=\"dp2\"\n                                    [(ngModel)]=\"modelSprint.endDate\" ngbDatepicker #dd=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\" (click)=\"dd.toggle()\"\n                                        type=\"button\"></button>\n                                </div>\n                            </div>\n\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <select class=\"custom-select\" id=\"status\" name=\"status\" [(ngModel)]=\"modelSprint.status\"\n                                [value]='0'>\n                                <option disabled value='0'>Statut</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n\n                    </div>\n\n                    <a class=\"btn btn-success\" (click)=\"onSubmitSprint(newSprint)\" data-toggle=\"collapse\"\n                        href=\"#multiCollapseExample3\" role=\"button\" aria-expanded=\"false\"\n                        aria-controls=\"multiCollapseExample3\">Confirmer</a>\n\n\n\n\n                </form>\n\n            </fieldset>\n        </div>\n    </div>\n</div>\n<table class=\"table table-striped\">\n    <caption>Liste des sprints</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">Titre</th>\n            <th scope=\"col\">Période</th>\n            <th scope=\"col\">Statut</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let sprint of sprints\">\n\n            <td><a routerLink={{sprint?._id}}>{{sprint?.title}}</a></td>\n            <td>{{sprint?.startDate}} - {{sprint?.endDate}}</td>\n            <td>{{sprint?.status}}</td>\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditSprint(sprint)\" data-toggle=\"modal\"\n                    data-target=\"#editSprintModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeSprint(sprint._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<div class=\"modal fade\" id=\"editSprintModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer sprint</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editSprint=\"ngForm\" (ngSubmit)=\"newSprint.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelSprintEdit.title\">\n                        </div>\n\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date de début\" name=\"dp1\"\n                                    [(ngModel)]=\"modelSprintEdit.startDate\" ngbDatepicker #ddedit=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\" (click)=\"ddedit.toggle()\"\n                                        type=\"button\"></button>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date de fin\" name=\"dp2\"\n                                    [(ngModel)]=\"modelSprintEdit.endDate\" ngbDatepicker #ddedit2=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\" (click)=\"ddedit2.toggle()\"\n                                        type=\"button\"></button>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"status\" name=\"status\" [(ngModel)]=\"modelSprintEdit.status\"\n                                [value]='0'>\n                                <option disabled value='0'>Statut</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditSprint(editSprint)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/task/task.component.html": 
+        /*!******************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/task/task.component.html ***!
+          \******************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste des tâches</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#multiCollapseExample2\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"multiCollapseExample2\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n<div class=\"collapse multi-collapse\" id=\"multiCollapseExample2\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-5\">\n            <fieldset>\n                <legend>Nouvelle tâche</legend>\n                <form #newTask=\"ngForm\" (ngSubmit)=\"newTask.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <ng-select name=\"issues\" placeholder=\"+ Ajouter des issues\" [(ngModel)]=\"modelTask.issue\"\n                                [multiple]=\"true\">\n                                <ng-option *ngFor=\"let issue of issues\" [value]=\"issue?.issueID\">{{issue?.issueID}} -\n                                    {{issue?.description}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre tâche\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTask.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Côut\" name=\"cout\" id=\"cout\" rows=\"3\"\n                                [(ngModel)]=\"modelTask.cout\">\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <ng-select class=\"custom\" placeholder=\"Choisir le développeur\"\n                                [(ngModel)]=\"modelTask.developer\" name=\"developer\">\n                                <ng-option *ngFor=\"let user of users\" [value]=\"user?.name\">{{user?.name}} /\n                                    {{user?.email}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                    <a class=\"btn btn-success\" (click)=\"onSubmitTask(newTask)\" data-toggle=\"collapse\"\n                        href=\"#multiCollapseExample2\" role=\"button\" aria-expanded=\"false\"\n                        aria-controls=\"multiCollapseExample2\">Confirmer</a>\n                </form>\n            </fieldset>\n        </div>\n    </div>\n</div>\n\n<table class=\"table table-striped\">\n    <caption>Liste des tâches</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">Issues</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Coût</th>\n            <th scope=\"col\">Développeur</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let task of tasks\">\n            <td>\n                <p *ngFor=\"let issue of task?.idIssues\"><span class=\"badge badge-pill badge-primary\">US\n                        {{issue}}</span></p>\n            </td>\n            <td style=\"width: 40%;\">{{task?.description}}</td>\n            <td>{{task?.cout}}</td>\n            <td>{{task?.developer}}</td>\n\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditTask(task)\" data-toggle=\"modal\"\n                    data-target=\"#editTaskModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeTask(task._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<div class=\"modal fade\" id=\"editTaskModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer tâche</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editTask=\"ngForm\" (ngSubmit)=\"editTask.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <!--<select class=\"custom-select\" id=\"idIssues\" name=\"idIssues\"\n                                [(ngModel)]=\"modelTaskEdit.issue\">\n                                <option disabled value='0'>Choisir l'issue</option>\n                                <option [value]='issue?.issueID' *ngFor=\"let issue of issues\">\n                                    {{issue?.issueID}} / {{issue?.description}}\n                                </option>\n                            </select>\n                        -->\n                            <ng-select name=\"issues\" placeholder=\"+ Ajouter des issues\"\n                                [(ngModel)]=\"modelTaskEdit.issue\" bindLabel=\"idIssue\" bindValue=\"idIssue\"  [multiple]=\"true\">\n                                <ng-option *ngFor=\"let issue of issues\" [value]=\"issue?.issueID\">{{issue?.issueID}} -\n                                    {{issue?.description}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre tâche\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTaskEdit.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Côut\" name=\"cout\" id=\"cout\" rows=\"3\"\n                                [(ngModel)]=\"modelTaskEdit.cout\">\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <ng-select class=\"custom\" placeholder=\"Choisir le développeur\"\n                                [(ngModel)]=\"modelTaskEdit.developer\" name=\"developer\">\n                                <ng-option *ngFor=\"let user of users\" [value]=\"user?.name\">{{user?.name}} /\n                                    {{user?.email}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditTask(editTask)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/test/test.component.html": 
+        /*!******************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/test/test.component.html ***!
+          \******************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste des tests</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#multiCollapseExample4\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"multiCollapseExample4\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n<div class=\"collapse multi-collapse\" id=\"multiCollapseExample4\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-5\">\n            <fieldset>\n                <legend>Nouveau test</legend>\n                <form #newTest=\"ngForm\" (ngSubmit)=\"newTest.valid\">\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelTest.title\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre test\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTest.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"type\" name=\"type\" [(ngModel)]=\"modelTest.type\"\n                                [value]='0'>\n                                <option disabled value='0'>Type</option>\n                                <option>Test unitaire</option>\n                                <option>Test de validation</option>\n                            </select>\n                        </div>\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date\" name=\"dp\" [(ngModel)]=\"modelTest.date\"\n                                    ngbDatepicker #d=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\"\n                                        (click)=\"d.toggle()\" type=\"button\"></button>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Lien\" name=\"Lien\" id=\"lien\" rows=\"3\"\n                                [(ngModel)]=\"modelTest.link\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <select class=\"custom-select\" id=\"status\" name=\"status\" [(ngModel)]=\"modelTest.status\"\n                                [value]='0'>\n                                <option disabled value='0'>Statut</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n                    </div>\n                    <a class=\"btn btn-success\" (click)=\"onSubmitTest(newTest)\" data-toggle=\"collapse\"\n                        href=\"#multiCollapseExample4\" role=\"button\" aria-expanded=\"false\"\n                        aria-controls=\"multiCollapseExample4\">Confirmer</a>\n                </form>\n            </fieldset>\n        </div>\n    </div>\n</div>\n\n<table class=\"table table-striped\">\n    <caption>Liste des tests</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">ID</th>\n            <th scope=\"col\">Titre</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Type</th>\n            <th scope=\"col\">Date</th>\n            <th scope=\"col\">Lien</th>\n            <th scope=\"col\">Statut</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let test of tests\">\n            <td> </td>\n            <td>{{test?.title}}</td>\n            <td style=\"width: 40%;\">{{test?.description}}</td>\n            <td>{{test?.type}}</td>\n            <td>{{test?.date}}</td>\n            <td>{{test?.link}}</td>\n            <td>{{test?.status}}</td>\n\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditTest(test)\" data-toggle=\"modal\"\n                    data-target=\"#editTestModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeTest(test._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<div class=\"modal fade\" id=\"editTestModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer test</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editTest=\"ngForm\" (ngSubmit)=\"editTest.valid\">\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelTestEdit.title\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre test\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTestEdit.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"type\" name=\"type\" [(ngModel)]=\"modelTestEdit.type\"\n                                [value]='0'>\n                                <option disabled value='0'>Type</option>\n                                <option>Test unitaire</option>\n                                <option>Test de validation</option>\n                            </select>\n                        </div>\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date\" name=\"dp\"\n                                    [(ngModel)]=\"modelTestEdit.date\" ngbDatepicker #dedit=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\"\n                                        (click)=\"dedit.toggle()\" type=\"button\"></button>\n                                </div>\n                            </div>\n                        </div>\n\n\n\n\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Lien\" name=\"Lien\" id=\"lien\" rows=\"3\"\n                                [(ngModel)]=\"modelTestEdit.link\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <select class=\"custom-select\" id=\"status\" name=\"status\" [(ngModel)]=\"modelTestEdit.status\"\n                                [value]='0'>\n                                <option disabled value='0'>Statut</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditTest(editTest)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/listprojets/listprojets.component.html": 
@@ -61,7 +116,18 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card\">\n    <div class=\"card-body\">\n        <h3 class=\"card-title\">Mes projets</h3>\n        <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#addproject\" role=\"button\"\n            aria-expanded=\"false\" aria-controls=\"addproject\">Nouveau projet  <i class=\"fa fa-plus\"></i></a>\n    </div>\n    <div class=\"collapse multi-collapse\" id=\"addproject\">\n        <div class=\"card card-body\">\n            <div class=\"col-md-5\">\n                <fieldset>\n                    <form #newProject=\"ngForm\" (ngSubmit)=\"newProject.valid\">\n                        <div class=\"form-group\">\n                            <label for=\"title\">Titre</label>\n                            <input type=\"email\" class=\"form-control\" name=\"title\" id=\"title\" [(ngModel)]=\"model.title\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"description\">Description</label>\n                            <textarea class=\"form-control\" id=\"description\" name=\"description\" rows=\"3\" [(ngModel)]=\"model.description\"></textarea>\n                        </div>\n                        <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#addproject\" role=\"button\"\n                            (click)=\"onSubmit(newProject)\" aria-expanded=\"false\"\n                            aria-controls=\"editproject\">Confirmer</a>\n                    </form>\n                </fieldset>\n            </div>\n        </div>\n    </div>\n</div>\n<table class=\"table\">\n    <thead>\n        <tr>\n            <th scope=\"col\">Titre</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Manager</th>\n            <th scope=\"col\">Status</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let project of projects.result\">\n            <td><a routerLink={{project?._id}}>{{project?.title}}</a></td>\n            <td>{{project?.description}}</td>\n            <td>{{project?.creator?.name}}</td>\n            <td>{{project?.status}}</td>\n            <td *ngIf=\"project?.creator?._id === projects?.idlogged\">\n                <button type=\"button\" (click)=\"removeProject(project._id)\" class=\"btn btn-danger\"><i class=\"fa fa-trash\"></i></button>\n            </td>\n        </tr>\n    </tbody>\n</table>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card\">\n    <div class=\"card-body\">\n        <h3 class=\"card-title\">Mes projets</h3>\n        <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#addproject\" role=\"button\"\n            aria-expanded=\"false\" aria-controls=\"addproject\">Nouveau projet<em class=\"fa fa-plus\"></em></a>\n    </div>\n    <div class=\"collapse multi-collapse\" id=\"addproject\">\n        <div class=\"card card-body\">\n            <div class=\"col-md-5\">\n                <fieldset>\n                    <form #newProject=\"ngForm\" (ngSubmit)=\"newProject.valid\">\n                        <legend>Nouveau projet</legend>\n                        <div class=\"form-group\">\n                            <label for=\"title\">Titre</label>\n                            <input type=\"email\" class=\"form-control\" name=\"title\" id=\"title\" [(ngModel)]=\"model.title\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"description\">Description</label>\n                            <textarea class=\"form-control\" id=\"description\" name=\"description\" rows=\"3\" [(ngModel)]=\"model.description\"></textarea>\n                        </div>\n                        <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#addproject\" role=\"button\"\n                            (click)=\"onSubmit(newProject)\" aria-expanded=\"false\"\n                            aria-controls=\"editproject\">Confirmer</a>\n                    </form>\n                </fieldset>\n            </div>\n        </div>\n    </div>\n</div>\n<table class=\"table\">\n    <caption>Liste des projets</caption>\n    <thead>\n        <tr>\n            <th scope=\"col\">Titre</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Manager</th>\n            <th scope=\"col\">Status</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let project of projects.result\">\n            <td><a routerLink={{project?._id}}>{{project?.title}}</a></td>\n            <td>{{project?.description}}</td>\n            <td>{{project?.creator?.name}}</td>\n            <td>{{project?.status}}</td>\n            <td *ngIf=\"project?.creator?._id === projects?.idlogged\">\n                <button type=\"button\" (click)=\"removeProject(project._id)\" class=\"btn btn-danger\"><em class=\"fa fa-trash\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/userdetail/userdetail.component.html": 
+        /*!*****************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/userdetail/userdetail.component.html ***!
+          \*****************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-6\">\n  <h2 class=\"text-center\">Edit User</h2>\n  <form #editForm=\"ngForm\" (ngSubmit)=\"editForm.valid\">\n    <div class=\"form-group\">\n      <label for=\"email\">Email address:</label>\n      <input type=\"email\" placeholder=\"Email\" name=\"email\" class=\"form-control\" id=\"email\"\n      [(ngModel)]=\"this.userService.user.email\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"name\">First Name:</label>\n      <input placeholder=\"Name\" name=\"Name\" class=\"form-control\" id=\"Name\"\n      [(ngModel)]=\"this.userService.user.name\">\n    </div>\n    <button class=\"btn btn-success\" (click)=\"onSubmit(editForm)\">Update</button>\n  </form>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/login/login.component.html": 
@@ -416,6 +482,12 @@
             /* harmony import */ var _auth_auth_guard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./auth/auth.guard */ "./src/app/auth/auth.guard.ts");
             /* harmony import */ var _components_dashboard_listprojets_listprojets_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/dashboard/listprojets/listprojets.component */ "./src/app/components/dashboard/listprojets/listprojets.component.ts");
             /* harmony import */ var _components_dashboard_detailprojet_detailprojet_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/dashboard/detailprojet/detailprojet.component */ "./src/app/components/dashboard/detailprojet/detailprojet.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_issue_issue_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/dashboard/detailprojet/issue/issue.component */ "./src/app/components/dashboard/detailprojet/issue/issue.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_task_task_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/dashboard/detailprojet/task/task.component */ "./src/app/components/dashboard/detailprojet/task/task.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_sprint_sprint_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/dashboard/detailprojet/sprint/sprint.component */ "./src/app/components/dashboard/detailprojet/sprint/sprint.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_detailsprint_detailsprint_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/dashboard/detailprojet/detailsprint/detailsprint.component */ "./src/app/components/dashboard/detailprojet/detailsprint/detailsprint.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_test_test_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/dashboard/detailprojet/test/test.component */ "./src/app/components/dashboard/detailprojet/test/test.component.ts");
+            /* harmony import */ var _components_dashboard_userdetail_userdetail_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/dashboard/userdetail/userdetail.component */ "./src/app/components/dashboard/userdetail/userdetail.component.ts");
             var routes = [
                 {
                     path: 'register', component: _components_user_user_component__WEBPACK_IMPORTED_MODULE_3__["UserComponent"],
@@ -433,7 +505,17 @@
                     path: 'dashboard', component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_6__["DashboardComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_7__["AuthGuard"]],
                     children: [
                         { path: 'projects', component: _components_dashboard_listprojets_listprojets_component__WEBPACK_IMPORTED_MODULE_8__["ListprojetsComponent"], pathMatch: 'full' },
-                        { path: 'projects/:id', component: _components_dashboard_detailprojet_detailprojet_component__WEBPACK_IMPORTED_MODULE_9__["DetailprojetComponent"], pathMatch: 'full' }
+                        { path: 'userdetail', component: _components_dashboard_userdetail_userdetail_component__WEBPACK_IMPORTED_MODULE_15__["UserdetailComponent"] },
+                        {
+                            path: 'projects/:id', component: _components_dashboard_detailprojet_detailprojet_component__WEBPACK_IMPORTED_MODULE_9__["DetailprojetComponent"], children: [
+                                { path: '', redirectTo: 'issues', pathMatch: 'full' },
+                                { path: 'issues', component: _components_dashboard_detailprojet_issue_issue_component__WEBPACK_IMPORTED_MODULE_10__["IssueComponent"] },
+                                { path: 'tasks', component: _components_dashboard_detailprojet_task_task_component__WEBPACK_IMPORTED_MODULE_11__["TaskComponent"] },
+                                { path: 'tests', component: _components_dashboard_detailprojet_test_test_component__WEBPACK_IMPORTED_MODULE_14__["TestComponent"] },
+                                { path: 'sprints', component: _components_dashboard_detailprojet_sprint_sprint_component__WEBPACK_IMPORTED_MODULE_12__["SprintComponent"] },
+                                { path: 'sprints/:idSprint', component: _components_dashboard_detailprojet_detailsprint_detailsprint_component__WEBPACK_IMPORTED_MODULE_13__["DetailsprintComponent"] }
+                            ]
+                        }
                     ]
                 },
                 {
@@ -451,17 +533,6 @@
                     exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
                 })
             ], AppRoutingModule);
-            /***/ 
-        }),
-        /***/ "./src/app/app.component.scss": 
-        /*!************************************!*\
-          !*** ./src/app/app.component.scss ***!
-          \************************************/
-        /*! exports provided: default */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJ9 */");
             /***/ 
         }),
         /***/ "./src/app/app.component.ts": 
@@ -484,8 +555,7 @@
             AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-root',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html")).default,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")).default]
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html")).default
                 })
             ], AppComponent);
             /***/ 
@@ -517,6 +587,15 @@
             /* harmony import */ var _components_dashboard_detailprojet_detailprojet_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/dashboard/detailprojet/detailprojet.component */ "./src/app/components/dashboard/detailprojet/detailprojet.component.ts");
             /* harmony import */ var _services_projet_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/projet.service */ "./src/app/services/projet.service.ts");
             /* harmony import */ var _services_issues_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/issues.service */ "./src/app/services/issues.service.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_issue_issue_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/dashboard/detailprojet/issue/issue.component */ "./src/app/components/dashboard/detailprojet/issue/issue.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_task_task_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/dashboard/detailprojet/task/task.component */ "./src/app/components/dashboard/detailprojet/task/task.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_sprint_sprint_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/dashboard/detailprojet/sprint/sprint.component */ "./src/app/components/dashboard/detailprojet/sprint/sprint.component.ts");
+            /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+            /* harmony import */ var _components_dashboard_detailprojet_detailsprint_detailsprint_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/dashboard/detailprojet/detailsprint/detailsprint.component */ "./src/app/components/dashboard/detailprojet/detailsprint/detailsprint.component.ts");
+            /* harmony import */ var _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @ng-select/ng-select */ "./node_modules/@ng-select/ng-select/fesm2015/ng-select-ng-select.js");
+            /* harmony import */ var _components_dashboard_detailprojet_test_test_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/dashboard/detailprojet/test/test.component */ "./src/app/components/dashboard/detailprojet/test/test.component.ts");
+            /* harmony import */ var _components_dashboard_userdetail_userdetail_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/dashboard/userdetail/userdetail.component */ "./src/app/components/dashboard/userdetail/userdetail.component.ts");
+            //import { ReleaseComponent } from './components/dashboard/detailprojet/release/release';
             var AppModule = /** @class */ (function () {
                 function AppModule() {
                 }
@@ -531,20 +610,29 @@
                         _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_10__["DashboardComponent"],
                         _components_user_login_login_component__WEBPACK_IMPORTED_MODULE_11__["LoginComponent"],
                         _components_dashboard_listprojets_listprojets_component__WEBPACK_IMPORTED_MODULE_14__["ListprojetsComponent"],
-                        _components_dashboard_detailprojet_detailprojet_component__WEBPACK_IMPORTED_MODULE_15__["DetailprojetComponent"]
+                        _components_dashboard_detailprojet_detailprojet_component__WEBPACK_IMPORTED_MODULE_15__["DetailprojetComponent"],
+                        _components_dashboard_detailprojet_issue_issue_component__WEBPACK_IMPORTED_MODULE_18__["IssueComponent"],
+                        _components_dashboard_detailprojet_task_task_component__WEBPACK_IMPORTED_MODULE_19__["TaskComponent"],
+                        _components_dashboard_detailprojet_sprint_sprint_component__WEBPACK_IMPORTED_MODULE_20__["SprintComponent"],
+                        _components_dashboard_detailprojet_detailsprint_detailsprint_component__WEBPACK_IMPORTED_MODULE_22__["DetailsprintComponent"],
+                        _components_dashboard_detailprojet_test_test_component__WEBPACK_IMPORTED_MODULE_24__["TestComponent"],
+                        _components_dashboard_userdetail_userdetail_component__WEBPACK_IMPORTED_MODULE_25__["UserdetailComponent"],
                     ],
                     imports: [
                         _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                         _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
                         _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
-                        _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"]
+                        _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"],
+                        _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_21__["NgbModule"],
+                        _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_23__["NgSelectModule"]
                     ],
                     providers: [_services_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"], _services_projet_service__WEBPACK_IMPORTED_MODULE_16__["ProjetService"], _services_issues_service__WEBPACK_IMPORTED_MODULE_17__["IssuesService"], _auth_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"],
                         {
                             provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HTTP_INTERCEPTORS"],
                             useClass: _auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_13__["AuthInterceptor"],
                             multi: true
-                        }],
+                        }
+                    ],
                     bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
                 })
             ], AppModule);
@@ -622,17 +710,6 @@
             ], AuthInterceptor);
             /***/ 
         }),
-        /***/ "./src/app/components/dashboard/dashboard.component.scss": 
-        /*!***************************************************************!*\
-          !*** ./src/app/components/dashboard/dashboard.component.scss ***!
-          \***************************************************************/
-        /*! exports provided: default */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZGFzaGJvYXJkL2Rhc2hib2FyZC5jb21wb25lbnQuc2NzcyJ9 */");
-            /***/ 
-        }),
         /***/ "./src/app/components/dashboard/dashboard.component.ts": 
         /*!*************************************************************!*\
           !*** ./src/app/components/dashboard/dashboard.component.ts ***!
@@ -674,21 +751,9 @@
             DashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-dashboard',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./dashboard.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/dashboard.component.html")).default,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./dashboard.component.scss */ "./src/app/components/dashboard/dashboard.component.scss")).default]
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./dashboard.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/dashboard.component.html")).default
                 })
             ], DashboardComponent);
-            /***/ 
-        }),
-        /***/ "./src/app/components/dashboard/detailprojet/detailprojet.component.scss": 
-        /*!*******************************************************************************!*\
-          !*** ./src/app/components/dashboard/detailprojet/detailprojet.component.scss ***!
-          \*******************************************************************************/
-        /*! exports provided: default */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZGFzaGJvYXJkL2RldGFpbHByb2pldC9kZXRhaWxwcm9qZXQuY29tcG9uZW50LnNjc3MifQ== */");
             /***/ 
         }),
         /***/ "./src/app/components/dashboard/detailprojet/detailprojet.component.ts": 
@@ -702,59 +767,25 @@
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DetailprojetComponent", function () { return DetailprojetComponent; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-            /* harmony import */ var src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/issues.service */ "./src/app/services/issues.service.ts");
-            /* harmony import */ var src_app_services_projet_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/projet.service */ "./src/app/services/projet.service.ts");
-            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-            /* harmony import */ var src_app_services_tasks_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/tasks.service */ "./src/app/services/tasks.service.ts");
-            /* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/user.service */ "./src/app/services/user.service.ts");
+            /* harmony import */ var src_app_services_projet_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/projet.service */ "./src/app/services/projet.service.ts");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/user.service */ "./src/app/services/user.service.ts");
             var DetailprojetComponent = /** @class */ (function () {
-                function DetailprojetComponent(issuesService, projetService, tasksService, userService, route) {
-                    this.issuesService = issuesService;
+                function DetailprojetComponent(projetService, userService, route) {
                     this.projetService = projetService;
-                    this.tasksService = tasksService;
                     this.userService = userService;
                     this.route = route;
-                    this.issues = [];
                     this.users = [];
-                    this.modelIssue = {
-                        issueId: '',
-                        description: '',
-                        priorite: '',
-                        difficulte: '0',
-                        status: '0'
-                    };
-                    this.modelIssueEdit = {
-                        _id: '',
-                        issueID: '',
-                        description: '',
-                        priorite: '',
-                        difficulte: '0',
-                        status: '0'
-                    };
-                    this.modelTask = {
-                        issue: '0',
-                        description: '',
-                        cout: '',
-                        developer: '0'
-                    };
-                    this.modelTaskEdit = {
-                        _id: '',
-                        issue: '0',
-                        description: '',
-                        cout: '',
-                        developer: '0'
-                    };
                     this.modelproject = {
                         title: '',
-                        description: ''
+                        description: '',
+                        status: ''
                     };
                     this.isCreator = false;
                 }
                 DetailprojetComponent.prototype.ngOnInit = function () {
-                    var _this = this;
                     this.project_id = this.route.snapshot.paramMap.get('id');
                     this.getProject();
-                    this.userService.getUsers().subscribe(function (data) { _this.users = data['users']; });
                 };
                 DetailprojetComponent.prototype.getProject = function () {
                     var _this = this;
@@ -769,42 +800,11 @@
                         }
                         _this.modelproject.title = _this.project.title;
                         _this.modelproject.description = _this.project.description;
+                        _this.modelproject.status = _this.project.status;
                     });
-                };
-                DetailprojetComponent.prototype.removeIssue = function (id) {
-                    var _this = this;
-                    this.issuesService.removeIssue(this.project['_id'], id).subscribe(function (data) { return _this.getProject(); });
-                };
-                DetailprojetComponent.prototype.removeTask = function (id) {
-                    var _this = this;
-                    this.tasksService.removeTask(this.project['_id'], id).subscribe(function (data) { return _this.getProject(); });
-                };
-                DetailprojetComponent.prototype.onSubmitIssue = function (form) {
-                    var _this = this;
-                    this.issuesService.addIssue(this.project['_id'], form.value).subscribe(function (res) {
-                        form.resetForm();
-                        _this.modelIssue.status = '0';
-                        _this.modelIssue.difficulte = '0';
-                        _this.getProject();
-                    }, function (err) {
-                        console.log(err);
-                    });
-                };
-                DetailprojetComponent.prototype.onSubmitTask = function (form) {
-                    var _this = this;
-                    this.tasksService.addTask(this.project['_id'], form.value).subscribe(function (res) {
-                        form.resetForm();
-                        _this.modelTask.developer = '0';
-                        _this.modelTask.issue = '0';
-                        _this.getProject();
-                    }, function (err) {
-                        console.log(err);
-                    });
-                    console.log(this.project);
                 };
                 DetailprojetComponent.prototype.editProject = function (form) {
                     var _this = this;
-                    console.log(form.value);
                     if (form.value.title === "" || form.value.description === "") {
                         this.getProject();
                         return;
@@ -814,9 +814,89 @@
                     }, function (err) {
                         console.log(err);
                     });
-                    console.log(this.project);
                 };
-                DetailprojetComponent.prototype.updateModalEditIssue = function (issue) {
+                return DetailprojetComponent;
+            }());
+            DetailprojetComponent.ctorParameters = function () { return [
+                { type: src_app_services_projet_service__WEBPACK_IMPORTED_MODULE_2__["ProjetService"] },
+                { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
+            ]; };
+            DetailprojetComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-detailprojet',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./detailprojet.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/detailprojet.component.html")).default
+                })
+            ], DetailprojetComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/components/dashboard/detailprojet/detailsprint/detailsprint.component.ts": 
+        /*!******************************************************************************************!*\
+          !*** ./src/app/components/dashboard/detailprojet/detailsprint/detailsprint.component.ts ***!
+          \******************************************************************************************/
+        /*! exports provided: DetailsprintComponent */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DetailsprintComponent", function () { return DetailsprintComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var src_app_services_sprint_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/sprint.service */ "./src/app/services/sprint.service.ts");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/issues.service */ "./src/app/services/issues.service.ts");
+            var DetailsprintComponent = /** @class */ (function () {
+                function DetailsprintComponent(sprintService, issueService, route) {
+                    this.sprintService = sprintService;
+                    this.issueService = issueService;
+                    this.route = route;
+                    this.nbrDifficulte = 0;
+                    this.nbrDifficulteRes = 0;
+                    this.sprint = {};
+                    this.issues = [];
+                    this.modelIssueEdit = {
+                        _id: '',
+                        issueID: '',
+                        description: '',
+                        priorite: '',
+                        difficulte: '0',
+                        status: '0'
+                    };
+                    this.events = [];
+                }
+                DetailsprintComponent.prototype.ngOnInit = function () {
+                    this.getSprint();
+                };
+                DetailsprintComponent.prototype.getSprint = function () {
+                    var _this = this;
+                    this.route.parent.params.subscribe(function (params) {
+                        _this.project_id = params['id']; // true
+                    });
+                    this.sprintID = this.route.snapshot.paramMap.get('idSprint');
+                    this.sprintService.getSprint(this.project_id, this.sprintID).subscribe(function (data) {
+                        _this.sprint = data['sprint'];
+                        _this.issueService.getIssues(_this.project_id).subscribe(function (data) {
+                            var res = data['issues'].filter(function (item1) { return !_this.sprint['issues'].some(function (item2) { return (item2._id === item1._id); }); });
+                            _this.issues = res;
+                            _this.nbrDifficulte = 0;
+                            _this.nbrDifficulteRes = 0;
+                            _this.sprint['issues'].forEach(function (e) {
+                                _this.nbrDifficulte = _this.nbrDifficulte + parseInt(e.difficulte);
+                                if (e.status === "Terminé")
+                                    _this.nbrDifficulteRes = _this.nbrDifficulteRes + parseInt(e.difficulte);
+                            });
+                        });
+                    });
+                };
+                DetailsprintComponent.prototype.onAdd = function ($event) {
+                    var _this = this;
+                    this.sprintService.addIssueSprint(this.project_id, this.sprintID, { idIssue: $event }).subscribe(function (res) {
+                        _this.getSprint();
+                        _this.selectedItems = null;
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                DetailsprintComponent.prototype.updateModalEditIssue = function (issue) {
                     this.modelIssueEdit._id = issue._id;
                     this.modelIssueEdit.issueID = issue.issueID;
                     this.modelIssueEdit.description = issue.description;
@@ -825,59 +905,461 @@
                     this.modelIssueEdit.status = issue.status;
                     console.log(this.modelIssueEdit._id);
                 };
-                DetailprojetComponent.prototype.updateModalEditTask = function (task) {
-                    console.log(task);
+                DetailsprintComponent.prototype.onSubmitEditIssue = function (form) {
+                    var _this = this;
+                    this.issueService.editIssue(this.project_id, this.modelIssueEdit._id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.getSprint();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                DetailsprintComponent.prototype.removeIssueFromSprint = function (issueId) {
+                    var _this = this;
+                    this.sprintService.removeIssue(this.project_id, this.sprintID, issueId).subscribe(function (data) { return _this.getSprint(); });
+                };
+                return DetailsprintComponent;
+            }());
+            DetailsprintComponent.ctorParameters = function () { return [
+                { type: src_app_services_sprint_service__WEBPACK_IMPORTED_MODULE_2__["SprintService"] },
+                { type: src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_4__["IssuesService"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
+            ]; };
+            DetailsprintComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-detailsprint',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./detailsprint.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/detailsprint/detailsprint.component.html")).default
+                })
+            ], DetailsprintComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/components/dashboard/detailprojet/issue/issue.component.ts": 
+        /*!****************************************************************************!*\
+          !*** ./src/app/components/dashboard/detailprojet/issue/issue.component.ts ***!
+          \****************************************************************************/
+        /*! exports provided: IssueComponent */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IssueComponent", function () { return IssueComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/issues.service */ "./src/app/services/issues.service.ts");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            var IssueComponent = /** @class */ (function () {
+                function IssueComponent(issueService, route) {
+                    this.issueService = issueService;
+                    this.route = route;
+                    this.issues = [];
+                    this.modelIssue = {
+                        issueID: '',
+                        description: '',
+                        priorite: '',
+                        difficulte: '',
+                        status: '0'
+                    };
+                    this.modelIssueEdit = {
+                        _id: '',
+                        issueID: '',
+                        description: '',
+                        priorite: '',
+                        difficulte: '0',
+                        status: '0'
+                    };
+                }
+                IssueComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.route.parent.params.subscribe(function (params) {
+                        _this.project_id = params['id']; // true
+                    });
+                    this.getIssues();
+                };
+                IssueComponent.prototype.getIssues = function () {
+                    var _this = this;
+                    this.issueService.getIssues(this.project_id).subscribe(function (data) { return _this.issues = data['issues']; });
+                };
+                IssueComponent.prototype.onSubmitIssue = function (form) {
+                    var _this = this;
+                    this.issueService.addIssue(this.project_id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.modelIssue.status = '0';
+                        _this.modelIssue.difficulte = '0';
+                        _this.getIssues();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                IssueComponent.prototype.removeIssue = function (id) {
+                    var _this = this;
+                    this.issueService.removeIssue(this.project_id, id).subscribe(function (data) { return _this.getIssues(); });
+                };
+                IssueComponent.prototype.updateModalEditIssue = function (issue) {
+                    this.modelIssueEdit._id = issue._id;
+                    this.modelIssueEdit.issueID = issue.issueID;
+                    this.modelIssueEdit.description = issue.description;
+                    this.modelIssueEdit.priorite = issue.priorite;
+                    this.modelIssueEdit.difficulte = issue.difficulte;
+                    this.modelIssueEdit.status = issue.status;
+                };
+                IssueComponent.prototype.onSubmitEditIssue = function (form) {
+                    var _this = this;
+                    this.issueService.editIssue(this.project_id, this.modelIssueEdit._id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.selectedItem = null;
+                        _this.getIssues();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                IssueComponent.prototype.sort = function ($event) {
+                    if ($event !== undefined) {
+                        var clicked = $event.$ngOptionLabel;
+                        switch (clicked) {
+                            case "ID": {
+                                this.issues = this.issues.sort(function (a, b) { return a.issueID.localeCompare(b.issueID); });
+                                break;
+                            }
+                            case "Priorité": {
+                                this.issues = this.issues.sort(function (a, b) { return a.priorite.localeCompare(b.priorite); });
+                                break;
+                            }
+                            case "Difficulté": {
+                                this.issues = this.issues.sort(function (a, b) { return parseInt(a.difficulte) - parseInt(b.difficulte); });
+                                console.log(this.issues);
+                                break;
+                            }
+                        }
+                    }
+                };
+                return IssueComponent;
+            }());
+            IssueComponent.ctorParameters = function () { return [
+                { type: src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_2__["IssuesService"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
+            ]; };
+            IssueComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-issue',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./issue.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/issue/issue.component.html")).default
+                })
+            ], IssueComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/components/dashboard/detailprojet/sprint/sprint.component.ts": 
+        /*!******************************************************************************!*\
+          !*** ./src/app/components/dashboard/detailprojet/sprint/sprint.component.ts ***!
+          \******************************************************************************/
+        /*! exports provided: SprintComponent */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SprintComponent", function () { return SprintComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var src_app_services_sprint_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/sprint.service */ "./src/app/services/sprint.service.ts");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+            var SprintComponent = /** @class */ (function () {
+                function SprintComponent(sprintService, route, calendar) {
+                    this.sprintService = sprintService;
+                    this.route = route;
+                    this.calendar = calendar;
+                    this.sprints = [];
+                    this.modelSprint = {
+                        title: '',
+                        startDate: {},
+                        endDate: {},
+                        status: '0',
+                        issues: ''
+                    };
+                    this.modelSprintEdit = {
+                        _id: '',
+                        title: '',
+                        startDate: {},
+                        endDate: {},
+                        status: '0',
+                        issues: ''
+                    };
+                }
+                SprintComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.route.parent.params.subscribe(function (params) {
+                        _this.project_id = params['id'];
+                    });
+                    this.getSprints();
+                    this.modelSprint.startDate = this.calendar.getToday();
+                    this.modelSprint.endDate = this.calendar.getToday();
+                };
+                SprintComponent.prototype.getSprints = function () {
+                    var _this = this;
+                    this.sprintService.getSprints(this.project_id).subscribe(function (data) { return _this.sprints = data['sprints']; });
+                };
+                SprintComponent.prototype.onSubmitSprint = function (form) {
+                    var _this = this;
+                    var startDate = form.value.dp1;
+                    var endDate = form.value.dp2;
+                    form.value.dp1 = startDate.day + "/" + startDate.month + "/" + startDate.year;
+                    form.value.dp2 = endDate.day + "/" + endDate.month + "/" + endDate.year;
+                    console.log(form.value);
+                    this.sprintService.addSprint(this.project_id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.modelSprint.status = '0';
+                        _this.getSprints();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                SprintComponent.prototype.updateModalEditSprint = function (sprint) {
+                    this.modelSprintEdit._id = sprint._id;
+                    this.modelSprintEdit.title = sprint.title;
+                    var tmpDateStart = sprint.startDate.split("/");
+                    this.modelSprintEdit.startDate = { year: parseInt(tmpDateStart[2]), month: parseInt(tmpDateStart[1]), day: parseInt(tmpDateStart[0]) };
+                    var tmpDateEnd = sprint.endDate.split("/");
+                    this.modelSprintEdit.endDate = { year: parseInt(tmpDateEnd[2]), month: parseInt(tmpDateEnd[1]), day: parseInt(tmpDateEnd[0]) };
+                    this.modelSprintEdit.status = sprint.status;
+                    //this.modelSprintEdit.issues = sprint.issues[0];
+                };
+                SprintComponent.prototype.onSubmitEditSprint = function (form) {
+                    var _this = this;
+                    var startDate = form.value.dp1;
+                    var endDate = form.value.dp2;
+                    form.value.dp1 = startDate.day + "/" + startDate.month + "/" + startDate.year;
+                    form.value.dp2 = endDate.day + "/" + endDate.month + "/" + endDate.year;
+                    this.sprintService.editSprint(this.project_id, this.modelSprintEdit._id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.modelSprintEdit.status = '0';
+                        _this.getSprints();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                SprintComponent.prototype.removeSprint = function (id) {
+                    var _this = this;
+                    this.sprintService.removeSprint(this.project_id, id).subscribe(function (data) { return _this.getSprints(); });
+                };
+                return SprintComponent;
+            }());
+            SprintComponent.ctorParameters = function () { return [
+                { type: src_app_services_sprint_service__WEBPACK_IMPORTED_MODULE_2__["SprintService"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+                { type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NgbCalendar"] }
+            ]; };
+            SprintComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-sprint',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./sprint.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/sprint/sprint.component.html")).default
+                })
+            ], SprintComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/components/dashboard/detailprojet/task/task.component.ts": 
+        /*!**************************************************************************!*\
+          !*** ./src/app/components/dashboard/detailprojet/task/task.component.ts ***!
+          \**************************************************************************/
+        /*! exports provided: TaskComponent */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TaskComponent", function () { return TaskComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var src_app_services_tasks_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/tasks.service */ "./src/app/services/tasks.service.ts");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/issues.service */ "./src/app/services/issues.service.ts");
+            /* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/user.service */ "./src/app/services/user.service.ts");
+            var TaskComponent = /** @class */ (function () {
+                function TaskComponent(tasksService, issueService, userService, route) {
+                    this.tasksService = tasksService;
+                    this.issueService = issueService;
+                    this.userService = userService;
+                    this.route = route;
+                    this.tasks = [];
+                    this.issues = [];
+                    this.users = [];
+                    this.modelTask = {
+                        issue: [],
+                        description: '',
+                        cout: '',
+                        developer: null
+                    };
+                    this.modelTaskEdit = {
+                        _id: '',
+                        issue: [],
+                        description: '',
+                        cout: '',
+                        developer: null
+                    };
+                    this.tests = ["1", "2"];
+                }
+                TaskComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.route.parent.params.subscribe(function (params) {
+                        _this.project_id = params['id'];
+                    });
+                    this.getTasks();
+                    this.getIssues();
+                    this.getUsers();
+                };
+                TaskComponent.prototype.getTasks = function () {
+                    var _this = this;
+                    this.tasksService.getTasks(this.project_id).subscribe(function (data) { return _this.tasks = data['tasks']; });
+                };
+                TaskComponent.prototype.getIssues = function () {
+                    var _this = this;
+                    this.issueService.getIssues(this.project_id).subscribe(function (data) { return _this.issues = data['issues']; });
+                };
+                TaskComponent.prototype.getUsers = function () {
+                    var _this = this;
+                    this.userService.getUsers().subscribe(function (data) { _this.users = data['users']; });
+                };
+                TaskComponent.prototype.onSubmitTask = function (form) {
+                    var _this = this;
+                    console.log(form.value);
+                    this.tasksService.addTask(this.project_id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.modelTask.developer = null;
+                        _this.modelTask.issue = null;
+                        _this.getTasks();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                TaskComponent.prototype.removeTask = function (id) {
+                    var _this = this;
+                    this.tasksService.removeTask(this.project_id, id).subscribe(function (data) { return _this.getTasks(); });
+                };
+                TaskComponent.prototype.updateModalEditTask = function (task) {
+                    var _this = this;
                     this.modelTaskEdit._id = task._id;
                     this.modelTaskEdit.cout = task.cout;
                     this.modelTaskEdit.description = task.description;
                     this.modelTaskEdit.developer = task.developer;
-                    this.modelTaskEdit.issue = task.idIssues[0];
+                    this.modelTaskEdit.issue = [];
+                    task.idIssues.forEach(function (e) { return _this.modelTaskEdit.issue.push(e); });
                 };
-                DetailprojetComponent.prototype.onSubmitEditIssue = function (form) {
+                TaskComponent.prototype.onSubmitEditTask = function (form) {
                     var _this = this;
-                    this.issuesService.editIssue(this.project['_id'], this.modelIssueEdit._id, form.value).subscribe(function (res) {
+                    this.tasksService.editTask(this.project_id, this.modelTaskEdit._id, form.value).subscribe(function (res) {
                         form.resetForm();
-                        _this.getProject();
+                        _this.getTasks();
                     }, function (err) {
                         console.log(err);
                     });
                 };
-                DetailprojetComponent.prototype.onSubmitEditTask = function (form) {
-                    var _this = this;
-                    this.tasksService.editTask(this.project['_id'], this.modelTaskEdit._id, form.value).subscribe(function (res) {
-                        form.resetForm();
-                        _this.getProject();
-                    }, function (err) {
-                        console.log(err);
-                    });
-                };
-                return DetailprojetComponent;
+                return TaskComponent;
             }());
-            DetailprojetComponent.ctorParameters = function () { return [
-                { type: src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_2__["IssuesService"] },
-                { type: src_app_services_projet_service__WEBPACK_IMPORTED_MODULE_3__["ProjetService"] },
-                { type: src_app_services_tasks_service__WEBPACK_IMPORTED_MODULE_5__["TasksService"] },
-                { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"] },
-                { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
+            TaskComponent.ctorParameters = function () { return [
+                { type: src_app_services_tasks_service__WEBPACK_IMPORTED_MODULE_2__["TasksService"] },
+                { type: src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_4__["IssuesService"] },
+                { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
             ]; };
-            DetailprojetComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+            TaskComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-                    selector: 'app-detailprojet',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./detailprojet.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/detailprojet.component.html")).default,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./detailprojet.component.scss */ "./src/app/components/dashboard/detailprojet/detailprojet.component.scss")).default]
+                    selector: 'app-task',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./task.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/task/task.component.html")).default
                 })
-            ], DetailprojetComponent);
+            ], TaskComponent);
             /***/ 
         }),
-        /***/ "./src/app/components/dashboard/listprojets/listprojets.component.scss": 
-        /*!*****************************************************************************!*\
-          !*** ./src/app/components/dashboard/listprojets/listprojets.component.scss ***!
-          \*****************************************************************************/
-        /*! exports provided: default */
+        /***/ "./src/app/components/dashboard/detailprojet/test/test.component.ts": 
+        /*!**************************************************************************!*\
+          !*** ./src/app/components/dashboard/detailprojet/test/test.component.ts ***!
+          \**************************************************************************/
+        /*! exports provided: TestComponent */
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZGFzaGJvYXJkL2xpc3Rwcm9qZXRzL2xpc3Rwcm9qZXRzLmNvbXBvbmVudC5zY3NzIn0= */");
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestComponent", function () { return TestComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+            /* harmony import */ var src_app_services_tests_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/tests.service */ "./src/app/services/tests.service.ts");
+            var TestComponent = /** @class */ (function () {
+                function TestComponent(testsService, route, calendar) {
+                    this.testsService = testsService;
+                    this.route = route;
+                    this.calendar = calendar;
+                    this.tests = [];
+                    this.modelTest = {
+                        title: '',
+                        description: '',
+                        type: '0',
+                        date: '',
+                        link: '',
+                        status: '0'
+                    };
+                    this.modelTestEdit = {
+                        _id: '',
+                        title: '',
+                        description: '',
+                        type: '0',
+                        date: '',
+                        link: '',
+                        status: '0'
+                    };
+                }
+                TestComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.route.parent.params.subscribe(function (params) {
+                        _this.project_id = params['id'];
+                    });
+                    this.getTests();
+                    this.modelDate = this.calendar.getToday();
+                };
+                TestComponent.prototype.getTests = function () {
+                    var _this = this;
+                    this.testsService.getTests(this.project_id).subscribe(function (data) { return _this.tests = data['tests']; });
+                };
+                TestComponent.prototype.onSubmitTest = function (form) {
+                    var _this = this;
+                    var date = form.value.dp;
+                    form.value.dp = date.day + "/" + date.month + "/" + date.year;
+                    this.testsService.addTest(this.project_id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.getTests();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                TestComponent.prototype.removeTest = function (id) {
+                    var _this = this;
+                    this.testsService.removeTest(this.project_id, id).subscribe(function (data) { return _this.getTests(); });
+                };
+                TestComponent.prototype.updateModalEditTest = function (test) {
+                    this.modelTestEdit._id = test._id;
+                    this.modelTestEdit.title = test.title;
+                    this.modelTestEdit.description = test.description;
+                    this.modelTestEdit.type = test.type;
+                    this.modelTestEdit.date = test.date;
+                    this.modelTestEdit.link = test.link;
+                    this.modelTestEdit.status = test.status;
+                };
+                TestComponent.prototype.onSubmitEditTest = function (form) {
+                    var _this = this;
+                    var date = form.value.dp;
+                    form.value.dp = date.day + "/" + date.month + "/" + date.year;
+                    this.testsService.editTest(this.project_id, this.modelTestEdit._id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.getTests();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                return TestComponent;
+            }());
+            TestComponent.ctorParameters = function () { return [
+                { type: src_app_services_tests_service__WEBPACK_IMPORTED_MODULE_4__["TestsService"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+                { type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbCalendar"] }
+            ]; };
+            TestComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-test',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./test.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/test/test.component.html")).default
+                })
+            ], TestComponent);
             /***/ 
         }),
         /***/ "./src/app/components/dashboard/listprojets/listprojets.component.ts": 
@@ -933,21 +1415,54 @@
             ListprojetsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-listprojets',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./listprojets.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/listprojets/listprojets.component.html")).default,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./listprojets.component.scss */ "./src/app/components/dashboard/listprojets/listprojets.component.scss")).default]
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./listprojets.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/listprojets/listprojets.component.html")).default
                 })
             ], ListprojetsComponent);
             /***/ 
         }),
-        /***/ "./src/app/components/user/login/login.component.scss": 
-        /*!************************************************************!*\
-          !*** ./src/app/components/user/login/login.component.scss ***!
-          \************************************************************/
-        /*! exports provided: default */
+        /***/ "./src/app/components/dashboard/userdetail/userdetail.component.ts": 
+        /*!*************************************************************************!*\
+          !*** ./src/app/components/dashboard/userdetail/userdetail.component.ts ***!
+          \*************************************************************************/
+        /*! exports provided: UserdetailComponent */
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdXNlci9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyJ9 */");
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserdetailComponent", function () { return UserdetailComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/user.service */ "./src/app/services/user.service.ts");
+            var UserdetailComponent = /** @class */ (function () {
+                function UserdetailComponent(userService) {
+                    this.userService = userService;
+                }
+                UserdetailComponent.prototype.ngOnInit = function () {
+                };
+                UserdetailComponent.prototype.onSubmit = function (form) {
+                    var _this = this;
+                    this.userService.editUser(form.value).subscribe(function (res) {
+                        _this.successmessage = true;
+                        setTimeout(function () { return _this.successmessage = false; }, 4000);
+                    }, function (err) {
+                        if (err.status === 442) {
+                            _this.errormessage = err.error.join('<br/>');
+                        }
+                        else {
+                            _this.errormessage = 'Une erreur est survenue dans le serveur';
+                        }
+                    });
+                };
+                return UserdetailComponent;
+            }());
+            UserdetailComponent.ctorParameters = function () { return [
+                { type: _services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"] }
+            ]; };
+            UserdetailComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-userdetail',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./userdetail.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/userdetail/userdetail.component.html")).default
+                })
+            ], UserdetailComponent);
             /***/ 
         }),
         /***/ "./src/app/components/user/login/login.component.ts": 
@@ -992,21 +1507,9 @@
             LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-login',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./login.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/login/login.component.html")).default,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./login.component.scss */ "./src/app/components/user/login/login.component.scss")).default]
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./login.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/login/login.component.html")).default
                 })
             ], LoginComponent);
-            /***/ 
-        }),
-        /***/ "./src/app/components/user/register/register.component.scss": 
-        /*!******************************************************************!*\
-          !*** ./src/app/components/user/register/register.component.scss ***!
-          \******************************************************************/
-        /*! exports provided: default */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdXNlci9yZWdpc3Rlci9yZWdpc3Rlci5jb21wb25lbnQuc2NzcyJ9 */");
             /***/ 
         }),
         /***/ "./src/app/components/user/register/register.component.ts": 
@@ -1060,21 +1563,9 @@
             RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-register',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./register.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/register/register.component.html")).default,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./register.component.scss */ "./src/app/components/user/register/register.component.scss")).default]
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./register.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/register/register.component.html")).default
                 })
             ], RegisterComponent);
-            /***/ 
-        }),
-        /***/ "./src/app/components/user/user.component.scss": 
-        /*!*****************************************************!*\
-          !*** ./src/app/components/user/user.component.scss ***!
-          \*****************************************************/
-        /*! exports provided: default */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdXNlci91c2VyLmNvbXBvbmVudC5zY3NzIn0= */");
             /***/ 
         }),
         /***/ "./src/app/components/user/user.component.ts": 
@@ -1098,8 +1589,7 @@
             UserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-user',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./user.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/user.component.html")).default,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./user.component.scss */ "./src/app/components/user/user.component.scss")).default]
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./user.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/user.component.html")).default
                 })
             ], UserComponent);
             /***/ 
@@ -1193,6 +1683,56 @@
             ], ProjetService);
             /***/ 
         }),
+        /***/ "./src/app/services/sprint.service.ts": 
+        /*!********************************************!*\
+          !*** ./src/app/services/sprint.service.ts ***!
+          \********************************************/
+        /*! exports provided: SprintService */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SprintService", function () { return SprintService; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+            /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+            var SprintService = /** @class */ (function () {
+                function SprintService(httpClient) {
+                    this.httpClient = httpClient;
+                }
+                SprintService.prototype.getSprints = function (idProject) {
+                    return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/sprints');
+                };
+                SprintService.prototype.getSprint = function (idProject, idSprint) {
+                    return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/sprints/' + idSprint);
+                };
+                SprintService.prototype.addSprint = function (idProject, sprint) {
+                    return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/sprints', sprint);
+                };
+                SprintService.prototype.editSprint = function (idProject, idSprint, sprint) {
+                    return this.httpClient.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/sprints/' + idSprint, sprint);
+                };
+                SprintService.prototype.removeSprint = function (idProject, id) {
+                    return this.httpClient.delete(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/sprints/' + id);
+                };
+                SprintService.prototype.addIssueSprint = function (idProject, idSprint, idIssue) {
+                    return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/sprints/' + idSprint + '/issues', idIssue);
+                };
+                SprintService.prototype.removeIssue = function (idProject, idSprint, idIssue) {
+                    return this.httpClient.delete(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/sprints/' + idSprint + '/issues/' + idIssue);
+                };
+                return SprintService;
+            }());
+            SprintService.ctorParameters = function () { return [
+                { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+            ]; };
+            SprintService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+                    providedIn: 'root'
+                })
+            ], SprintService);
+            /***/ 
+        }),
         /***/ "./src/app/services/tasks.service.ts": 
         /*!*******************************************!*\
           !*** ./src/app/services/tasks.service.ts ***!
@@ -1234,6 +1774,47 @@
             ], TasksService);
             /***/ 
         }),
+        /***/ "./src/app/services/tests.service.ts": 
+        /*!*******************************************!*\
+          !*** ./src/app/services/tests.service.ts ***!
+          \*******************************************/
+        /*! exports provided: TestsService */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestsService", function () { return TestsService; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+            /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+            var TestsService = /** @class */ (function () {
+                function TestsService(httpClient) {
+                    this.httpClient = httpClient;
+                }
+                TestsService.prototype.getTests = function (idProject) {
+                    return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/tests');
+                };
+                TestsService.prototype.addTest = function (idProject, test) {
+                    return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/tests', test);
+                };
+                TestsService.prototype.editTest = function (idProject, testId, test) {
+                    return this.httpClient.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/tests/' + testId, test);
+                };
+                TestsService.prototype.removeTest = function (idProject, id) {
+                    return this.httpClient.delete(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/tests/' + id);
+                };
+                return TestsService;
+            }());
+            TestsService.ctorParameters = function () { return [
+                { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+            ]; };
+            TestsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+                    providedIn: 'root'
+                })
+            ], TestsService);
+            /***/ 
+        }),
         /***/ "./src/app/services/user.service.ts": 
         /*!******************************************!*\
           !*** ./src/app/services/user.service.ts ***!
@@ -1273,6 +1854,13 @@
                     localStorage.setItem("userinfos", JSON.stringify({ infos: infos }));
                 };
                 UserService.prototype.removeToken = function () {
+                };
+                UserService.prototype.getUser = function (email) {
+                    return this.httpClient.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/users' + email);
+                };
+                UserService.prototype.editUser = function (user) {
+                    console.log(user);
+                    return this.httpClient.put(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/users/' + this.getIDOflogged(), user);
                 };
                 UserService.prototype.getUserInfos = function () {
                 };
@@ -1348,7 +1936,7 @@
           \***************************/
         /*! no static exports found */
         /***/ (function (module, exports, __webpack_require__) {
-            module.exports = __webpack_require__(/*! /home/computeruser/Desktop/myprojectmanager-PROD/frontoffice/src/main.ts */ "./src/main.ts");
+            module.exports = __webpack_require__(/*! /home/computeruser/Desktop/myprojectmanager-DEV/frontoffice/src/main.ts */ "./src/main.ts");
             /***/ 
         })
     }, [[0, "runtime", "vendor"]]]);

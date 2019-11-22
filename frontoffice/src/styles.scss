@@ -1,5 +1,20 @@
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+.ng-select.custom {
+  min-height: 0px;
+  min-height: 10px;
+
+}
+
+.ng-select.custom .ng-select-container  {
+  height: 10px;
+  border-radius: 2;
+}
+
+
+
 
 body {
   overflow-x: hidden;
@@ -15,11 +30,6 @@ body {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-}
-
-#content {
-
-
 }
 
 /* Sidebar Styles */
@@ -56,10 +66,6 @@ body {
   color: #fff;
 }
 
-#sidebar .nav{
-  
-}
-
 #sidebar .nav a{
   background: none;
   border-bottom: 0px solid #455A64;
@@ -93,7 +99,7 @@ h2 {
   font-weight: 600;
   text-transform: uppercase;
   display:inline-block;
-  margin: 40px 8px 10px 8px; 
+  margin: 40px 8px 10px 8px;
   color: #cccccc;
 }
 
@@ -104,7 +110,7 @@ h2 {
 .wrapper {
   display: flex;
   align-items: center;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   padding: 20px;
@@ -118,7 +124,6 @@ h2 {
   width: 90%;
   max-width: 450px;
   position: relative;
-  padding: 0px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
@@ -192,7 +197,6 @@ input[type=submit]:disabled{
 
 input[type=text],input[type=password] {
   background-color: #f6f6f6;
-  border: none;
   color: #0d0d0d;
   padding: 15px 32px;
   text-align: center;
@@ -240,6 +244,9 @@ label.validation-message{
 
 }
 
+caption{
+  visibility: hidden;
+}
 
 
 

@@ -9,17 +9,17 @@ const issueSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    priorite: { 
+    priorite: {
         type: String
     },
-    difficulte: { 
+    difficulte: {
         type: String
     },
-    status: { 
+    status: {
         type: String
     }
 
 });
 
 
-mongoose.model('Issue', issueSchema);
+module.exports = mongoose.model('Issue', issueSchema);

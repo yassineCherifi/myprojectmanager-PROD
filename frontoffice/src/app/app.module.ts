@@ -16,7 +16,15 @@ import { ListprojetsComponent } from './components/dashboard/listprojets/listpro
 import { DetailprojetComponent } from './components/dashboard/detailprojet/detailprojet.component';
 import { ProjetService } from './services/projet.service';
 import { IssuesService } from './services/issues.service';
-
+import { IssueComponent } from './components/dashboard/detailprojet/issue/issue.component';
+import { TaskComponent } from './components/dashboard/detailprojet/task/task.component';
+import { SprintComponent } from './components/dashboard/detailprojet/sprint/sprint.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { DetailsprintComponent } from './components/dashboard/detailprojet/detailsprint/detailsprint.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { TestComponent } from './components/dashboard/detailprojet/test/test.component';
+import { UserdetailComponent } from './components/dashboard/userdetail/userdetail.component';
+import { ReleaseComponent } from './components/dashboard/detailprojet/release/release.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,21 +33,30 @@ import { IssuesService } from './services/issues.service';
     DashboardComponent,
     LoginComponent,
     ListprojetsComponent,
-    DetailprojetComponent
+    DetailprojetComponent,
+    IssueComponent,
+    TaskComponent,
+    SprintComponent,
+    DetailsprintComponent,
+    TestComponent,
+    UserdetailComponent,
+    ReleaseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
-    
+    HttpClientModule,
+    NgbModule,
+    NgSelectModule
   ],
   providers: [UserService,ProjetService,IssuesService,AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }],
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

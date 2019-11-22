@@ -12,11 +12,9 @@ import { environment } from 'src/environments/environment';
 export class IssuesService {
 
     constructor(private httpClient: HttpClient) { }
-   
-    getIssues(idProject): Observable<Issues[]>{
-    
-      return this.httpClient.get<Issues[]>(environment.API_URL + '/projects/' + idProject + '/issues');
 
+    getIssues(idProject): Observable<Issues[]>{
+      return this.httpClient.get<Issues[]>(environment.API_URL + '/projects/' + idProject + '/issues');
     }
 
     addIssue(idProject, issue){
