@@ -3,7 +3,7 @@
 # myprojectmanager-PROD
 A system that facilitates the management of projects using the agile process framework SCRUM  
 
-The release is deployed on : https://cdpmyprojectanager.herokuapp.com
+The release is deployed on : https://myprojectrelease.herokuapp.com
 
 To use it in production mode :<br>
   in `myprojectmanager-PROD/` run `docker-compose up --build`<br>
