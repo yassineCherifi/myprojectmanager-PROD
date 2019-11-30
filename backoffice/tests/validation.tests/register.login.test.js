@@ -1,13 +1,13 @@
 process.env.NODE_ENV = 'test';
-let app = require('../../app');
+const app = require('../../app');
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { expect } = require('chai');
 const mongoose = require('mongoose');
 const model = require('../../models/user')
 const User = mongoose.model('User');
-const URL_REGISTER = 'http://localhost:3000/register';
-const URL_LOGIN = 'http://localhost:3000/login';
-const PROJECTS_URL = 'http://localhost:3000/dashboard/projects';
+const URL_REGISTER = 'http://localhost:4200/register';
+const URL_LOGIN = 'http://localhost:4200/login';
+const PROJECTS_URL = 'http://localhost:4200/dashboard/projects';
 const user = new User({ name: "test", email: "test@email.com", password: "password" })
 
 
@@ -31,7 +31,7 @@ describe('Register & Login test', () => {
         await driver.findElement(By.name('email')).sendKeys(user.email);
         await driver.findElement(By.name('password')).sendKeys(user.password);
         await driver.findElement(By.id('submit')).click()
-        const alert = await driver.findElement(By.className("alert")).isDisplayed();
+        const alert = await driver.findElement(By.className("alertt")).isDisplayed();
         expect(alert).to.equal(true);
 
     });
@@ -57,7 +57,6 @@ describe('Register & Login test', () => {
         User.remove({}, v => {
         });
         driver.quit()
-
     });
 
 

@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'test';
-let app = require('../../app');
+const app = require('../../app');
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const { expect } = require('chai');
 const mongoose = require('mongoose');
@@ -9,24 +9,24 @@ const issueModel = require('../../models/issue')
 const User = mongoose.model('User');
 const Issue = mongoose.model('Issue');
 const Project = mongoose.model('Project');
-const URL_REGISTER = 'http://localhost:3000/register';
-const URL_LOGIN = 'http://localhost:3000/login';
-const PROJECTS_URL = 'http://localhost:3000/dashboard/projects';
+const URL_REGISTER = 'http://localhost:4200/register';
+const URL_LOGIN = 'http://localhost:4200/login';
+const PROJECTS_URL = 'http://localhost:4200/dashboard/projects';
 const user = new User({ name: "test", email: "test@email.com", password: "password" })
 const project = new Project({ title: "projectTest", description: "projectDescription" })
 const issue = new Issue({
-    description: "issueDescTest",
     issueID: 1,
-    priorite: "testPriorite",
+    description: 'ffffffffffffffff',
+    priorite: 'Basse',
     difficulte: 1,
-    status: "statusTest"
+    status: 'Terminé'
 })
 
 
 describe('Issue tests', () => {
     const driver = new Builder().forBrowser('firefox')
-    .withCapabilities({'browserName': 'firefox','name':'Firefox Test','moz:webdriverClick': false,'tz':'America/Los_Angeles','build':'Firefox Build','idleTimeout':'60'})
-    .build();
+        .withCapabilities({ 'browserName': 'firefox', 'name': 'Firefox Test', 'moz:webdriverClick': false, 'tz': 'America/Los_Angeles', 'build': 'Firefox Build', 'idleTimeout': '100' })
+        .build();
     it('It should register', async () => {
         await driver.get(URL_REGISTER);
         await driver.findElement(By.name('name')).sendKeys(user.name);
@@ -55,13 +55,24 @@ describe('Issue tests', () => {
 
     it('It should add issue', async () => {
         await driver.findElement(By.xpath('/html/body/app-root/app-dashboard/div/div[2]/div/app-listprojets/table/tbody/tr/td[1]/a')).click()
-        await driver.findElement(By.css('a.btn:nth-child(2)')).click()
-        await driver.findElement(By.xpath('//*[@id="description"]')).sendKeys(issue.description);
-        await driver.findElement(By.xpath('//*[@id="issueID"]')).sendKeys(issue.issueID);
-        await driver.findElement(By.xpath('//*[@id="priorite"]')).sendKeys(issue.priorite);
-        await driver.findElement(By.xpath('//*[@id="difficulte"]')).sendKeys(issue.difficulte);
-        await driver.findElement(By.xpath('//*[@id="status"]')).sendKeys(issue.status);
-        await driver.findElement(By.xpath('/html/body/app-root/app-dashboard/div/div[2]/div/app-detailprojet/div[2]/div/app-root/app-issue/div[2]/div/div/fieldset/form/a')).click()
+        const a = await driver.getCurrentUrl();
+        await driver.get(a.replace("contributors", "issues"));
+        await driver.findElement(By.xpath('/html/body/app-root/app-dashboard/div[2]/div[2]/div/app-detailprojet/div[2]/div/app-root/app-issue/div[1]/a')).click()
+        driver.findElement(By.xpath('//*[@id="issueID"]')).then(e => {
+            e.sendKeys(issue.issueID);
+        })
+        driver.findElement(By.xpath('//*[@id="priorite"]')).then(e => {
+            e.sendKeys(issue.priorite);
+        })
+        driver.findElement(By.xpath('//*[@id="difficulte"]')).then(e => {
+            e.sendKeys(issue.difficulte);
+        })
+        driver.findElement(By.xpath('//*[@id="status"]')).then(e => {
+            e.sendKeys(issue.status);
+        })
+        driver.findElement(By.xpath('/html/body/app-root/app-dashboard/div[2]/div[2]/div/app-detailprojet/div[2]/div/app-root/app-issue/div[2]/div/div/fieldset/form/a')).then(e => {
+            e.click();
+        })
         const isPresent = await driver.findElements(By.css('.table > tbody:nth-child(3) > tr:nth-child(1)')) === undefined;
         expect(isPresent).to.equal(true);
     });
@@ -74,9 +85,6 @@ describe('Issue tests', () => {
         Issue.remove({}, v => {
         });
         driver.quit()
-
     });
-
-
 
 });

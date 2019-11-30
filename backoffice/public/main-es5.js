@@ -39,7 +39,18 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div id=\"viewport\">\n  <!-- Sidebar -->\n  <div *ngIf=\"userInfos\" id=\"sidebar\">\n    <header>\n        <p style=\"text-align: center\"><span class=\"badge badge-secondary\"> Bienvenue {{ userInfos.name}}</span></p>\n\n      </header>\n\n    <ul class=\"nav\">\n      <li>\n        <a routerLink=\"projects\">\n          <em class=\"zmdi zmdi-view-dashboard\"></em> Mes projets\n        </a>\n      </li>\n      <li>\n        <a routerLink=\"projects\" >\n          <em class=\"zmdi zmdi-view-dashboard\"></em> Mes collaborateurs\n        </a>\n      </li>\n      <li>\n        <a routerLink=\"edit\" >\n          <em class=\"zmdi zmdi-view-dashboard\"></em> Mon profil\n        </a>\n      </li>\n      <li>\n        <a href=\"javascript:void(0)\" (click)=\"logout()\">\n          <em class=\"zmdi zmdi-view-dashboard\"></em> Déconnexion\n        </a>\n      </li>\n    </ul>\n  </div>\n  <!-- Content -->\n  <div id=\"content\">\n    <div class=\"container-fluid\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div id=\"navbar\" class=\"navbar-header\" *ngIf=\"userInfos\">\n<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark fixed-top\">\n    <a class=\"navbar-brand\" href=\"#\">MyProjectManager</a>\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n      <ul class=\"navbar-nav\">\n      </ul>\n    </div>\n    <div class=\"mx-auto order-0\">\n        <ul class=\"navbar-nav\">\n            <li class=\"dropdown\">\n              <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">{{ userInfos.name}}<span class=\"caret\"></span></a>\n              <ul class=\"dropdown-menu dropdown-menu-right\">\n                <li><a href=\"javascript:void(0)\" (click)=\"logout()\" class=\"fa fa-sign-out\">Déconnexion</a></li>\n              </ul>\n            </li>\n        </ul>\n    </div>\n  </nav>\n</div>\n\n<div id=\"viewport\" style=\"padding-top:50px\">\n  <!-- Sidebar -->\n  <div *ngIf=\"userInfos\" id=\"sidebar\">\n\n    <ul class=\"nav\">\n      <li>\n        <a routerLink=\"projects\">\n          <em class=\"zmdi zmdi-view-dashboard\" class=\"fa fa-folder-open-o\"></em> Mes projets\n        </a>\n      </li>\n      <li>\n        <a routerLink=\"userdetail\">\n          <em class=\"zmdi zmdi-view-dashboard\" class=\"fa fa-user\"></em> Mon profil\n        </a>\n      </li>\n    </ul>\n  </div>\n  <!-- Content -->\n  <div id=\"content\">\n    <div class=\"container-fluid\" style=\"margin-top: 1%\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/contributor/contributor.component.html": 
+        /*!********************************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/contributor/contributor.component.html ***!
+          \********************************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n    <div class=\"col-md-12\">\n        <div class=\"card-body\">\n            <h5 class=\"card-title\">Liste des contributeurs</h5>\n            <button type=\"button\" data-toggle=\"modal\" data-target=\"#invitationModel\"\n                class=\"btn btn-info\">Invitations</button>\n        </div>\n        <table class=\"table table-striped\">\n            <caption>Liste des issues</caption>\n            <thead class=\"thead\">\n                <tr>\n                    <th scope=\"col\">Nom </th>\n                    <th scope=\"col\">Email </th>\n                    <th scope=\"col\"></th>\n                </tr>\n            </thead>\n\n            <tbody>\n                <tr *ngFor=\"let contributor of contributors\">\n                    <td>{{contributor?.name}}</td>\n                    <td>{{contributor?.email}}</td>\n\n                    <td>\n                        <button type=\"button\" (click)=\"removeContributor(contributor?._id)\" class=\"btn btn-danger\"><em\n                                class=\"fa fa-trash-o\"></em></button>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n</div>\n\n<div class=\"modal fade\" id=\"invitationModel\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Liste des invitations</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <div class=\"card-body\">\n                    <h5 class=\"card-title\">Invitation</h5>\n                    <div class=\"form-group\">\n                        <ng-select (add)=\"onAdd($event)\" class=\"custom\" placeholder=\"+ Inviter un contributeur\"\n                            [(ngModel)]=\"selectedUser\" [multiple]=\"true\">\n                            <ng-option *ngFor=\"let user of users\" [value]=\"user?.email\">{{user?.email}} - {{user?.name}}\n                            </ng-option>\n                        </ng-select>\n                    </div>\n                    <div *ngIf=\"waiting\" class=\"text-center\">\n                        <div class=\"spinner-border\" role=\"status\">\n                            <span class=\"sr-only\">Loading...</span>\n                        </div>\n                        Envoi de l'invitation en cours\n                    </div>\n                    <div *ngIf=\"success\" class=\"alert alert-success\" role=\"alert\">\n                        L'invitation a été envoyé avec succès\n                    </div>\n                </div>\n                <ul class=\"list-group\">\n                    <li *ngFor=\"let invitation of invitations\"\n                        class=\"list-group-item d-flex justify-content-between align-items-center\">\n                        {{invitation?.emailUser}}\n                        <span class=\"badge badge-secondary badge-pill\"> {{invitation?.date}}</span>\n                        <span *ngIf=\"invitation?.status===0\" class=\"badge badge-dark badge-pill\">En attente</span>\n                        <span *ngIf=\"invitation?.status===1\" class=\"badge badge-success badge-pill\">Acceptée</span>\n                    </li>\n                </ul>\n            </div>\n            <div class=\"modal-footer\">\n            </div>\n        </div>\n    </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/detailprojet.component.html": 
@@ -50,7 +61,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card w-100\">\n    <div class=\"card-body\">\n        <h4 class=\"card-title\">{{ project?.title }}</h4>\n        <p class=\"card-text\" style=\"color: gray;\">{{ project?.description }}</p>\n        <a *ngIf=\"isCreator\" class=\"btn btn-primary\" data-toggle=\"collapse\" href=\"#editproject\" role=\"button\"\n            aria-expanded=\"false\" aria-controls=\"editproject\">Editer <em class=\"fa fa-pencil\"></em></a>\n    </div>\n\n    <div class=\"collapse multi-collapse\" id=\"editproject\">\n        <div class=\"card card-body\">\n            <div class=\"col-md-5\">\n                <fieldset>\n                    <legend>Modifier le projet</legend>\n                    <form #editproject=\"ngForm\" (ngSubmit)=\"editProject(editproject)\">\n                        <div class=\"form-group\">\n                            <input style=\"width: 100%;\" required type=\"email\" [(ngModel)]=\"modelproject.title\"\n                                class=\"form-control\" name=\"title\" id=\"title\" ng-init=\"myText='Hello World!'\">\n                        </div>\n                        <div class=\"form-group\">\n                            <textarea class=\"form-control\" required style=\"width: 100%;resize: none;\"\n                                [(ngModel)]=\"modelproject.description\" id=\"description\" name=\"description\"\n                                rows=\"4\">{{project?.description}}</textarea>\n                        </div>\n                        <div class=\"form-group\">\n                            <select style=\"width: 100%;\" class=\"custom-select\" id=\"status\" name=\"status\" [(ngModel)]=\"modelproject.status\"\n                                [value]='0'>\n                                <option disabled value='0'>Status</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n                        <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#editproject\" role=\"button\"\n                            (click)=\"editProject(editproject)\" aria-expanded=\"false\"\n                            aria-controls=\"editproject\">Confirmer</a>\n                    </form>\n                </fieldset>\n            </div>\n        </div>\n    </div>\n</div><br>\n<ul class=\"nav nav-tabs\" id=\"myTab\" role=\"tablist\">\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"home-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='issues' role=\"tab\" aria-controls=\"home\"\n            aria-selected=\"true\">Issues</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"taches-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='tasks' role=\"tab\" aria-controls=\"taches\"\n            aria-selected=\"false\">Tâches</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"sprints-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='sprints' role=\"tab\" aria-controls=\"sprints\"\n            aria-selected=\"false\">Sprints</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='tests' role=\"tab\" aria-controls=\"tests\"\n            aria-selected=\"false\">Tests</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"releases-tab\" data-toggle=\"tab\" role=\"tab\" aria-controls=\"releases\"\n            aria-selected=\"false\">Releases</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"documentations-tab\" data-toggle=\"tab\" role=\"tab\" aria-controls=\"documentations\"\n            aria-selected=\"false\">Documentations</a>\n    </li>\n</ul>\n\n<div class=\"tab-content\">\n    <div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\n\n        <app-root></app-root>\n    </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card w-100\">\n    <div class=\"card-body\">\n        <h4 class=\"card-title\">{{ project?.title }}</h4>\n        <p class=\"card-text\" style=\"color: gray;\">{{ project?.description }}</p>\n        <a *ngIf=\"isCreator\" class=\"btn btn-primary\" data-toggle=\"collapse\" href=\"#editproject\" role=\"button\"\n            aria-expanded=\"false\" aria-controls=\"editproject\">Editer <em class=\"fa fa-pencil\"></em></a>\n    </div>\n\n    <div class=\"collapse multi-collapse\" id=\"editproject\">\n        <div class=\"card card-body\">\n            <div class=\"col-md-5\">\n                <fieldset>\n                    <legend>Modifier le projet</legend>\n                    <form #editproject=\"ngForm\" (ngSubmit)=\"editProject(editproject)\">\n                        <div class=\"form-group\">\n                            <input style=\"width: 100%;\" required type=\"email\" [(ngModel)]=\"modelproject.title\"\n                                class=\"form-control\" name=\"title\" id=\"title\" ng-init=\"myText='Hello World!'\">\n                        </div>\n                        <div class=\"form-group\">\n                            <textarea class=\"form-control\" required style=\"width: 100%;resize: none;\"\n                                [(ngModel)]=\"modelproject.description\" id=\"description\" name=\"description\"\n                                rows=\"4\">{{project?.description}}</textarea>\n                        </div>\n                        <div class=\"form-group\">\n                            <select style=\"width: 100%;\" class=\"custom-select\" id=\"status\" name=\"status\"\n                                [(ngModel)]=\"modelproject.status\" [value]='0'>\n                                <option disabled value='0'>Status</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n                        <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#editproject\" role=\"button\"\n                            (click)=\"editProject(editproject)\" aria-expanded=\"false\"\n                            aria-controls=\"editproject\">Confirmer</a>\n                    </form>\n                </fieldset>\n            </div>\n        </div>\n    </div>\n</div><br>\n<ul class=\"nav nav-tabs\" id=\"myTab\" role=\"tablist\">\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"contributor-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='contributors' role=\"tab\"\n            aria-controls=\"contributor\" aria-selected=\"true\">Contributeurs</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"home-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='issues' role=\"tab\"\n            aria-controls=\"home\" aria-selected=\"true\">Issues</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"taches-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='tasks' role=\"tab\"\n            aria-controls=\"taches\" aria-selected=\"false\">Tâches</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"sprints-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='sprints' role=\"tab\"\n            aria-controls=\"sprints\" aria-selected=\"false\">Sprints</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"profile-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='tests' role=\"tab\"\n            aria-controls=\"tests\" aria-selected=\"false\">Tests</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"releases-tab\" data-toggle=\"tab\" routerLinkActive=\"active\" routerLink='releases'\n            role=\"tab\" aria-controls=\"releases\" aria-selected=\"false\">Releases</a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" id=\"documentations-tab\" data-toggle=\"tab\" routerLinkActive=\"active\"\n            routerLink='documentations' role=\"tab\" aria-controls=\"documentations\"\n            aria-selected=\"false\">Documentations</a>\n    </li>\n</ul>\n\n<div class=\"tab-content\">\n    <div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\n\n        <app-root></app-root>\n    </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/detailsprint/detailsprint.component.html": 
@@ -64,6 +75,17 @@
             /* harmony default export */ __webpack_exports__["default"] = ("<br>\n<div class=\"card\">\n    <div class=\"card-body\">\n        <h4 class=\"card-title\">{{sprint?.title}} <span class=\"badge badge-secondary\">{{sprint?.status}}</span></h4>\n        <h5><span class=\"badge badge-info\">{{sprint?.startDate}} au {{sprint?.endDate}}</span></h5>\n        <p>Nombre d'issues: <span class=\"badge badge-dark\">{{sprint?.issues.length}}</span></p>\n        <p>Difficultés totales: <span class=\"badge badge-danger\">{{nbrDifficulte}}</span></p>\n        <p>Difficultés résolues: <span class=\"badge badge-success\">{{nbrDifficulteRes}}</span></p>\n    </div>\n</div>\n<div class=\"card\">\n    <div class=\"card-body\">\n        <h5 class=\"card-title\">Issues</h5>\n        <div class=\"form-group\">\n            <ng-select (add)=\"onAdd($event)\" class=\"custom\" placeholder=\"+ Ajouter des issues\" [(ngModel)]=\"selectedItems\" [multiple]=\"true\">\n                <ng-option *ngFor=\"let issue of issues\" [value]=\"issue?._id\" >{{issue?.issueID}} - {{issue?.description}}</ng-option>\n            </ng-select>\n        </div>\n        <table class=\"table table-striped\">\n            <caption>Liste des issues du sprint</caption>\n            <thead class=\"thead\">\n                <tr>\n                    <th scope=\"col\">ID</th>\n                    <th scope=\"col\">Description</th>\n                    <th scope=\"col\">Priorité </th>\n                    <th scope=\"col\">Difficulté </th>\n                    <th scope=\"col\">Status </th>\n                    <th scope=\"col\"></th>\n                </tr>\n            </thead>\n\n            <tbody>\n                <tr *ngFor=\"let issue of sprint?.issues\">\n                    <td>#{{issue?.issueID}}</td>\n                    <td style=\"width: 40%;\">{{issue?.description}}</td>\n                    <td>{{issue?.priorite}}</td>\n                    <td>{{issue?.difficulte}}</td>\n                    <td>{{issue?.status}}</td>\n\n                    <td>\n                        <button type=\"button\" (click)=\"updateModalEditIssue(issue)\" data-toggle=\"modal\"\n                            data-target=\"#editIssueModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                        <button type=\"button\" (click)=\"removeIssueFromSprint(issue?._id)\" class=\"btn btn-danger\"><em\n                                class=\"fa fa-trash-o\"></em></button>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n</div>\n\n<div class=\"modal fade\" id=\"editIssueModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\naria-hidden=\"true\">\n<div class=\"modal-dialog modal-lg\" role=\"document\">\n    <div class=\"modal-content\">\n        <div class=\"modal-header\">\n            <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer issue</h5>\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n        </div>\n        <div class=\"modal-body\">\n            <form #editIssue=\"ngForm\" (ngSubmit)=\"editIssue.valid\">\n                <div class=\"from row\">\n                    <div class=\"form-group col-md-12\">\n                        <textarea class=\"form-control\" placeholder=\"Décrire votre issue\"\n                            style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                            [(ngModel)]=\"modelIssueEdit.description\" rows=\"4\"></textarea>\n                    </div>\n                </div>\n                <div class=\"from row\">\n                    <div class=\"form-group col\">\n                        <input type=\"email\" class=\"form-control\" placeholder=\"ID\" name=\"issueID\" id=\"issueID\"\n                            rows=\"3\" [(ngModel)]=\"modelIssueEdit.issueID\">\n                    </div>\n\n                    <div class=\"form-group col\">\n                        <select class=\"custom-select\" id=\"priorite\" name=\"priorite\"\n                            [(ngModel)]=\"modelIssueEdit.priorite\">\n                            <option disabled value='0'>Priorité</option>\n                            <option>Basse</option>\n                            <option>Moyenne</option>\n                            <option>Elevée</option>\n                        </select>\n                    </div>\n\n                    <div class=\"form-group col\">\n                        <input type=\"email\" class=\"form-control\" placeholder=\"Difficulté\" name=\"difficulte\"\n                            id=\"difficulte\" rows=\"3\" [(ngModel)]=\"modelIssueEdit.difficulte\">\n                    </div>\n                    <div class=\"form-group col\">\n                        <select (change)=\"ChangingValue($event)\" class=\"custom-select\" id=\"status\" name=\"status\"\n                            [(ngModel)]=\"modelIssueEdit.status\" [value]='0'>\n                            <option disabled value='0'>Status</option>\n                            <option>En cours</option>\n                            <option>Terminé</option>\n                        </select>\n\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n            <button type=\"button\" (click)=\"onSubmitEditIssue(editIssue)\" data-dismiss=\"modal\"\n                class=\"btn btn-primary\">Confirmer</button>\n        </div>\n    </div>\n</div>\n</div>");
             /***/ 
         }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/documentation/documentation.component.html": 
+        /*!************************************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/documentation/documentation.component.html ***!
+          \************************************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste de la documentation</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#multiCollapseExample4\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"multiCollapseExample4\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n<div class=\"collapse multi-collapse\" id=\"multiCollapseExample4\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-5\">\n            <fieldset>\n                <legend>Nouvelle documentation</legend>\n                <form #newDocumentation=\"ngForm\" (ngSubmit)=\"newDocumentation.valid\">\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelDocumentation.title\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre documentation\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelDocumentation.description\" rows=\"4\"></textarea>\n                        </div>\n\n                        <div class=\"form-group col\">    \n                            <input type=\"email\" class=\"form-control\" placeholder=\"Link\" name=\"link\" id=\"link\" rows=\"3\"\n                                [(ngModel)]=\"modelDocumentation.link\">\n                        </div>\n                    </div>        \n                       \n\n                  \n                    <a class=\"btn btn-success\" (click)=\"onSubmitDocumentation(newDocumentation)\" data-toggle=\"collapse\"\n                        href=\"#multiCollapseExample4\" role=\"button\" aria-expanded=\"false\"\n                        aria-controls=\"multiCollapseExample4\">Confirmer</a>\n                </form>\n            </fieldset>\n        </div>\n    </div>\n</div>\n\n<table class=\"table table-striped\">\n    <caption>Liste de la documentation</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">Titre</th>\n            <th scope=\"col\">Description</th>    \n            <th scope=\"col\">Lien</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let documentation of documentations\">\n            <td>{{documentation?.title}}</td>\n            <td style=\"width: 40%;\">{{documentation?.description}}</td>\n            <td>{{documentation?.link}}</td>\n\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditDocumentation(documentation)\" data-toggle=\"modal\"\n                    data-target=\"#editDocumentationModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeDocumentation(documentation._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<div class=\"modal fade\" id=\"editDocumentationModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer documentation</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editDocumentation=\"ngForm\" (ngSubmit)=\"editDocumentation.valid\">\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelDocumentationEdit.title\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre documentation\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelDocumentationEdit.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n               \n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Link\" name=\"link\" id=\"link\" rows=\"3\"\n                                [(ngModel)]=\"modelDocumentationEdit.link\">\n                        </div>\n                        \n\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditDocumentation(editDocumentation)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>");
+            /***/ 
+        }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/issue/issue.component.html": 
         /*!********************************************************************************************************************!*\
           !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/issue/issue.component.html ***!
@@ -73,6 +95,17 @@
             "use strict";
             __webpack_require__.r(__webpack_exports__);
             /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste des issues</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#addIssue\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"addIssue\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n\n<div class=\"collapse multi-collapse\" id=\"addIssue\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-6\">\n            <fieldset>\n                <legend>Nouvelle issue</legend>\n                <form #newIssue=\"ngForm\" (ngSubmit)=\"newIssue.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre issue\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelIssue.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"number\" class=\"form-control\" placeholder=\"ID\" name=\"issueID\" id=\"issueID\"\n                                rows=\"3\" [(ngModel)]=\"modelIssue.issueID\">\n                        </div>\n\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"priorite\" name=\"priorite\"\n                                [(ngModel)]=\"modelIssue.priorite\">\n                                <option disabled value=\"\">Priorité</option>\n                                <option>Basse</option>\n                                <option>Moyenne</option>\n                                <option>Elevée</option>\n                            </select>\n                        </div>\n                        <div class=\"form-group col\">\n                            <input type=\"number\" class=\"form-control\" placeholder=\"Difficulté\" name=\"difficulte\"\n                                id=\"difficulte\" rows=\"3\" [(ngModel)]=\"modelIssue.difficulte\">\n                        </div>\n                        <div class=\"form-group col\">\n                            <select (change)=\"ChangingValue($event)\" class=\"custom-select\" id=\"status\" name=\"status\"\n                                [(ngModel)]=\"modelIssue.status\" [value]='0'>\n                                <option disabled value='0'>Status</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n\n                        </div>\n                    </div>\n                    <a class=\"btn btn-success\" (click)=\"onSubmitIssue(newIssue)\" data-toggle=\"collapse\" href=\"#addIssue\"\n                        role=\"button\" aria-expanded=\"false\" aria-controls=\"addIssue\">Ajouter</a>\n                </form>\n            </fieldset>\n        </div>\n    </div>\n</div>\n<div class=\"row justify-content-center\">\n    <div class=\"form-group col-md-3\">\n        <ng-select (change)=\"sort($event)\" (clear)=\"getIssues()\" [searchable]=\"false\" class=\"custom\" [(ngModel)]=\"selectedItem\" placeholder=\"Trier par\">\n            <ng-option [value]=\"issueID\" >ID</ng-option>\n            <ng-option [value]=\"priorite\">Priorité</ng-option>\n            <ng-option [value]=\"difficulte\">Difficulté</ng-option>\n        </ng-select>\n    </div>\n</div>\n<table class=\"table table-striped\">\n    <caption>Liste des issues</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">ID</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Priorité </th>\n            <th scope=\"col\">Difficulté </th>\n            <th scope=\"col\">Status </th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let issue of issues\">\n            <td>#{{issue?.issueID}}</td>\n            <td style=\"width: 40%;\">{{issue?.description}}</td>\n            <td>{{issue?.priorite}}</td>\n            <td>{{issue?.difficulte}}</td>\n            <td>{{issue?.status}}</td>\n\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditIssue(issue)\" data-toggle=\"modal\"\n                    data-target=\"#editIssueModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeIssue(issue._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n\n<div class=\"modal fade\" id=\"editIssueModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer issue</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editIssue=\"ngForm\" (ngSubmit)=\"editIssue.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre issue\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelIssueEdit.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"ID\" name=\"issueID\" id=\"issueID\"\n                                rows=\"3\" [(ngModel)]=\"modelIssueEdit.issueID\">\n                        </div>\n\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"priorite\" name=\"priorite\"\n                                [(ngModel)]=\"modelIssueEdit.priorite\">\n                                <option disabled value='0'>Priorité</option>\n                                <option>Basse</option>\n                                <option>Moyenne</option>\n                                <option>Elevée</option>\n                            </select>\n                        </div>\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Difficulté\" name=\"difficulte\"\n                                id=\"difficulte\" rows=\"3\" [(ngModel)]=\"modelIssueEdit.difficulte\">\n                        </div>\n                        <div class=\"form-group col\">\n                            <select (change)=\"ChangingValue($event)\" class=\"custom-select\" id=\"status\" name=\"status\"\n                                [(ngModel)]=\"modelIssueEdit.status\" [value]='0'>\n                                <option disabled value='0'>Status</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditIssue(editIssue)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>\n");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/release/release.component.html": 
+        /*!************************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/release/release.component.html ***!
+          \************************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste des releases</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#multiCollapseExample4\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"multiCollapseExample4\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n<div class=\"collapse multi-collapse\" id=\"multiCollapseExample4\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-5\">\n            <fieldset>\n                <legend>Nouvelle release</legend>\n                <form #newRelease=\"ngForm\" (ngSubmit)=\"newRelease.valid\">\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelRelease.title\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre release\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelRelease.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Version\" name=\"version\" id=\"version\"\n                                rows=\"1\" [(ngModel)]=\"modelRelease.version\">\n                        </div>\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date\" name=\"date\"\n                                    [(ngModel)]=\"modelRelease.date\" ngbDatepicker #d=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\"\n                                        (click)=\"d.toggle()\" type=\"button\"></button>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"sprintNumber\" name=\"sprintNumber\"\n                                [(ngModel)]=\"modelRelease.sprintNumber\">\n                                <option disabled value='0'>Choisir le sprint</option>\n                                <option [value]='sprint?.title' *ngFor=\"let sprint of sprints\">\n                                    {{sprint?.title}}\n                            </select>\n                        </div>\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Link\" name=\"link\" id=\"link\" rows=\"3\"\n                                [(ngModel)]=\"modelRelease.link\">\n                        </div>\n                    </div>\n                    <a class=\"btn btn-success\" (click)=\"onSubmitRelease(newRelease)\" data-toggle=\"collapse\"\n                        href=\"#multiCollapseExample4\" role=\"button\" aria-expanded=\"false\"\n                        aria-controls=\"multiCollapseExample4\">Confirmer</a>\n                </form>\n            </fieldset>\n        </div>\n    </div>\n</div>\n\n<table class=\"table table-striped\">\n    <caption>Liste des Releases</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">Titre</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Version</th>\n            <th scope=\"col\">Date</th>\n            <th scope=\"col\">Sprint</th>\n            <th scope=\"col\">Lien</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let release of releases\">\n            <td>{{release?.title}}</td>\n            <td style=\"width: 40%;\">{{release?.description}}</td>\n            <td>{{release?.version}}</td>\n            <td>{{release?.date}}</td>\n            <td>{{release?.sprintNumber}}</td>\n            <td>{{release?.link}}</td>\n\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditRelease(release)\" data-toggle=\"modal\"\n                    data-target=\"#editReleaseModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeRelease(release._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<div class=\"modal fade\" id=\"editReleaseModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer release</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editRelease=\"ngForm\" (ngSubmit)=\"editRelease.valid\">\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelReleaseEdit.title\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre release\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelReleaseEdit.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Version\" name=\"version\" id=\"version\"\n                                rows=\"1\" [(ngModel)]=\"modelReleaseEdit.version\">\n                        </div>\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date\" name=\"date\"\n                                    [(ngModel)]=\"modelReleaseEdit.date\" ngbDatepicker #dedit=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\"\n                                        (click)=\"dedit.toggle()\" type=\"button\"></button>\n                                </div>\n                            </div>\n                        </div>\n\n\n\n\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Link\" name=\"link\" id=\"link\" rows=\"3\"\n                                [(ngModel)]=\"modelReleaseEdit.link\">\n                        </div>\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"sprintNumber\" name=\"sprintNumber\"\n                                [(ngModel)]=\"modelReleaseEdit.sprintNumber\">\n                                <option disabled value='0'>Choisir le sprint</option>\n                                <option [value]='sprint?.title' *ngFor=\"let sprint of sprints\">\n                                    {{sprint?.title}}\n                                </option>\n                            </select>\n                        </div>\n\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditRelease(editRelease)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/sprint/sprint.component.html": 
@@ -94,7 +127,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste des tâches</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#multiCollapseExample2\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"multiCollapseExample2\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n<div class=\"collapse multi-collapse\" id=\"multiCollapseExample2\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-5\">\n            <fieldset>\n                <legend>Nouvelle tâche</legend>\n                <form #newTask=\"ngForm\" (ngSubmit)=\"newTask.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <ng-select name=\"issues\" placeholder=\"+ Ajouter des issues\" [(ngModel)]=\"modelTask.issue\"\n                                [multiple]=\"true\">\n                                <ng-option *ngFor=\"let issue of issues\" [value]=\"issue?.issueID\">{{issue?.issueID}} -\n                                    {{issue?.description}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre tâche\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTask.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Côut\" name=\"cout\" id=\"cout\" rows=\"3\"\n                                [(ngModel)]=\"modelTask.cout\">\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <ng-select class=\"custom\" placeholder=\"Choisir le développeur\"\n                                [(ngModel)]=\"modelTask.developer\" name=\"developer\">\n                                <ng-option *ngFor=\"let user of users\" [value]=\"user?.name\">{{user?.name}} /\n                                    {{user?.email}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                    <a class=\"btn btn-success\" (click)=\"onSubmitTask(newTask)\" data-toggle=\"collapse\"\n                        href=\"#multiCollapseExample2\" role=\"button\" aria-expanded=\"false\"\n                        aria-controls=\"multiCollapseExample2\">Confirmer</a>\n                </form>\n            </fieldset>\n        </div>\n    </div>\n</div>\n\n<table class=\"table table-striped\">\n    <caption>Liste des tâches</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">Issues</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Coût</th>\n            <th scope=\"col\">Développeur</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let task of tasks\">\n            <td>\n                <p *ngFor=\"let issue of task?.idIssues\"><span class=\"badge badge-pill badge-primary\">US\n                        {{issue}}</span></p>\n            </td>\n            <td style=\"width: 40%;\">{{task?.description}}</td>\n            <td>{{task?.cout}}</td>\n            <td>{{task?.developer}}</td>\n\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditTask(task)\" data-toggle=\"modal\"\n                    data-target=\"#editTaskModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeTask(task._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<div class=\"modal fade\" id=\"editTaskModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer tâche</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editTask=\"ngForm\" (ngSubmit)=\"editTask.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <!--<select class=\"custom-select\" id=\"idIssues\" name=\"idIssues\"\n                                [(ngModel)]=\"modelTaskEdit.issue\">\n                                <option disabled value='0'>Choisir l'issue</option>\n                                <option [value]='issue?.issueID' *ngFor=\"let issue of issues\">\n                                    {{issue?.issueID}} / {{issue?.description}}\n                                </option>\n                            </select>\n                        -->\n                            <ng-select name=\"issues\" placeholder=\"+ Ajouter des issues\"\n                                [(ngModel)]=\"modelTaskEdit.issue\" bindLabel=\"idIssue\" bindValue=\"idIssue\"  [multiple]=\"true\">\n                                <ng-option *ngFor=\"let issue of issues\" [value]=\"issue?.issueID\">{{issue?.issueID}} -\n                                    {{issue?.description}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre tâche\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTaskEdit.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Côut\" name=\"cout\" id=\"cout\" rows=\"3\"\n                                [(ngModel)]=\"modelTaskEdit.cout\">\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <ng-select class=\"custom\" placeholder=\"Choisir le développeur\"\n                                [(ngModel)]=\"modelTaskEdit.developer\" name=\"developer\">\n                                <ng-option *ngFor=\"let user of users\" [value]=\"user?.name\">{{user?.name}} /\n                                    {{user?.email}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditTask(editTask)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste des tâches</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#multiCollapseExample2\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"multiCollapseExample2\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n<div class=\"collapse multi-collapse\" id=\"multiCollapseExample2\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-5\">\n            <fieldset>\n                <legend>Nouvelle tâche</legend>\n                <form #newTask=\"ngForm\" (ngSubmit)=\"newTask.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <ng-select name=\"issues\" placeholder=\"+ Ajouter des issues\" [(ngModel)]=\"modelTask.issue\"\n                                [multiple]=\"true\">\n                                <ng-option *ngFor=\"let issue of issues\" [value]=\"issue?.issueID\">{{issue?.issueID}} -\n                                    {{issue?.description}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre tâche\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTask.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Côut\" name=\"cout\" id=\"cout\" rows=\"3\"\n                                [(ngModel)]=\"modelTask.cout\">\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <ng-select class=\"custom\" placeholder=\"Choisir le développeur\"\n                                [(ngModel)]=\"modelTask.developer\" name=\"developer\">\n                                <ng-option *ngFor=\"let contributor of contributors\" [value]=\"contributor?.name\">\n                                    {{contributor?.name}} /\n                                    {{contributor?.email}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                    <a class=\"btn btn-success\" (click)=\"onSubmitTask(newTask)\" data-toggle=\"collapse\"\n                        href=\"#multiCollapseExample2\" role=\"button\" aria-expanded=\"false\"\n                        aria-controls=\"multiCollapseExample2\">Confirmer</a>\n                </form>\n            </fieldset>\n        </div>\n    </div>\n</div>\n\n<table class=\"table table-striped\">\n    <caption>Liste des tâches</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">Issues</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Coût</th>\n            <th scope=\"col\">Développeur</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let task of tasks\">\n            <td>\n                <p *ngFor=\"let issue of task?.idIssues\"><span class=\"badge badge-pill badge-primary\">US\n                        {{issue}}</span></p>\n            </td>\n            <td style=\"width: 40%;\">{{task?.description}}</td>\n            <td>{{task?.cout}}</td>\n            <td>{{task?.developer}}</td>\n\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditTask(task)\" data-toggle=\"modal\"\n                    data-target=\"#editTaskModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeTask(task._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<div class=\"modal fade\" id=\"editTaskModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer tâche</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editTask=\"ngForm\" (ngSubmit)=\"editTask.valid\">\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <!--<select class=\"custom-select\" id=\"idIssues\" name=\"idIssues\"\n                                [(ngModel)]=\"modelTaskEdit.issue\">\n                                <option disabled value='0'>Choisir l'issue</option>\n                                <option [value]='issue?.issueID' *ngFor=\"let issue of issues\">\n                                    {{issue?.issueID}} / {{issue?.description}}\n                                </option>\n                            </select>\n                        -->\n                            <ng-select name=\"issues\" placeholder=\"+ Ajouter des issues\"\n                                [(ngModel)]=\"modelTaskEdit.issue\" bindLabel=\"idIssue\" bindValue=\"idIssue\"\n                                [multiple]=\"true\">\n                                <ng-option *ngFor=\"let issue of issues\" [value]=\"issue?.issueID\">{{issue?.issueID}} -\n                                    {{issue?.description}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre tâche\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTaskEdit.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Côut\" name=\"cout\" id=\"cout\" rows=\"3\"\n                                [(ngModel)]=\"modelTaskEdit.cout\">\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <ng-select class=\"custom\" placeholder=\"Choisir le développeur\"\n                                [(ngModel)]=\"modelTaskEdit.developer\" name=\"developer\">\n                                <ng-option *ngFor=\"let contributor of contributors\" [value]=\"contributor?.name\">\n                                    {{contributor?.name}} /\n                                    {{contributor?.email}}</ng-option>\n                            </ng-select>\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditTask(editTask)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/test/test.component.html": 
@@ -105,7 +138,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste des tests</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#multiCollapseExample4\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"multiCollapseExample4\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n<div class=\"collapse multi-collapse\" id=\"multiCollapseExample4\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-5\">\n            <fieldset>\n                <legend>Nouveau test</legend>\n                <form #newTest=\"ngForm\" (ngSubmit)=\"newTest.valid\">\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelTest.title\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre test\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTest.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"type\" name=\"type\" [(ngModel)]=\"modelTest.type\"\n                                [value]='0'>\n                                <option disabled value='0'>Type</option>\n                                <option>Test unitaire</option>\n                                <option>Test de validation</option>\n                            </select>\n                        </div>\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date\" name=\"dp\" [(ngModel)]=\"modelTest.date\"\n                                    ngbDatepicker #d=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\"\n                                        (click)=\"d.toggle()\" type=\"button\"></button>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Lien\" name=\"Lien\" id=\"lien\" rows=\"3\"\n                                [(ngModel)]=\"modelTest.link\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <select class=\"custom-select\" id=\"status\" name=\"status\" [(ngModel)]=\"modelTest.status\"\n                                [value]='0'>\n                                <option disabled value='0'>Statut</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n                    </div>\n                    <a class=\"btn btn-success\" (click)=\"onSubmitTest(newTest)\" data-toggle=\"collapse\"\n                        href=\"#multiCollapseExample4\" role=\"button\" aria-expanded=\"false\"\n                        aria-controls=\"multiCollapseExample4\">Confirmer</a>\n                </form>\n            </fieldset>\n        </div>\n    </div>\n</div>\n\n<table class=\"table table-striped\">\n    <caption>Liste des tests</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">ID</th>\n            <th scope=\"col\">Titre</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Type</th>\n            <th scope=\"col\">Date</th>\n            <th scope=\"col\">Lien</th>\n            <th scope=\"col\">Statut</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let test of tests\">\n            <td> </td>\n            <td>{{test?.title}}</td>\n            <td style=\"width: 40%;\">{{test?.description}}</td>\n            <td>{{test?.type}}</td>\n            <td>{{test?.date}}</td>\n            <td>{{test?.link}}</td>\n            <td>{{test?.status}}</td>\n\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditTest(test)\" data-toggle=\"modal\"\n                    data-target=\"#editTestModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeTest(test._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<div class=\"modal fade\" id=\"editTestModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer test</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editTest=\"ngForm\" (ngSubmit)=\"editTest.valid\">\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelTestEdit.title\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre test\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTestEdit.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"type\" name=\"type\" [(ngModel)]=\"modelTestEdit.type\"\n                                [value]='0'>\n                                <option disabled value='0'>Type</option>\n                                <option>Test unitaire</option>\n                                <option>Test de validation</option>\n                            </select>\n                        </div>\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date\" name=\"dp\"\n                                    [(ngModel)]=\"modelTestEdit.date\" ngbDatepicker #dedit=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\"\n                                        (click)=\"dedit.toggle()\" type=\"button\"></button>\n                                </div>\n                            </div>\n                        </div>\n\n\n\n\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Lien\" name=\"Lien\" id=\"lien\" rows=\"3\"\n                                [(ngModel)]=\"modelTestEdit.link\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <select class=\"custom-select\" id=\"status\" name=\"status\" [(ngModel)]=\"modelTestEdit.status\"\n                                [value]='0'>\n                                <option disabled value='0'>Statut</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditTest(editTest)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"card-body\">\n    <h5 class=\"card-title\">Liste des tests</h5>\n    <a class=\"btn btn-success\" data-toggle=\"collapse\" href=\"#multiCollapseExample4\" role=\"button\" aria-expanded=\"false\"\n        aria-controls=\"multiCollapseExample4\">Ajouter <em class=\"fa fa-plus\"></em></a>\n</div>\n<div class=\"collapse multi-collapse\" id=\"multiCollapseExample4\">\n    <div class=\"card card-body\">\n        <div class=\"col-md-5\">\n            <fieldset>\n                <legend>Nouveau test</legend>\n                <form #newTest=\"ngForm\" (ngSubmit)=\"newTest.valid\">\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelTest.title\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre test\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTest.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"type\" name=\"type\" [(ngModel)]=\"modelTest.type\"\n                                [value]='0'>\n                                <option disabled value='0'>Type</option>\n                                <option>Test unitaire</option>\n                                <option>Test de validation</option>\n                            </select>\n                        </div>\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date\" name=\"dp\" [(ngModel)]=\"modelTest.date\"\n                                    ngbDatepicker #d=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\"\n                                        (click)=\"d.toggle()\" type=\"button\"></button>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Lien\" name=\"Lien\" id=\"lien\" rows=\"3\"\n                                [(ngModel)]=\"modelTest.link\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <select class=\"custom-select\" id=\"status\" name=\"status\" [(ngModel)]=\"modelTest.status\"\n                                [value]='0'>\n                                <option disabled value='0'>Statut</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n                    </div>\n                    <a class=\"btn btn-success\" (click)=\"onSubmitTest(newTest)\" data-toggle=\"collapse\"\n                        href=\"#multiCollapseExample4\" role=\"button\" aria-expanded=\"false\"\n                        aria-controls=\"multiCollapseExample4\">Confirmer</a>\n                </form>\n            </fieldset>\n        </div>\n    </div>\n</div>\n\n<table class=\"table table-striped\">\n    <caption>Liste des tests</caption>\n    <thead class=\"thead\">\n        <tr>\n            <th scope=\"col\">Titre</th>\n            <th scope=\"col\">Description</th>\n            <th scope=\"col\">Type</th>\n            <th scope=\"col\">Date</th>\n            <th scope=\"col\">Lien</th>\n            <th scope=\"col\">Statut</th>\n            <th scope=\"col\"></th>\n        </tr>\n    </thead>\n\n    <tbody>\n        <tr *ngFor=\"let test of tests\">\n            <td>{{test?.title}}</td>\n            <td style=\"width: 40%;\">{{test?.description}}</td>\n            <td>{{test?.type}}</td>\n            <td>{{test?.date}}</td>\n            <td>{{test?.link}}</td>\n            <td>{{test?.status}}</td>\n\n            <td>\n                <button type=\"button\" (click)=\"updateModalEditTest(test)\" data-toggle=\"modal\"\n                    data-target=\"#editTestModal\" class=\"btn btn-info\"><em class=\"fa fa-edit\"></em></button>&nbsp;\n                <button type=\"button\" (click)=\"removeTest(test._id)\" class=\"btn btn-danger\"><em\n                        class=\"fa fa-trash-o\"></em></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n<div class=\"modal fade\" id=\"editTestModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title\" id=\"exampleModalLabel\">Editer test</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #editTest=\"ngForm\" (ngSubmit)=\"editTest.valid\">\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Titre\" name=\"title\" id=\"title\"\n                                rows=\"1\" [(ngModel)]=\"modelTestEdit.title\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <textarea class=\"form-control\" placeholder=\"Décrire votre test\"\n                                style=\"width: 100%;resize: none;\" id=\"description\" name=\"description\"\n                                [(ngModel)]=\"modelTestEdit.description\" rows=\"4\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"from row\">\n\n                        <div class=\"form-group col\">\n                            <select class=\"custom-select\" id=\"type\" name=\"type\" [(ngModel)]=\"modelTestEdit.type\"\n                                [value]='0'>\n                                <option disabled value='0'>Type</option>\n                                <option>Test unitaire</option>\n                                <option>Test de validation</option>\n                            </select>\n                        </div>\n                        <div class=\"form-group col\">\n                            <div class=\"input-group\">\n                                <input class=\"form-control\" placeholder=\"Date\" name=\"dp\"\n                                    [(ngModel)]=\"modelTestEdit.date\" ngbDatepicker #dedit=\"ngbDatepicker\">\n                                <div class=\"input-group-append\">\n                                    <button class=\"btn btn-outline-secondary calendar fa fa-calendar\"\n                                        (click)=\"dedit.toggle()\" type=\"button\"></button>\n                                </div>\n                            </div>\n                        </div>\n\n\n\n\n                    </div>\n                    <div class=\"from row\">\n                        <div class=\"form-group col\">\n                            <input type=\"email\" class=\"form-control\" placeholder=\"Lien\" name=\"Lien\" id=\"lien\" rows=\"3\"\n                                [(ngModel)]=\"modelTestEdit.link\">\n                        </div>\n                        <div class=\"form-group col-md-12\">\n                            <select class=\"custom-select\" id=\"status\" name=\"status\" [(ngModel)]=\"modelTestEdit.status\"\n                                [value]='0'>\n                                <option disabled value='0'>Statut</option>\n                                <option>En cours</option>\n                                <option>Terminé</option>\n                            </select>\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>\n                <button type=\"button\" (click)=\"onSubmitEditTest(editTest)\" data-dismiss=\"modal\"\n                    class=\"btn btn-primary\">Confirmer</button>\n            </div>\n        </div>\n    </div>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/listprojets/listprojets.component.html": 
@@ -127,7 +160,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-6\">\n  <h2 class=\"text-center\">Edit User</h2>\n  <form #editForm=\"ngForm\" (ngSubmit)=\"editForm.valid\">\n    <div class=\"form-group\">\n      <label for=\"email\">Email address:</label>\n      <input type=\"email\" placeholder=\"Email\" name=\"email\" class=\"form-control\" id=\"email\"\n      [(ngModel)]=\"this.userService.user.email\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"name\">First Name:</label>\n      <input placeholder=\"Name\" name=\"Name\" class=\"form-control\" id=\"Name\"\n      [(ngModel)]=\"this.userService.user.name\">\n    </div>\n    <button class=\"btn btn-success\" (click)=\"onSubmit(editForm)\">Update</button>\n  </form>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"col-md-6\">\n  <h2 class=\"text-center\">Edit User</h2>\n  <form #editForm=\"ngForm\" (ngSubmit)=\"editForm.valid\">\n    <div class=\"form-group\">\n      <label for=\"email\">Email address:</label>\n      <input type=\"email\" placeholder=\"Email\" name=\"email\" class=\"form-control\" id=\"email\"\n      [(ngModel)]=\"this.userService.user.email\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"name\">Name:</label>\n      <input placeholder=\"Name\" name=\"Name\" class=\"form-control\" id=\"Name\"\n      [(ngModel)]=\"this.userService.user.name\">\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"password\">Password:</label>\n      <input placeholder=\"password\" name=\"password\" class=\"form-control\" id=\"password\"\n      [(ngModel)]=\"this.userService.user.password\">\n    </div>\n    \n    <button class=\"btn btn-success\" (click)=\"onSubmit(editForm)\">Update</button>\n  </form>\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/login/login.component.html": 
@@ -138,7 +171,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<form #loginForm=\"ngForm\" (ngSubmit)=\"loginForm.valid && onSubmit(loginForm)\">\n    <input type=\"text\" #email=\"ngModel\" [(ngModel)]=\"model.email\" [pattern]=\"emailRegex\"\n        [ngClass]=\"{'invalid-textbox' :loginForm.submitted && !email.valid}\" name=\"email\"\n        placeholder=\"Entrez votre email\" required>\n    <div *ngIf=\"loginForm.submitted && email.errors?.pattern\">\n        <label class=\"validation-message\">L'adresse mail n'est pas valide</label>\n    </div>\n    <input type=\"password\" minlength=\"8\" #password=\"ngModel\"\n        [ngClass]=\"{'invalid-textbox' :loginForm.submitted && !password.valid}\" [(ngModel)]=\"model.password\"\n        name=\"password\" placeholder=\"Entrez votre mot de passe\" required>\n    <div *ngIf=\"loginForm.submitted && password.errors?.minlength\">\n        <label class=\"validation-message\">Le mot de passe doit contenir au moins 8 caractères</label>\n    </div>\n    <input type=\"submit\" value=\"Se connecter\">\n</form>\n\n<div class=\"alert\" *ngIf=\"errormessage\">\n    {{ errormessage }}\n</div>\n\n");
+            /* harmony default export */ __webpack_exports__["default"] = ("<form #loginForm=\"ngForm\" (ngSubmit)=\"loginForm.valid && onSubmit(loginForm)\">\n    <input type=\"text\" #email=\"ngModel\" [(ngModel)]=\"model.email\" [pattern]=\"emailRegex\"\n        [ngClass]=\"{'invalid-textbox' :loginForm.submitted && !email.valid}\" name=\"email\"\n        placeholder=\"Entrez votre email\" required>\n    <div *ngIf=\"loginForm.submitted && email.errors?.pattern\">\n        <label class=\"validation-message\">L'adresse mail n'est pas valide</label>\n    </div>\n    <input type=\"password\" minlength=\"8\" #password=\"ngModel\"\n        [ngClass]=\"{'invalid-textbox' :loginForm.submitted && !password.valid}\" [(ngModel)]=\"model.password\"\n        name=\"password\" placeholder=\"Entrez votre mot de passe\" required>\n    <div *ngIf=\"loginForm.submitted && password.errors?.minlength\">\n        <label class=\"validation-message\">Le mot de passe doit contenir au moins 8 caractères</label>\n    </div>\n    <input type=\"submit\" id=\"submit\" value=\"Se connecter\">\n</form>\n\n<div class=\"alertt\" *ngIf=\"errormessage\">\n    {{ errormessage }}\n</div>\n\n");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/register/register.component.html": 
@@ -149,7 +182,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<form #signUpForm=\"ngForm\" (ngSubmit)=\"signUpForm.valid && onSubmit(signUpForm)\">\n    <input type=\"text\" #name=\"ngModel\" [(ngModel)]=\"this.userService.user.name\" name=\"name\"\n        placeholder=\"Nom\" required [ngClass]=\"{'invalid-textbox' :signUpForm.submitted && !name.valid }\">\n    <div *ngIf=\"signUpForm.submitted && !name.valid\">\n        <label class=\"validation-message\">Ce champs est obligatoire.</label>\n    </div>\n    <input type=\"text\" #email=\"ngModel\" [(ngModel)]=\"this.userService.user.email\" name=\"email\" placeholder=\"Email\"\n        required [pattern]=\"emailRegex\" [ngClass]=\"{'invalid-textbox' :signUpForm.submitted && !email.valid }\">\n    <div *ngIf=\"signUpForm.submitted && email.errors\">\n        <label *ngIf=\"email.errors.required\" class=\"validation-message\">Ce champs est obligatoire.</label>\n        <label *ngIf=\"email.errors.pattern\" class=\"validation-message\">L'adresse mail n'est pas valide.</label>\n    </div>\n    <input type=\"password\" #password=\"ngModel\" [(ngModel)]=\"this.userService.user.password\" name=\"password\"\n        placeholder=\"Mot de passe\" minlength=\"8\" required\n        [ngClass]=\"{'invalid-textbox' :signUpForm.submitted && !password.valid }\">\n    <div *ngIf=\"signUpForm.submitted && password.errors\">\n        <label *ngIf=\"password.errors.required\" class=\"validation-message\">Ce champs est obligatoire.</label>\n        <label *ngIf=\"password.errors.minlength\" class=\"validation-message\">Le mot de passe doit contenir au moins 8 caractères.</label>\n    </div>\n    <input type=\"submit\" value=\"Sign Up\">\n</form>\n\n<!-- Success message -->\n<div class=\"success\" *ngIf=\"successmessage\">\n    Inscription réussie\n</div>\n\n<!-- Error message -->\n<div class=\"alert\" *ngIf=\"errormessage\">\n    {{errormessage}}\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<form #signUpForm=\"ngForm\" (ngSubmit)=\"signUpForm.valid && onSubmit(signUpForm)\">\n    <input type=\"text\" #name=\"ngModel\" [(ngModel)]=\"this.userService.user.name\" name=\"name\"\n        placeholder=\"Nom\" required [ngClass]=\"{'invalid-textbox' :signUpForm.submitted && !name.valid }\">\n    <div *ngIf=\"signUpForm.submitted && !name.valid\">\n        <label class=\"validation-message\">Ce champs est obligatoire.</label>\n    </div>\n    <input type=\"text\" #email=\"ngModel\" [(ngModel)]=\"this.userService.user.email\" name=\"email\" placeholder=\"Email\"\n        required [pattern]=\"emailRegex\" [ngClass]=\"{'invalid-textbox' :signUpForm.submitted && !email.valid }\">\n    <div *ngIf=\"signUpForm.submitted && email.errors\">\n        <label *ngIf=\"email.errors.required\" class=\"validation-message\">Ce champs est obligatoire.</label>\n        <label *ngIf=\"email.errors.pattern\" class=\"validation-message\">L'adresse mail n'est pas valide.</label>\n    </div>\n    <input type=\"password\" #password=\"ngModel\" [(ngModel)]=\"this.userService.user.password\" name=\"password\"\n        placeholder=\"Mot de passe\" minlength=\"8\" required\n        [ngClass]=\"{'invalid-textbox' :signUpForm.submitted && !password.valid }\">\n    <div *ngIf=\"signUpForm.submitted && password.errors\">\n        <label *ngIf=\"password.errors.required\" class=\"validation-message\">Ce champs est obligatoire.</label>\n        <label *ngIf=\"password.errors.minlength\" class=\"validation-message\">Le mot de passe doit contenir au moins 8 caractères.</label>\n    </div>\n    <input type=\"submit\" id=\"submit\" value=\"Sign Up\">\n</form>\n\n<!-- Success message -->\n<div class=\"success\" *ngIf=\"successmessage\">\n    Inscription réussie\n</div>\n\n<!-- Error message -->\n<div class=\"alertt\" *ngIf=\"errormessage\">\n    {{errormessage}}\n</div>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/user.component.html": 
@@ -488,6 +521,9 @@
             /* harmony import */ var _components_dashboard_detailprojet_detailsprint_detailsprint_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/dashboard/detailprojet/detailsprint/detailsprint.component */ "./src/app/components/dashboard/detailprojet/detailsprint/detailsprint.component.ts");
             /* harmony import */ var _components_dashboard_detailprojet_test_test_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/dashboard/detailprojet/test/test.component */ "./src/app/components/dashboard/detailprojet/test/test.component.ts");
             /* harmony import */ var _components_dashboard_userdetail_userdetail_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/dashboard/userdetail/userdetail.component */ "./src/app/components/dashboard/userdetail/userdetail.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_release_release_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/dashboard/detailprojet/release/release.component */ "./src/app/components/dashboard/detailprojet/release/release.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_documentation_documentation_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/dashboard/detailprojet/documentation/documentation.component */ "./src/app/components/dashboard/detailprojet/documentation/documentation.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_contributor_contributor_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/dashboard/detailprojet/contributor/contributor.component */ "./src/app/components/dashboard/detailprojet/contributor/contributor.component.ts");
             var routes = [
                 {
                     path: 'register', component: _components_user_user_component__WEBPACK_IMPORTED_MODULE_3__["UserComponent"],
@@ -508,12 +544,15 @@
                         { path: 'userdetail', component: _components_dashboard_userdetail_userdetail_component__WEBPACK_IMPORTED_MODULE_15__["UserdetailComponent"] },
                         {
                             path: 'projects/:id', component: _components_dashboard_detailprojet_detailprojet_component__WEBPACK_IMPORTED_MODULE_9__["DetailprojetComponent"], children: [
-                                { path: '', redirectTo: 'issues', pathMatch: 'full' },
+                                { path: '', redirectTo: 'contributors', pathMatch: 'full' },
+                                { path: 'contributors', component: _components_dashboard_detailprojet_contributor_contributor_component__WEBPACK_IMPORTED_MODULE_18__["ContributorComponent"] },
                                 { path: 'issues', component: _components_dashboard_detailprojet_issue_issue_component__WEBPACK_IMPORTED_MODULE_10__["IssueComponent"] },
                                 { path: 'tasks', component: _components_dashboard_detailprojet_task_task_component__WEBPACK_IMPORTED_MODULE_11__["TaskComponent"] },
                                 { path: 'tests', component: _components_dashboard_detailprojet_test_test_component__WEBPACK_IMPORTED_MODULE_14__["TestComponent"] },
                                 { path: 'sprints', component: _components_dashboard_detailprojet_sprint_sprint_component__WEBPACK_IMPORTED_MODULE_12__["SprintComponent"] },
-                                { path: 'sprints/:idSprint', component: _components_dashboard_detailprojet_detailsprint_detailsprint_component__WEBPACK_IMPORTED_MODULE_13__["DetailsprintComponent"] }
+                                { path: 'sprints/:idSprint', component: _components_dashboard_detailprojet_detailsprint_detailsprint_component__WEBPACK_IMPORTED_MODULE_13__["DetailsprintComponent"] },
+                                { path: 'releases', component: _components_dashboard_detailprojet_release_release_component__WEBPACK_IMPORTED_MODULE_16__["ReleaseComponent"] },
+                                { path: 'documentations', component: _components_dashboard_detailprojet_documentation_documentation_component__WEBPACK_IMPORTED_MODULE_17__["DocumentationComponent"] }
                             ]
                         }
                     ]
@@ -595,7 +634,10 @@
             /* harmony import */ var _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @ng-select/ng-select */ "./node_modules/@ng-select/ng-select/fesm2015/ng-select-ng-select.js");
             /* harmony import */ var _components_dashboard_detailprojet_test_test_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/dashboard/detailprojet/test/test.component */ "./src/app/components/dashboard/detailprojet/test/test.component.ts");
             /* harmony import */ var _components_dashboard_userdetail_userdetail_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/dashboard/userdetail/userdetail.component */ "./src/app/components/dashboard/userdetail/userdetail.component.ts");
-            //import { ReleaseComponent } from './components/dashboard/detailprojet/release/release';
+            /* harmony import */ var _components_dashboard_detailprojet_release_release_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/dashboard/detailprojet/release/release.component */ "./src/app/components/dashboard/detailprojet/release/release.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_documentation_documentation_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/dashboard/detailprojet/documentation/documentation.component */ "./src/app/components/dashboard/detailprojet/documentation/documentation.component.ts");
+            /* harmony import */ var _components_dashboard_detailprojet_contributor_contributor_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/dashboard/detailprojet/contributor/contributor.component */ "./src/app/components/dashboard/detailprojet/contributor/contributor.component.ts");
+            /* harmony import */ var _services_contributor_service__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./services/contributor.service */ "./src/app/services/contributor.service.ts");
             var AppModule = /** @class */ (function () {
                 function AppModule() {
                 }
@@ -617,6 +659,9 @@
                         _components_dashboard_detailprojet_detailsprint_detailsprint_component__WEBPACK_IMPORTED_MODULE_22__["DetailsprintComponent"],
                         _components_dashboard_detailprojet_test_test_component__WEBPACK_IMPORTED_MODULE_24__["TestComponent"],
                         _components_dashboard_userdetail_userdetail_component__WEBPACK_IMPORTED_MODULE_25__["UserdetailComponent"],
+                        _components_dashboard_detailprojet_release_release_component__WEBPACK_IMPORTED_MODULE_26__["ReleaseComponent"],
+                        _components_dashboard_detailprojet_documentation_documentation_component__WEBPACK_IMPORTED_MODULE_27__["DocumentationComponent"],
+                        _components_dashboard_detailprojet_contributor_contributor_component__WEBPACK_IMPORTED_MODULE_28__["ContributorComponent"]
                     ],
                     imports: [
                         _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -626,7 +671,7 @@
                         _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_21__["NgbModule"],
                         _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_23__["NgSelectModule"]
                     ],
-                    providers: [_services_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"], _services_projet_service__WEBPACK_IMPORTED_MODULE_16__["ProjetService"], _services_issues_service__WEBPACK_IMPORTED_MODULE_17__["IssuesService"], _auth_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"],
+                    providers: [_services_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"], _services_projet_service__WEBPACK_IMPORTED_MODULE_16__["ProjetService"], _services_issues_service__WEBPACK_IMPORTED_MODULE_17__["IssuesService"], _services_contributor_service__WEBPACK_IMPORTED_MODULE_29__["ContributorService"], _auth_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"],
                         {
                             provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HTTP_INTERCEPTORS"],
                             useClass: _auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_13__["AuthInterceptor"],
@@ -728,6 +773,9 @@
                     this.userService = userService;
                     this.router = router;
                 }
+                /**
+                 * Initialize the Dashboard component.
+                 */
                 DashboardComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this.userService.getDashboard().subscribe(function (res) {
@@ -735,6 +783,9 @@
                         _this.userInfos = res['user'];
                     }, function (err) { });
                 };
+                /**
+                 * Logout the current user.
+                 */
                 DashboardComponent.prototype.logout = function () {
                     var _this = this;
                     this.userService.logout().subscribe(function (res) {
@@ -754,6 +805,118 @@
                     template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./dashboard.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/dashboard.component.html")).default
                 })
             ], DashboardComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/components/dashboard/detailprojet/contributor/contributor.component.ts": 
+        /*!****************************************************************************************!*\
+          !*** ./src/app/components/dashboard/detailprojet/contributor/contributor.component.ts ***!
+          \****************************************************************************************/
+        /*! exports provided: ContributorComponent */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContributorComponent", function () { return ContributorComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var src_app_services_projet_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/projet.service */ "./src/app/services/projet.service.ts");
+            /* harmony import */ var src_app_services_contributor_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/contributor.service */ "./src/app/services/contributor.service.ts");
+            /* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/user.service */ "./src/app/services/user.service.ts");
+            var ContributorComponent = /** @class */ (function () {
+                function ContributorComponent(route, projectService, contributorService, userService) {
+                    this.route = route;
+                    this.projectService = projectService;
+                    this.contributorService = contributorService;
+                    this.userService = userService;
+                    this.contributors = [];
+                    this.invitations = [];
+                    this.waiting = false;
+                    this.success = false;
+                    this.users = [];
+                }
+                /**
+                 * Initialization of contributor component.
+                 */
+                ContributorComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.route.parent.params.subscribe(function (params) {
+                        _this.project_id = params['id'];
+                        _this.getContributors();
+                        _this.getInvitations();
+                    });
+                };
+                /**
+                 * Get the contributor list of the current project.
+                 */
+                ContributorComponent.prototype.getContributors = function () {
+                    var _this = this;
+                    this.projectService.getProject(this.project_id).subscribe(function (data) {
+                        _this.project = data['project'];
+                        _this.contributors = _this.project['contributors'];
+                        _this.getUsers();
+                    });
+                };
+                /**
+                 * Get pending invitations for the current user and project.
+                 */
+                ContributorComponent.prototype.getInvitations = function () {
+                    var _this = this;
+                    this.contributorService.getInvitations(this.project_id).subscribe(function (data) {
+                        _this.invitations = data;
+                    });
+                };
+                /**
+                 * Get current project user list.
+                 */
+                ContributorComponent.prototype.getUsers = function () {
+                    var _this = this;
+                    this.userService.getUsers().subscribe(function (data) {
+                        _this.users = data['users'].filter(function (item) { return !_this.contributors.some(function (d) { return d._id === item._id || item._id === _this.project['creator']._id; }); });
+                    });
+                };
+                /**
+                 * Invite a new contributor.
+                 * @param $event invite event
+                 */
+                ContributorComponent.prototype.onAdd = function ($event) {
+                    var _this = this;
+                    this.waiting = true;
+                    this.contributorService.inviteContributor(this.project_id, $event).subscribe(function (res) {
+                        _this.waiting = false;
+                        _this.success = true;
+                        setTimeout(function () { return _this.success = false; }, 2000);
+                        _this.getInvitations();
+                        _this.selectedUser = null;
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                /**
+                 * Remove a contributor from project
+                 * @param id id of contributor
+                 */
+                ContributorComponent.prototype.removeContributor = function (id) {
+                    var _this = this;
+                    this.contributorService.removeContributor(this.project_id, id).subscribe(function (data) {
+                        _this.getContributors();
+                        _this.getUsers();
+                        _this.getInvitations();
+                    });
+                };
+                return ContributorComponent;
+            }());
+            ContributorComponent.ctorParameters = function () { return [
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+                { type: src_app_services_projet_service__WEBPACK_IMPORTED_MODULE_3__["ProjetService"] },
+                { type: src_app_services_contributor_service__WEBPACK_IMPORTED_MODULE_4__["ContributorService"] },
+                { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] }
+            ]; };
+            ContributorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-contributor',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./contributor.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/contributor/contributor.component.html")).default,
+                })
+            ], ContributorComponent);
             /***/ 
         }),
         /***/ "./src/app/components/dashboard/detailprojet/detailprojet.component.ts": 
@@ -783,10 +946,16 @@
                     };
                     this.isCreator = false;
                 }
+                /**
+                 * Initialize the detaiProjet component.
+                 */
                 DetailprojetComponent.prototype.ngOnInit = function () {
                     this.project_id = this.route.snapshot.paramMap.get('id');
                     this.getProject();
                 };
+                /**
+                 * Get the selected project.
+                 */
                 DetailprojetComponent.prototype.getProject = function () {
                     var _this = this;
                     this.projetService.getProject(this.project_id).subscribe(function (data) {
@@ -803,6 +972,10 @@
                         _this.modelproject.status = _this.project.status;
                     });
                 };
+                /**
+                 * Edit the selected project title and/or description form form info
+                 * @param form the form containing the new title and description.
+                 */
                 DetailprojetComponent.prototype.editProject = function (form) {
                     var _this = this;
                     if (form.value.title === "" || form.value.description === "") {
@@ -863,9 +1036,15 @@
                     };
                     this.events = [];
                 }
+                /**
+                 * Initialization of detailSprint component.
+                 */
                 DetailsprintComponent.prototype.ngOnInit = function () {
                     this.getSprint();
                 };
+                /**
+                 * Get selected sprint infos.
+                 */
                 DetailsprintComponent.prototype.getSprint = function () {
                     var _this = this;
                     this.route.parent.params.subscribe(function (params) {
@@ -887,6 +1066,10 @@
                         });
                     });
                 };
+                /**
+                 * Add an issue to the sprint.
+                 * @param $event Add event
+                 */
                 DetailsprintComponent.prototype.onAdd = function ($event) {
                     var _this = this;
                     this.sprintService.addIssueSprint(this.project_id, this.sprintID, { idIssue: $event }).subscribe(function (res) {
@@ -896,6 +1079,10 @@
                         console.log(err);
                     });
                 };
+                /**
+                 * Update the edit issue template.
+                 * @param issue issue reference
+                 */
                 DetailsprintComponent.prototype.updateModalEditIssue = function (issue) {
                     this.modelIssueEdit._id = issue._id;
                     this.modelIssueEdit.issueID = issue.issueID;
@@ -903,8 +1090,11 @@
                     this.modelIssueEdit.priorite = issue.priorite;
                     this.modelIssueEdit.difficulte = issue.difficulte;
                     this.modelIssueEdit.status = issue.status;
-                    console.log(this.modelIssueEdit._id);
                 };
+                /**
+                 * Edit an issue
+                 * @param form form containing the issue infos.
+                 */
                 DetailsprintComponent.prototype.onSubmitEditIssue = function (form) {
                     var _this = this;
                     this.issueService.editIssue(this.project_id, this.modelIssueEdit._id, form.value).subscribe(function (res) {
@@ -914,6 +1104,10 @@
                         console.log(err);
                     });
                 };
+                /**
+                 * Remove an issue from the sprint.
+                 * @param issueId id of issue to remove
+                 */
                 DetailsprintComponent.prototype.removeIssueFromSprint = function (issueId) {
                     var _this = this;
                     this.sprintService.removeIssue(this.project_id, this.sprintID, issueId).subscribe(function (data) { return _this.getSprint(); });
@@ -931,6 +1125,123 @@
                     template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./detailsprint.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/detailsprint/detailsprint.component.html")).default
                 })
             ], DetailsprintComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/components/dashboard/detailprojet/documentation/documentation.component.ts": 
+        /*!********************************************************************************************!*\
+          !*** ./src/app/components/dashboard/detailprojet/documentation/documentation.component.ts ***!
+          \********************************************************************************************/
+        /*! exports provided: DocumentationComponent */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DocumentationComponent", function () { return DocumentationComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/issues.service */ "./src/app/services/issues.service.ts");
+            /* harmony import */ var src_app_services_documentations_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/documentations.service */ "./src/app/services/documentations.service.ts");
+            var DocumentationComponent = /** @class */ (function () {
+                function DocumentationComponent(documentationService, issueService, route) {
+                    this.documentationService = documentationService;
+                    this.issueService = issueService;
+                    this.route = route;
+                    this.issues = [];
+                    this.documentations = [];
+                    this.modelDocumentation = {
+                        title: '',
+                        description: '',
+                        link: ''
+                    };
+                    this.modelDocumentationEdit = {
+                        _id: '',
+                        title: '',
+                        description: '',
+                        link: ''
+                    };
+                }
+                /**
+                 * Initialization of documentation component.
+                 */
+                DocumentationComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.route.parent.params.subscribe(function (params) {
+                        _this.project_id = params['id'];
+                    });
+                    this.getDocumentations();
+                    this.getIssues();
+                };
+                /**
+                 * Get the current project issue list.
+                 */
+                DocumentationComponent.prototype.getIssues = function () {
+                    var _this = this;
+                    this.issueService.getIssues(this.project_id).subscribe(function (data) { return _this.issues = data['issues']; });
+                };
+                /**
+                 * Get the current project documentation list.
+                 */
+                DocumentationComponent.prototype.getDocumentations = function () {
+                    var _this = this;
+                    this.documentationService.getDocumentations(this.project_id).subscribe(function (data) { return _this.documentations = data['documentations']; });
+                };
+                /**
+                 * Add documentation from form info
+                 * @param form the form containing the documentation info
+                 */
+                DocumentationComponent.prototype.onSubmitDocumentation = function (form) {
+                    var _this = this;
+                    this.documentationService.addDocumentation(this.project_id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.getDocumentations();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                /**
+                 * Remove a documentation reference
+                 * @param id id of the documentation reference
+                 */
+                DocumentationComponent.prototype.removeDocumentation = function (id) {
+                    var _this = this;
+                    this.documentationService.removeDocumentation(this.project_id, id).subscribe(function (data) { return _this.getDocumentations(); });
+                };
+                /**
+                 * Update the edit documentation form with the documentation info
+                 * @param documentation documentation info
+                 */
+                DocumentationComponent.prototype.updateModalEditDocumentation = function (documentation) {
+                    this.modelDocumentationEdit._id = documentation._id;
+                    this.modelDocumentationEdit.title = documentation.title;
+                    this.modelDocumentationEdit.description = documentation.description;
+                    this.modelDocumentationEdit.link = documentation.link;
+                };
+                /**
+                 * Edit documentation from form info
+                 * @param form the form containing documentation info
+                 */
+                DocumentationComponent.prototype.onSubmitEditDocumentation = function (form) {
+                    var _this = this;
+                    this.documentationService.editDocumentation(this.project_id, this.modelDocumentationEdit._id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.getDocumentations();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                return DocumentationComponent;
+            }());
+            DocumentationComponent.ctorParameters = function () { return [
+                { type: src_app_services_documentations_service__WEBPACK_IMPORTED_MODULE_4__["DocumentationsService"] },
+                { type: src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_3__["IssuesService"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }
+            ]; };
+            DocumentationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-documentation',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./documentation.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/documentation/documentation.component.html")).default
+                })
+            ], DocumentationComponent);
             /***/ 
         }),
         /***/ "./src/app/components/dashboard/detailprojet/issue/issue.component.ts": 
@@ -967,6 +1278,9 @@
                         status: '0'
                     };
                 }
+                /**
+                 * Initialize issue component.
+                 */
                 IssueComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this.route.parent.params.subscribe(function (params) {
@@ -974,10 +1288,17 @@
                     });
                     this.getIssues();
                 };
+                /**
+                 * Get the current project issue list
+                 */
                 IssueComponent.prototype.getIssues = function () {
                     var _this = this;
                     this.issueService.getIssues(this.project_id).subscribe(function (data) { return _this.issues = data['issues']; });
                 };
+                /**
+                 * Add an issue from form info
+                 * @param form form containing the issue info
+                 */
                 IssueComponent.prototype.onSubmitIssue = function (form) {
                     var _this = this;
                     this.issueService.addIssue(this.project_id, form.value).subscribe(function (res) {
@@ -989,10 +1310,18 @@
                         console.log(err);
                     });
                 };
+                /**
+                 * Remove an issue
+                 * @param id id of the issue to remove
+                 */
                 IssueComponent.prototype.removeIssue = function (id) {
                     var _this = this;
                     this.issueService.removeIssue(this.project_id, id).subscribe(function (data) { return _this.getIssues(); });
                 };
+                /**
+                 * Update issue edit form from issue info
+                 * @param issue issue info
+                 */
                 IssueComponent.prototype.updateModalEditIssue = function (issue) {
                     this.modelIssueEdit._id = issue._id;
                     this.modelIssueEdit.issueID = issue.issueID;
@@ -1001,6 +1330,10 @@
                     this.modelIssueEdit.difficulte = issue.difficulte;
                     this.modelIssueEdit.status = issue.status;
                 };
+                /**
+                 * Edit an issue from form info
+                 * @param form form containing the issue info
+                 */
                 IssueComponent.prototype.onSubmitEditIssue = function (form) {
                     var _this = this;
                     this.issueService.editIssue(this.project_id, this.modelIssueEdit._id, form.value).subscribe(function (res) {
@@ -1011,6 +1344,10 @@
                         console.log(err);
                     });
                 };
+                /**
+                 * Sort issues by criteria : "ID", "Priorité" or "Difficulté".
+                 * @param $event the criteria on which issues are sorted.
+                 */
                 IssueComponent.prototype.sort = function ($event) {
                     if ($event !== undefined) {
                         var clicked = $event.$ngOptionLabel;
@@ -1043,6 +1380,152 @@
                     template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./issue.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/issue/issue.component.html")).default
                 })
             ], IssueComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/components/dashboard/detailprojet/release/release.component.ts": 
+        /*!********************************************************************************!*\
+          !*** ./src/app/components/dashboard/detailprojet/release/release.component.ts ***!
+          \********************************************************************************/
+        /*! exports provided: ReleaseComponent */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReleaseComponent", function () { return ReleaseComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+            /* harmony import */ var src_app_services_releases_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/releases.service */ "./src/app/services/releases.service.ts");
+            /* harmony import */ var src_app_services_sprint_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/sprint.service */ "./src/app/services/sprint.service.ts");
+            /* harmony import */ var src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/issues.service */ "./src/app/services/issues.service.ts");
+            var ReleaseComponent = /** @class */ (function () {
+                function ReleaseComponent(releasesService, sprintService, issueService, route, calendar) {
+                    this.releasesService = releasesService;
+                    this.sprintService = sprintService;
+                    this.issueService = issueService;
+                    this.route = route;
+                    this.calendar = calendar;
+                    this.releases = [];
+                    this.sprints = [];
+                    this.issues = [];
+                    this.modelRelease = {
+                        title: '',
+                        description: '',
+                        version: '',
+                        date: '',
+                        sprintNumber: '',
+                        link: ''
+                    };
+                    this.modelReleaseEdit = {
+                        _id: '',
+                        title: '',
+                        description: '',
+                        version: '',
+                        date: '',
+                        sprintNumber: '',
+                        link: ''
+                    };
+                }
+                /**
+                 * Initialize the release component.
+                 */
+                ReleaseComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.route.parent.params.subscribe(function (params) {
+                        _this.project_id = params['id'];
+                    });
+                    this.getReleases();
+                    this.getSprints();
+                    this.getIssues();
+                    this.modelDate = this.calendar.getToday();
+                };
+                /**
+                 * Get the current project issue list.
+                 */
+                ReleaseComponent.prototype.getIssues = function () {
+                    var _this = this;
+                    this.issueService.getIssues(this.project_id).subscribe(function (data) { return _this.issues = data['issues']; });
+                };
+                /**
+                 * Get the current project release list.
+                 */
+                ReleaseComponent.prototype.getReleases = function () {
+                    var _this = this;
+                    this.releasesService.getReleases(this.project_id).subscribe(function (data) { return _this.releases = data['releases']; });
+                };
+                /**
+                 * Get the current project sprint list.
+                 */
+                ReleaseComponent.prototype.getSprints = function () {
+                    var _this = this;
+                    this.sprintService.getSprints(this.project_id).subscribe(function (data) { return _this.sprints = data['sprints']; });
+                };
+                /**
+                 * Add a release from form info.
+                 * @param form form containing the release info.
+                 */
+                ReleaseComponent.prototype.onSubmitRelease = function (form) {
+                    var _this = this;
+                    var date = form.value.date;
+                    form.value.date = date.day + "/" + date.month + "/" + date.year;
+                    this.releasesService.addRelease(this.project_id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.getReleases();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                /**
+                 * Remove a release from project.
+                 * @param id id of release to remove.
+                 */
+                ReleaseComponent.prototype.removeRelease = function (id) {
+                    var _this = this;
+                    this.releasesService.removeRelease(this.project_id, id).subscribe(function (data) { return _this.getReleases(); });
+                };
+                /**
+                 * Update release edit form from release info
+                 * @param release release info
+                 */
+                ReleaseComponent.prototype.updateModalEditRelease = function (release) {
+                    this.modelReleaseEdit._id = release._id;
+                    this.modelReleaseEdit.title = release.title;
+                    this.modelReleaseEdit.description = release.description;
+                    this.modelReleaseEdit.version = release.version;
+                    this.modelReleaseEdit.date = release.date;
+                    this.modelReleaseEdit.sprintNumber = release.sprintNumber;
+                    this.modelReleaseEdit.link = release.link;
+                };
+                /**
+                 * Edit a release from form info
+                 * @param form form containing the release info
+                 */
+                ReleaseComponent.prototype.onSubmitEditRelease = function (form) {
+                    var _this = this;
+                    var date = form.value.date;
+                    form.value.date = date.day + "/" + date.month + "/" + date.year;
+                    this.releasesService.editRelease(this.project_id, this.modelReleaseEdit._id, form.value).subscribe(function (res) {
+                        form.resetForm();
+                        _this.getReleases();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                };
+                return ReleaseComponent;
+            }());
+            ReleaseComponent.ctorParameters = function () { return [
+                { type: src_app_services_releases_service__WEBPACK_IMPORTED_MODULE_4__["ReleasesService"] },
+                { type: src_app_services_sprint_service__WEBPACK_IMPORTED_MODULE_5__["SprintService"] },
+                { type: src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_6__["IssuesService"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+                { type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbCalendar"] }
+            ]; };
+            ReleaseComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-release',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./release.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/dashboard/detailprojet/release/release.component.html")).default
+                })
+            ], ReleaseComponent);
             /***/ 
         }),
         /***/ "./src/app/components/dashboard/detailprojet/sprint/sprint.component.ts": 
@@ -1081,6 +1564,9 @@
                         issues: ''
                     };
                 }
+                /**
+                 * Initialize the sprint component.
+                 */
                 SprintComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this.route.parent.params.subscribe(function (params) {
@@ -1090,10 +1576,17 @@
                     this.modelSprint.startDate = this.calendar.getToday();
                     this.modelSprint.endDate = this.calendar.getToday();
                 };
+                /**
+                 * Get the current project sprint list.
+                 */
                 SprintComponent.prototype.getSprints = function () {
                     var _this = this;
                     this.sprintService.getSprints(this.project_id).subscribe(function (data) { return _this.sprints = data['sprints']; });
                 };
+                /**
+                * Add a sprint from form info.
+                * @param form form containing the sprint info.
+                */
                 SprintComponent.prototype.onSubmitSprint = function (form) {
                     var _this = this;
                     var startDate = form.value.dp1;
@@ -1109,6 +1602,10 @@
                         console.log(err);
                     });
                 };
+                /**
+                 * Update sprint edit form from sprint info
+                 * @param sprint sprint info
+                 */
                 SprintComponent.prototype.updateModalEditSprint = function (sprint) {
                     this.modelSprintEdit._id = sprint._id;
                     this.modelSprintEdit.title = sprint.title;
@@ -1117,8 +1614,11 @@
                     var tmpDateEnd = sprint.endDate.split("/");
                     this.modelSprintEdit.endDate = { year: parseInt(tmpDateEnd[2]), month: parseInt(tmpDateEnd[1]), day: parseInt(tmpDateEnd[0]) };
                     this.modelSprintEdit.status = sprint.status;
-                    //this.modelSprintEdit.issues = sprint.issues[0];
                 };
+                /**
+                 * Edit a sprint from form info
+                 * @param form form containing the sprint info
+                 */
                 SprintComponent.prototype.onSubmitEditSprint = function (form) {
                     var _this = this;
                     var startDate = form.value.dp1;
@@ -1133,6 +1633,10 @@
                         console.log(err);
                     });
                 };
+                /**
+                * Remove a sprint from project.
+                * @param id id of sprint to remove.
+                */
                 SprintComponent.prototype.removeSprint = function (id) {
                     var _this = this;
                     this.sprintService.removeSprint(this.project_id, id).subscribe(function (data) { return _this.getSprints(); });
@@ -1166,16 +1670,16 @@
             /* harmony import */ var src_app_services_tasks_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/tasks.service */ "./src/app/services/tasks.service.ts");
             /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
             /* harmony import */ var src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/issues.service */ "./src/app/services/issues.service.ts");
-            /* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/user.service */ "./src/app/services/user.service.ts");
+            /* harmony import */ var src_app_services_projet_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/projet.service */ "./src/app/services/projet.service.ts");
             var TaskComponent = /** @class */ (function () {
-                function TaskComponent(tasksService, issueService, userService, route) {
+                function TaskComponent(tasksService, issueService, projectService, route) {
                     this.tasksService = tasksService;
                     this.issueService = issueService;
-                    this.userService = userService;
+                    this.projectService = projectService;
                     this.route = route;
                     this.tasks = [];
                     this.issues = [];
-                    this.users = [];
+                    this.contributors = [];
                     this.modelTask = {
                         issue: [],
                         description: '',
@@ -1189,8 +1693,10 @@
                         cout: '',
                         developer: null
                     };
-                    this.tests = ["1", "2"];
                 }
+                /**
+                 * Initialize the task component.
+                 */
                 TaskComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this.route.parent.params.subscribe(function (params) {
@@ -1198,20 +1704,35 @@
                     });
                     this.getTasks();
                     this.getIssues();
-                    this.getUsers();
+                    this.getContributors();
                 };
+                /**
+                 * Get the current project task list.
+                 */
                 TaskComponent.prototype.getTasks = function () {
                     var _this = this;
                     this.tasksService.getTasks(this.project_id).subscribe(function (data) { return _this.tasks = data['tasks']; });
                 };
+                /**
+                 * Get the current project issue list.
+                 */
                 TaskComponent.prototype.getIssues = function () {
                     var _this = this;
                     this.issueService.getIssues(this.project_id).subscribe(function (data) { return _this.issues = data['issues']; });
                 };
-                TaskComponent.prototype.getUsers = function () {
+                /**
+                 * Get the current project contributors list.
+                 */
+                TaskComponent.prototype.getContributors = function () {
                     var _this = this;
-                    this.userService.getUsers().subscribe(function (data) { _this.users = data['users']; });
+                    this.projectService.getProject(this.project_id).subscribe(function (data) {
+                        _this.contributors = data['project']['contributors'];
+                    });
                 };
+                /**
+                 * Add a task from form info.
+                 * @param form form containing the task info.
+                 */
                 TaskComponent.prototype.onSubmitTask = function (form) {
                     var _this = this;
                     console.log(form.value);
@@ -1224,10 +1745,18 @@
                         console.log(err);
                     });
                 };
+                /**
+                * Remove a task from project.
+                * @param id id of task to remove.
+                */
                 TaskComponent.prototype.removeTask = function (id) {
                     var _this = this;
                     this.tasksService.removeTask(this.project_id, id).subscribe(function (data) { return _this.getTasks(); });
                 };
+                /**
+                 * Update task edit form from task info
+                 * @param task task info
+                 */
                 TaskComponent.prototype.updateModalEditTask = function (task) {
                     var _this = this;
                     this.modelTaskEdit._id = task._id;
@@ -1237,6 +1766,10 @@
                     this.modelTaskEdit.issue = [];
                     task.idIssues.forEach(function (e) { return _this.modelTaskEdit.issue.push(e); });
                 };
+                /**
+                 * Edit a task from form info
+                 * @param form form containing the task info
+                 */
                 TaskComponent.prototype.onSubmitEditTask = function (form) {
                     var _this = this;
                     this.tasksService.editTask(this.project_id, this.modelTaskEdit._id, form.value).subscribe(function (res) {
@@ -1251,7 +1784,7 @@
             TaskComponent.ctorParameters = function () { return [
                 { type: src_app_services_tasks_service__WEBPACK_IMPORTED_MODULE_2__["TasksService"] },
                 { type: src_app_services_issues_service__WEBPACK_IMPORTED_MODULE_4__["IssuesService"] },
-                { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
+                { type: src_app_services_projet_service__WEBPACK_IMPORTED_MODULE_5__["ProjetService"] },
                 { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
             ]; };
             TaskComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1300,6 +1833,9 @@
                         status: '0'
                     };
                 }
+                /**
+                 * Initialize the test component.
+                 */
                 TestComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this.route.parent.params.subscribe(function (params) {
@@ -1308,10 +1844,17 @@
                     this.getTests();
                     this.modelDate = this.calendar.getToday();
                 };
+                /**
+                 * Get the current project test list.
+                 */
                 TestComponent.prototype.getTests = function () {
                     var _this = this;
                     this.testsService.getTests(this.project_id).subscribe(function (data) { return _this.tests = data['tests']; });
                 };
+                /**
+                 * Add a test from form info.
+                 * @param form form containing the test info.
+                 */
                 TestComponent.prototype.onSubmitTest = function (form) {
                     var _this = this;
                     var date = form.value.dp;
@@ -1323,10 +1866,18 @@
                         console.log(err);
                     });
                 };
+                /**
+                 * Remove a test from project.
+                 * @param id id of test to remove.
+                 */
                 TestComponent.prototype.removeTest = function (id) {
                     var _this = this;
                     this.testsService.removeTest(this.project_id, id).subscribe(function (data) { return _this.getTests(); });
                 };
+                /**
+                 * Update test edit form from test info
+                 * @param test test info
+                 */
                 TestComponent.prototype.updateModalEditTest = function (test) {
                     this.modelTestEdit._id = test._id;
                     this.modelTestEdit.title = test.title;
@@ -1336,6 +1887,10 @@
                     this.modelTestEdit.link = test.link;
                     this.modelTestEdit.status = test.status;
                 };
+                /**
+                 * Edit a test from form info
+                 * @param form form containing the test info
+                 */
                 TestComponent.prototype.onSubmitEditTest = function (form) {
                     var _this = this;
                     var date = form.value.dp;
@@ -1385,18 +1940,31 @@
                         description: ''
                     };
                 }
+                /**
+                 * Initialize the listProjets component.
+                 */
                 ListprojetsComponent.prototype.ngOnInit = function () {
-                    //this.idLogged = this.userService.getIDOflogged();
                     this.getProjects();
                 };
+                /**
+                 * Get the projects list.
+                 */
                 ListprojetsComponent.prototype.getProjects = function () {
                     var _this = this;
                     this.projectsService.getProjects().subscribe(function (data) { return _this.projects = data; });
                 };
+                /**
+                 * Remove a project.
+                 * @param id id of the project to remove.
+                 */
                 ListprojetsComponent.prototype.removeProject = function (id) {
                     var _this = this;
                     this.projectsService.deleteProject(id).subscribe(function (data) { return _this.getProjects(); });
                 };
+                /**
+                 * Create a new project from form info
+                 * @param form form containing the new project info.
+                 */
                 ListprojetsComponent.prototype.onSubmit = function (form) {
                     var _this = this;
                     this.projectsService.addProject(form.value).subscribe(function (res) {
@@ -1436,8 +2004,14 @@
                 function UserdetailComponent(userService) {
                     this.userService = userService;
                 }
-                UserdetailComponent.prototype.ngOnInit = function () {
-                };
+                /**
+                 * Initialize the UserDetail component.
+                 */
+                UserdetailComponent.prototype.ngOnInit = function () { };
+                /**
+                 * Edit the current user from form info.
+                 * @param form form containing the user info.
+                 */
                 UserdetailComponent.prototype.onSubmit = function (form) {
                     var _this = this;
                     this.userService.editUser(form.value).subscribe(function (res) {
@@ -1488,8 +2062,14 @@
                         password: ''
                     };
                 }
-                LoginComponent.prototype.ngOnInit = function () {
-                };
+                /**
+                 * Initialize the login component.
+                 */
+                LoginComponent.prototype.ngOnInit = function () { };
+                /**
+                 * Login the user from form info.
+                 * @param form form containing the login credentials.
+                 */
                 LoginComponent.prototype.onSubmit = function (form) {
                     var _this = this;
                     this.userService.login(form.value).subscribe(function (res) {
@@ -1529,8 +2109,14 @@
                     this.userService = userService;
                     this.emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 }
-                RegisterComponent.prototype.ngOnInit = function () {
-                };
+                /**
+                 * Initialize the register component.
+                 */
+                RegisterComponent.prototype.ngOnInit = function () { };
+                /**
+                 * Register a new user from form info.
+                 * @param form form containing the new user credentials.
+                 */
                 RegisterComponent.prototype.onSubmit = function (form) {
                     var _this = this;
                     this.userService.postUser(form.value).subscribe(function (res) {
@@ -1546,6 +2132,10 @@
                         }
                     });
                 };
+                /**
+                 * Reset the register form.
+                 * @param form form to reset.
+                 */
                 RegisterComponent.prototype.resetForm = function (form) {
                     this.userService.user = {
                         name: '',
@@ -1582,8 +2172,10 @@
             var UserComponent = /** @class */ (function () {
                 function UserComponent() {
                 }
-                UserComponent.prototype.ngOnInit = function () {
-                };
+                /**
+                 * Initialize the user component.
+                 */
+                UserComponent.prototype.ngOnInit = function () { };
                 return UserComponent;
             }());
             UserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1592,6 +2184,88 @@
                     template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./user.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/user.component.html")).default
                 })
             ], UserComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/services/contributor.service.ts": 
+        /*!*************************************************!*\
+          !*** ./src/app/services/contributor.service.ts ***!
+          \*************************************************/
+        /*! exports provided: ContributorService */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContributorService", function () { return ContributorService; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+            /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+            var ContributorService = /** @class */ (function () {
+                function ContributorService(httpClient) {
+                    this.httpClient = httpClient;
+                }
+                ContributorService.prototype.getInvitations = function (idProject) {
+                    return this.httpClient.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/projects/' + idProject + '/invitations');
+                };
+                ContributorService.prototype.inviteContributor = function (idProject, email) {
+                    return this.httpClient.post(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/projects/' + idProject + '/invite', { email: email });
+                };
+                ContributorService.prototype.addContributor = function (idProject, email) {
+                    return this.httpClient.post(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/projects/' + idProject + '/contributors', { email: email });
+                };
+                ContributorService.prototype.removeContributor = function (idProject, id_user) {
+                    return this.httpClient.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/projects/' + idProject + '/contributors/' + id_user);
+                };
+                return ContributorService;
+            }());
+            ContributorService.ctorParameters = function () { return [
+                { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
+            ]; };
+            ContributorService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+                    providedIn: 'root'
+                })
+            ], ContributorService);
+            /***/ 
+        }),
+        /***/ "./src/app/services/documentations.service.ts": 
+        /*!****************************************************!*\
+          !*** ./src/app/services/documentations.service.ts ***!
+          \****************************************************/
+        /*! exports provided: DocumentationsService */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DocumentationsService", function () { return DocumentationsService; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+            /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+            var DocumentationsService = /** @class */ (function () {
+                function DocumentationsService(httpClient) {
+                    this.httpClient = httpClient;
+                }
+                DocumentationsService.prototype.getDocumentations = function (idProject) {
+                    return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/documentations');
+                };
+                DocumentationsService.prototype.addDocumentation = function (idProject, documentation) {
+                    return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/documentations', documentation);
+                };
+                DocumentationsService.prototype.editDocumentation = function (idProject, documentationId, documentation) {
+                    return this.httpClient.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/documentations/' + documentationId, documentation);
+                };
+                DocumentationsService.prototype.removeDocumentation = function (idProject, id) {
+                    return this.httpClient.delete(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/documentations/' + id);
+                };
+                return DocumentationsService;
+            }());
+            DocumentationsService.ctorParameters = function () { return [
+                { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+            ]; };
+            DocumentationsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+                    providedIn: 'root'
+                })
+            ], DocumentationsService);
             /***/ 
         }),
         /***/ "./src/app/services/issues.service.ts": 
@@ -1681,6 +2355,47 @@
                     providedIn: 'root'
                 })
             ], ProjetService);
+            /***/ 
+        }),
+        /***/ "./src/app/services/releases.service.ts": 
+        /*!**********************************************!*\
+          !*** ./src/app/services/releases.service.ts ***!
+          \**********************************************/
+        /*! exports provided: ReleasesService */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReleasesService", function () { return ReleasesService; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+            /* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+            var ReleasesService = /** @class */ (function () {
+                function ReleasesService(httpClient) {
+                    this.httpClient = httpClient;
+                }
+                ReleasesService.prototype.getReleases = function (idProject) {
+                    return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/releases');
+                };
+                ReleasesService.prototype.addRelease = function (idProject, release) {
+                    return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/releases', release);
+                };
+                ReleasesService.prototype.editRelease = function (idProject, releaseId, release) {
+                    return this.httpClient.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/releases/' + releaseId, release);
+                };
+                ReleasesService.prototype.removeRelease = function (idProject, id) {
+                    return this.httpClient.delete(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].API_URL + '/projects/' + idProject + '/releases/' + id);
+                };
+                return ReleasesService;
+            }());
+            ReleasesService.ctorParameters = function () { return [
+                { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+            ]; };
+            ReleasesService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+                    providedIn: 'root'
+                })
+            ], ReleasesService);
             /***/ 
         }),
         /***/ "./src/app/services/sprint.service.ts": 
@@ -1851,7 +2566,7 @@
                     return this.httpClient.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/logout');
                 };
                 UserService.prototype.setToken = function (infos) {
-                    localStorage.setItem("userinfos", JSON.stringify({ infos: infos }));
+                    localStorage.setItem('userinfos', JSON.stringify({ infos: infos }));
                 };
                 UserService.prototype.removeToken = function () {
                 };
@@ -1893,21 +2608,10 @@
             __webpack_require__.r(__webpack_exports__);
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function () { return environment; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            // This file can be replaced during build by using the `fileReplacements` array.
-            // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-            // The list of file replacements can be found in `angular.json`.
             var environment = {
                 production: false,
-                API_URL: 'http://localhost:3000/api'
+                API_URL: 'https://cdpmyprojectanager.herokuapp.com/api'
             };
-            /*
-             * For easier debugging in development mode, you can import the following file
-             * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
-             *
-             * This import should be commented out in production mode because it will have a negative impact
-             * on performance if an error is thrown.
-             */
-            // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
             /***/ 
         }),
         /***/ "./src/main.ts": 

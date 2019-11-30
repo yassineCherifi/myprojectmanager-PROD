@@ -11,7 +11,7 @@ const projectRoutes = require('./routes/projects.router');
 const jwtVerify = require('./config/jwt.verify') ;
 const cookieParser = require('cookie-parser');
 const path = require('path');
-
+const port = process.env.PORT || 3002;
 const app = express();
 
 app.use(bodyParse.json());
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname, 'public','index.html')));
 
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
     if (err.name === 'ValidationError') {
         const valErrors = [];
         Object.keys(err.errors).forEach(key => valErrors.push(err.errors[key].message));
@@ -35,8 +35,8 @@ app.use((err, req, res, next) => {
     }
 });
 
-app.listen(process.env.PORT, () => {
-    console.log('Démarrage du serveur sur le port :' + process.env.PORT);
+app.listen(port, () => {
+    console.log('Démarrage du serveur sur le port :' +  port);
 });
 
-module.exports = app
+module.exports = app;

@@ -5,3 +5,12 @@
       - Open the directory `myprojectmanager-PROD/`
       - Run `docker-compose up`
       - Visit the URL `http://localhost:3000`
+
+
+# Release 1.1
+  - Date: 22/11/2019
+  - To run the application :
+      - Download : https://github.com/yassineCherifi/myprojectmanager-PROD/archive/v1.1.zip
+      - Open the directory `myprojectmanager-PROD/`
+      - Run `docker-compose up`
+      - Visit the URL `http://localhost:3000`
