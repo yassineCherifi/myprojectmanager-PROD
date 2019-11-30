@@ -21,6 +21,7 @@ Backlog
 | US02 | User | to sign-in by providing my email and password and clicking on the button "sign-in" | I can access to my dashboard | LOW | 3 | 1 | DONE |
 | US03 | User | to logout by clicking on the button "logout" in the dashboard|  can get out of my dashboard | LOW | 1 | 1 | DONE |
 | US04 | User | to edit my profile (name, email, password) by clicking on the button "edit profile" in the dashboard and modifying the fields (name(20 chars max), email, password (min length 8) and confirm or cancel the changes by clicking on the corresponding buttons | I can update my informations | LOW | 1 | 2 | ON GOING |
+| US04 | User | to edit my profile (name, email, password) by clicking on the button "edit profile" in the dashboard and modifying the fields (name(20 chars max), email, password (min length 8) and confirm or cancel the changes by clicking on the corresponding buttons | I can update my informations | LOW | 1 | 2 | 80% |
 | US05 | Project manager | to create a new project (name(20 chars max) , description(100 chars max), status(En cours,  terminé)) and edit it or delete it by clicking on the corresponding buttons in the dashboard, then confirming or cancelling | I can update the projects list | HIGH | 1 | 1 | DONE |
 | US06 | Project manager | to add new contributors to my project by clicking on the button "Add contributor" and giving their emails then confirming or cancelling | They can start working with me | LOW | 3 | 3 | TODO |
 | US07 | Project manager | to remove contributors to my project by selecting the contributor to delete and clicking on the button "Remove contributor" then confirming or cancelling | I can update the list of contributors | LOW | 2 | 3 | TODO |
@@ -28,8 +29,13 @@ Backlog
 | US09 | Project contributor | to create an issue (id, description(100 char max), priority(10chars max), sprint number, status(todo,done)  and edit it or delete it by clicking on the corresponding buttons in the dahsboard then confirming or cancelling | I can update the backlog | HIGH | 1 | 1 | DONE |
 | US10 | Project contributor | to create a sprint in the sprint tab by clicking on the button "New sprint" and by giving (title, start date, end date, status) on the form then confirming or cancelling | I can add it to the sprint list | LOW | 2 | 2 | DONE |
 | US11 | Project contributor | to add a list of issues to the sprint by clicking on the button "Add issue to the sprint" then choosing items among the list of issues displayed on the form then confirming or cancelling | I can specify the required issues for the sprint | LOW | 3 | 2 | DONE |
+<<<<<<< HEAD
 | US12 | Project contributor | to search in the list of issues in the sprints tab | that facilitates the planification of the sprint | LOW | 1 | 2 | DONE |
 | US13 | Project contributor | to sort the list of issues by difficulty or priority in the issues tab  | that facilitates the planification of the sprint | LOW | 3 | 2 | DONE |
+=======
+| US12 | Project contributor | to search in the list of issues in the sprints tab | that facilitates the planification of the sprint | LOW | 3 | 3 | DONE |
+| US13 | Project contributor | to sort the list of issues by difficulty or priority in the sprints tab  | that facilitates the planification of the sprint | LOW | 3 | 2 | DONE |
+>>>>>>> 2aaa7d00e94125b546619bbd3691b415d7554f49
 | US14 | Project contributor | to delete an issue from the sprint by clicking on the corresponding button | I can update the list of issues in the sprint | LOW | 1 | 2 | DONE |
 | US15 | Project contributor | to add a list of tasks to the project by clicking on the button tasks and giving (title(50 chars max), description(100chars max), id_issue,status(todo,done)) then confirming or cancelling | I specify the required tasks for the issue | HIGH | 2 | 1 | DONE |
 | US16 | Project contributor | to edit a task and changing (title(50 chars max), description(100 chars max), status(todo,done)) or to delete it by clicking on corresponding buttons in the tasks tab then confirming or cancelling | I can update the tasks list | HIGH | 1 | 1 | DONE |
