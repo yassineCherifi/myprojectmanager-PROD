@@ -11,7 +11,7 @@ import { IssuesService } from 'src/app/services/issues.service';
   templateUrl: './release.component.html'
 })
 export class ReleaseComponent implements OnInit {
-  project_id;
+  projectId;
   releases = [];
   sprints = [];
   issues = [];
@@ -19,61 +19,65 @@ export class ReleaseComponent implements OnInit {
     title: '',
     description: '',
     version: '',
-    date: '',
-    sprintNumber: '',
+    date: {},
+    sprintNumber: '0',
     link: ''
-  }
+  };
 
   modelReleaseEdit = {
     _id: '',
     title: '',
     description: '',
     version: '',
-    date: '',
+    date: {},
     sprintNumber: '',
     link: ''
-  }
+  };
 
   modelDate;
 
   constructor(private releasesService: ReleasesService, private sprintService: SprintService, private issueService: IssuesService,
-    private route: ActivatedRoute,
-    private calendar: NgbCalendar) { }
+              private route: ActivatedRoute,
+              private calendar: NgbCalendar) { }
 
 
   /**
    * Initialize the release component.
    */
   ngOnInit() {
+    const id = 'id';
     this.route.parent.params.subscribe(params => {
-      this.project_id = params['id'];
-    })
+      this.projectId = params[id];
+    });
     this.getReleases();
     this.getSprints();
     this.getIssues();
 
-    this.modelDate = this.calendar.getToday();
+    this.modelRelease.date = this.calendar.getToday();
   }
 
   /**
    * Get the current project issue list.
    */
   getIssues() {
-    this.issueService.getIssues(this.project_id).subscribe(data => this.issues = data['issues']);
+    const issues = 'issues';
+    this.issueService.getIssues(this.projectId).subscribe(data => this.issues = data[issues]);
   }
 
   /**
    * Get the current project release list.
    */
   getReleases() {
-    this.releasesService.getReleases(this.project_id).subscribe(data => this.releases = data['releases']);
+    const releases = 'releases';
+    this.releasesService.getReleases(this.projectId).subscribe(data => this.releases = data[releases]);
   }
 
   /**
    * Get the current project sprint list.
    */
   getSprints() {
-    this.sprintService.getSprints(this.project_id).subscribe(data => this.sprints = data['sprints']);
+    const sprints = 'sprints';
+    this.sprintService.getSprints(this.projectId).subscribe(data => this.sprints = data[sprints]);
   }
 
   /**
@@ -81,12 +85,12 @@ export class ReleaseComponent implements OnInit {
    * @param form form containing the release info.
    */
   onSubmitRelease(form: NgForm) {
-    let date = form.value.date;
-    form.value.date = date.day + "/" + date.month + "/" + date.year;
-    this.releasesService.addRelease(this.project_id, form.value).subscribe(
+    const date = form.value.date;
+    form.value.date = date.day + '/' + date.month + '/' + date.year;
+    this.releasesService.addRelease(this.projectId, form.value).subscribe(
       res => {
         form.resetForm();
-        this.getReleases()
+        this.getReleases();
       },
       err => {
         console.log(err);
@@ -99,7 +103,7 @@ export class ReleaseComponent implements OnInit {
    * @param id id of release to remove.
    */
   removeRelease(id) {
-    this.releasesService.removeRelease(this.project_id, id).subscribe(data => this.getReleases());
+    this.releasesService.removeRelease(this.projectId, id).subscribe(data => this.getReleases());
   }
 
   /**
@@ -111,7 +115,8 @@ export class ReleaseComponent implements OnInit {
     this.modelReleaseEdit.title = release.title;
     this.modelReleaseEdit.description = release.description;
     this.modelReleaseEdit.version = release.version;
-    this.modelReleaseEdit.date = release.date;
+    const tmpDate = release.date.split('/');
+    this.modelReleaseEdit.date = { year: parseInt(tmpDate[2], 10), month: parseInt(tmpDate[1], 10), day: parseInt(tmpDate[0], 10) };
     this.modelReleaseEdit.sprintNumber = release.sprintNumber;
     this.modelReleaseEdit.link = release.link;
   }
@@ -121,12 +126,12 @@ export class ReleaseComponent implements OnInit {
    * @param form form containing the release info
    */
   onSubmitEditRelease(form: NgForm) {
-    let date = form.value.date;
-    form.value.date = date.day + "/" + date.month + "/" + date.year;
-    this.releasesService.editRelease(this.project_id, this.modelReleaseEdit._id, form.value).subscribe(
+    const date = form.value.date;
+    form.value.date = date.day + '/' + date.month + '/' + date.year;
+    this.releasesService.editRelease(this.projectId, this.modelReleaseEdit._id, form.value).subscribe(
       res => {
         form.resetForm();
-        this.getReleases()
+        this.getReleases();
       },
       err => {
         console.log(err);

@@ -13,22 +13,39 @@ export class IssuesService {
 
     constructor(private httpClient: HttpClient) { }
 
-    getIssues(idProject): Observable<Issues[]>{
+    /**
+     * Get the issues list of the project.
+     * @param idProject id of the project.
+     */
+    getIssues(idProject): Observable<Issues[]> {
       return this.httpClient.get<Issues[]>(environment.API_URL + '/projects/' + idProject + '/issues');
     }
 
-    addIssue(idProject, issue){
+    /**
+     * Add an issue to the project.
+     * @param idProject id of the project.
+     * @param issue issue to be added.
+     */
+    addIssue(idProject, issue) {
         return this.httpClient.post(environment.API_URL +  '/projects/' + idProject + '/issues', issue);
     }
 
-    editIssue(idProject, issueId,issue){
-      return this.httpClient.put(environment.API_URL + '/projects/' + idProject + '/issues/' + issueId,issue);
+    /**
+     * Edit an issue in the project.
+     * @param idProject id of the project.
+     * @param issueId id of the issue.
+     * @param issue edited issue.
+     */
+    editIssue(idProject, issueId, issue) {
+      return this.httpClient.put(environment.API_URL + '/projects/' + idProject + '/issues/' + issueId, issue);
     }
 
-    removeIssue(idProject, id){
-      console.log(idProject + " hhhh" + id);
+    /**
+     * Remove an issue from the project.
+     * @param idProject id of the project.
+     * @param id id of the issue to be removed.
+     */
+    removeIssue(idProject, id) {
       return this.httpClient.delete(environment.API_URL + '/projects/' + idProject + '/issues/' + id);
     }
-
-
 }

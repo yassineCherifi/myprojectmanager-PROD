@@ -11,7 +11,7 @@ import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 
 export class SprintComponent implements OnInit {
-  project_id;
+  projectId;
   sprints = [];
   modelSprint = {
     title: '',
@@ -19,7 +19,7 @@ export class SprintComponent implements OnInit {
     endDate: {},
     status: '0',
     issues: ''
-  }
+  };
   modelSprintEdit = {
     _id: '',
     title: '',
@@ -27,7 +27,7 @@ export class SprintComponent implements OnInit {
     endDate: {},
     status: '0',
     issues: ''
-  }
+  };
 
   modelDate;
 
@@ -38,9 +38,10 @@ export class SprintComponent implements OnInit {
    * Initialize the sprint component.
    */
   ngOnInit() {
+    const id = 'id';
     this.route.parent.params.subscribe(params => {
-      this.project_id = params['id'];
-    })
+      this.projectId = params[id];
+    });
     this.getSprints();
     this.modelSprint.startDate = this.calendar.getToday();
     this.modelSprint.endDate = this.calendar.getToday();
@@ -50,24 +51,25 @@ export class SprintComponent implements OnInit {
    * Get the current project sprint list.
    */
   getSprints() {
-    this.sprintService.getSprints(this.project_id).subscribe(data => this.sprints = data['sprints']);
+    const sprints = 'sprints';
+    this.sprintService.getSprints(this.projectId).subscribe(data => this.sprints = data[sprints]);
   }
 
-   /**
+  /**
    * Add a sprint from form info.
    * @param form form containing the sprint info.
    */
   onSubmitSprint(form: NgForm) {
-    let startDate = form.value.dp1;
-    let endDate = form.value.dp2;
-    form.value.dp1 = startDate.day + "/" + startDate.month + "/" + startDate.year;
-    form.value.dp2 = endDate.day + "/" + endDate.month + "/" + endDate.year;
+    const startDate = form.value.dp1;
+    const endDate = form.value.dp2;
+    form.value.dp1 = startDate.day + '/' + startDate.month + '/' + startDate.year;
+    form.value.dp2 = endDate.day + '/' + endDate.month + '/' + endDate.year;
     console.log(form.value);
-    this.sprintService.addSprint(this.project_id, form.value).subscribe(
+    this.sprintService.addSprint(this.projectId, form.value).subscribe(
       res => {
         form.resetForm();
         this.modelSprint.status = '0';
-        this.getSprints()
+        this.getSprints();
       },
       err => {
         console.log(err);
@@ -82,10 +84,14 @@ export class SprintComponent implements OnInit {
   updateModalEditSprint(sprint) {
     this.modelSprintEdit._id = sprint._id;
     this.modelSprintEdit.title = sprint.title;
-    let tmpDateStart = sprint.startDate.split("/");
-    this.modelSprintEdit.startDate = { year: parseInt(tmpDateStart[2]), month: parseInt(tmpDateStart[1]), day: parseInt(tmpDateStart[0]) };
-    let tmpDateEnd = sprint.endDate.split("/");
-    this.modelSprintEdit.endDate = { year: parseInt(tmpDateEnd[2]), month: parseInt(tmpDateEnd[1]), day: parseInt(tmpDateEnd[0]) };
+    const tmpDateStart = sprint.startDate.split('/');
+    this.modelSprintEdit.startDate = { year: parseInt(tmpDateStart[2], 10),
+                                      month: parseInt(tmpDateStart[1], 10),
+                                      day: parseInt(tmpDateStart[0], 10) };
+    const tmpDateEnd = sprint.endDate.split('/');
+    this.modelSprintEdit.endDate = { year: parseInt(tmpDateEnd[2], 10),
+                                    month: parseInt(tmpDateEnd[1], 10),
+                                    day: parseInt(tmpDateEnd[0], 10) };
     this.modelSprintEdit.status = sprint.status;
   }
 
@@ -95,15 +101,15 @@ export class SprintComponent implements OnInit {
    * @param form form containing the sprint info
    */
   onSubmitEditSprint(form: NgForm) {
-    let startDate = form.value.dp1;
-    let endDate = form.value.dp2;
-    form.value.dp1 = startDate.day + "/" + startDate.month + "/" + startDate.year;
-    form.value.dp2 = endDate.day + "/" + endDate.month + "/" + endDate.year;
-    this.sprintService.editSprint(this.project_id, this.modelSprintEdit._id, form.value).subscribe(
+    const startDate = form.value.dp1;
+    const endDate = form.value.dp2;
+    form.value.dp1 = startDate.day + '/' + startDate.month + '/' + startDate.year;
+    form.value.dp2 = endDate.day + '/' + endDate.month + '/' + endDate.year;
+    this.sprintService.editSprint(this.projectId, this.modelSprintEdit._id, form.value).subscribe(
       res => {
         form.resetForm();
         this.modelSprintEdit.status = '0';
-        this.getSprints()
+        this.getSprints();
       },
       err => {
         console.log(err);
@@ -111,12 +117,12 @@ export class SprintComponent implements OnInit {
     );
   }
 
-   /**
+  /**
    * Remove a sprint from project.
    * @param id id of sprint to remove.
    */
   removeSprint(id) {
-    this.sprintService.removeSprint(this.project_id, id).subscribe(data => this.getSprints());
+    this.sprintService.removeSprint(this.projectId, id).subscribe(data => this.getSprints());
   }
 
 }

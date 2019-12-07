@@ -19,7 +19,9 @@ const sprint = new Sprint({ titre: "sprintTest", status: "Terminé" })
 
 describe('Sprint tests', () => {
     const driver = new Builder().forBrowser('firefox')
-        .withCapabilities({ 'browserName': 'firefox', 'name': 'Firefox Test', 'moz:webdriverClick': true, 'tz': 'America/Los_Angeles', 'build': 'Firefox Build', 'idleTimeout': '100' })
+        .withCapabilities({ 'browserName': 'firefox', 'name': 'Firefox Test',
+                            'moz:webdriverClick': true, 'tz': 'America/Los_Angeles',
+                            'build': 'Firefox Build', 'idleTimeout': '100' })
         .build();
     it('It should register', async () => {
         await driver.get(URL_REGISTER);
@@ -57,7 +59,7 @@ describe('Sprint tests', () => {
             a.sendKeys('hhhhh');
 
         })
-        const isPresent = await driver.findElements(By.css('.table > tbody:nth-child(3) > tr:nth-child(1)')) === undefined;
+        await driver.findElements(By.css('.table > tbody:nth-child(3) > tr:nth-child(1)')) === undefined;
 
     });
 

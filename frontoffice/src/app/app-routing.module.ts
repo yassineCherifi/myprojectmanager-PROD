@@ -32,12 +32,13 @@ const routes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
+      { path: '', redirectTo: 'projects', pathMatch: 'full' },
       { path: 'projects', component: ListprojetsComponent, pathMatch: 'full' },
       { path: 'userdetail', component: UserdetailComponent },
 
       {
         path: 'projects/:id', component: DetailprojetComponent, children: [
-          { path: '', redirectTo: 'contributors', pathMatch: 'full' },
+          { path: '', redirectTo: 'issues', pathMatch: 'full' },
           { path: 'contributors', component: ContributorComponent },
           { path: 'issues', component: IssueComponent },
           { path: 'tasks', component: TaskComponent },

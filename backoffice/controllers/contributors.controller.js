@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
+const ACCEPT_URL = process.env.ACCEPT_URL || 'http://localhost:3002/api/';
+
 require('../models/project');
 require('../models/user');
 require('../models/invitation');
@@ -8,18 +10,24 @@ const Project = mongoose.model('Project');
 const User = mongoose.model('User');
 const Invitation = mongoose.model('Invitation');
 
+/**
+ * Get the invitation list from the project.
+ */
 module.exports.getInvitations = (req, res) => {
     Invitation.find({ project: req.params.id })
         .exec(function (err, invitations) {
-            if (err) { return res.json({ err: 'Aucun projet trouvé !' }); }
-            if (!invitations) { return res.json({ error: 'Aucune invitations dans ce projet!' }); }
+            if (err) { res.json({ err: 'Aucun projet trouvé !' }); }
+            if (!invitations) { res.json({ error: 'Aucune invitations dans ce projet!' }); }
             res.status(200).json(invitations);
         });
 
 };
 
+/**
+ * Add a contributor to the project.
+ */
 module.exports.addContributor = (req, res) => {
-    const invitation = req.params.invitation;
+    const invitationID = req.params.invitation;
     const email = req.params.email;
     Project.findOne({ _id: req.params.id }, (err, project) => {
         if (project) {
@@ -27,11 +35,13 @@ module.exports.addContributor = (req, res) => {
                 if (user) {
                     project.contributors.push(user);
                     project.save();
-                    Invitation.findOne({ _id: invitation }, (err, invitation) => {
+                    Invitation.findOne({ _id: invitationID }, (err, invitation) => {
                         if (!err) {
                             invitation.status = 1;
-                            invitation.save();
-                            res.send('<h3>Félicitations! Vous êtes contributeur dans le projet [' + project.title + ']!<h3>');
+                            invitation.save().then(() => {
+                                res.redirect('/');
+                            });
+
                         }
                     });
                 }
@@ -41,13 +51,11 @@ module.exports.addContributor = (req, res) => {
         .catch((error) => {
             res.status(500).json({ error });
         });
-
 };
 
-
-
-
-
+/**
+ * Invite a contributor to the project.
+ */
 module.exports.inviteContributor = (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -70,8 +78,11 @@ module.exports.inviteContributor = (req, res) => {
                         from: 'myprojectmanager.service@gmail.com',
                         to: req.body.email,
                         subject: '[MyProjectManager] Invitation to join project !',
-                        html: '<h4>Vous êtes invité à participer dans le projet [' + project.title + '], cliquer sur le lien suivant pour accepter l\'invitation :<h4>' +
-              '<a href="http://localhost:3002/api/' + project._id + '/contributors/' + invitation._id + '/' + invitation.emailUser + '">Accepter l\'invitation</a>'
+
+                        html: '<h4>Vous êtes invité à participer dans le projet [' +
+                            project.title + '], cliquer sur le lien suivant pour accepter l\'invitation et connectez-vous :<h4>' +
+                            '<a href="' + ACCEPT_URL + project._id + '/contributors/' + invitation._id + '/' + invitation.emailUser + '">Accepter l\'invitation</a>'
+
                     };
                     transporter.sendMail(mailOptions, function (error) {
                         if (error) {
@@ -86,6 +97,9 @@ module.exports.inviteContributor = (req, res) => {
     });
 };
 
+/**
+ * Delete a contributor of the project.
+ */
 module.exports.deleteContributor = (req, res) => {
     Project.findOne({ _id: req.params.id }, (err, project) => {
         if (project) {
@@ -93,13 +107,9 @@ module.exports.deleteContributor = (req, res) => {
             project.save();
             User.findOne({ _id: req.params.idContributor }, (err, user) => {
                 Invitation.remove({ emailUser: user.email, project: req.params.id }, function (err) {
-                    if (!err) return res.json({ message: 'User deleted from the project!' });
-
+                    if (!err) res.json({ message: 'User deleted from the project!' });
                 });
-
-
             });
         }
-
     });
 };

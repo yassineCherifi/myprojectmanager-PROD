@@ -1,3 +1,6 @@
+/**
+ * Release in the project.
+ */
 export class Releases {
     title: string;
     description: string;
@@ -5,5 +8,4 @@ export class Releases {
     date: string;
     sprintNumber: string;
     link: string;
-
 }

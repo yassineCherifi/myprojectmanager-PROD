@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class DetailprojetComponent implements OnInit {
 
 
-  public project_id;
+  public projectId;
   public users = [];
 
   public project: Projet;
@@ -27,15 +27,15 @@ export class DetailprojetComponent implements OnInit {
     title: '',
     description: '',
     status: ''
-  }
+  };
   idLogged;
-  isCreator: boolean = false;
+  isCreator = false;
 
   /**
    * Initialize the detaiProjet component.
    */
   ngOnInit() {
-    this.project_id = this.route.snapshot.paramMap.get('id');
+    this.projectId = this.route.snapshot.paramMap.get('id');
     this.getProject();
 
   }
@@ -44,13 +44,14 @@ export class DetailprojetComponent implements OnInit {
    * Get the selected project.
    */
   getProject() {
-    this.projetService.getProject(this.project_id).subscribe(data => {
-      this.project = data['project']
+    this.projetService.getProject(this.projectId).subscribe(data => {
+      const project = 'project';
+      const id = '_id';
+      this.project = data[project];
       this.idLogged = this.userService.getIDOflogged();
-      if (this.project.creator['_id'] == this.idLogged) {
+      if (this.project.creator[id] === this.idLogged) {
         this.isCreator = true;
-      }
-      else {
+      } else {
         this.isCreator = false;
       }
       this.modelproject.title = this.project.title;
@@ -65,13 +66,14 @@ export class DetailprojetComponent implements OnInit {
    * @param form the form containing the new title and description.
    */
   editProject(form: NgForm) {
-    if (form.value.title === "" || form.value.description === "") {
+    if (form.value.title === '' || form.value.description === '') {
       this.getProject();
       return;
     }
-    this.projetService.editProject(this.project['_id'], form.value).subscribe(
+    const id = '_id';
+    this.projetService.editProject(this.project[id], form.value).subscribe(
       res => {
-        this.getProject()
+        this.getProject();
 
       },
       err => {

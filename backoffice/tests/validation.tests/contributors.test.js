@@ -19,7 +19,9 @@ const sprint = new Sprint({ titre: "sprintTest", status: "Terminé" })
 
 describe('Contributor tests', () => {
     const driver = new Builder().forBrowser('firefox')
-        .withCapabilities({ 'browserName': 'firefox', 'name': 'Firefox Test', 'moz:webdriverClick': true, 'tz': 'America/Los_Angeles', 'build': 'Firefox Build', 'idleTimeout': '100' })
+        .withCapabilities({ 'browserName': 'firefox', 'name': 'Firefox Test',
+                            'moz:webdriverClick': true, 'tz': 'America/Los_Angeles',
+                            'build': 'Firefox Build', 'idleTimeout': '100' })
         .build();
     it('It should register', async () => {
         await driver.get(URL_REGISTER);
@@ -46,12 +48,14 @@ describe('Contributor tests', () => {
         const added = await driver.findElement(By.xpath('/html/body/app-root/app-dashboard/div/div[2]/div/app-listprojets/table/tbody/tr')).isDisplayed();
         expect(added).to.equal(true);
         await driver.findElement(By.xpath('/html/body/app-root/app-dashboard/div/div[2]/div/app-listprojets/table/tbody/tr/td[1]/a')).click()
-        const a = await driver.getCurrentUrl();
+        await driver.getCurrentUrl();
     });
 
     it('It should view invitations', async () => {
-        await driver.findElement(By.xpath('/html/body/app-root/app-dashboard/div[2]/div[2]/div/app-detailprojet/div[2]/div/app-root/app-contributor/div[1]/div/div/button')).click() 
-        let  isPresent = driver.findElements(By.xpath('/html/body/app-root/app-dashboard/div[2]/div[2]/div/app-detailprojet/div[2]/div/app-root/app-contributor/div[2]/div/div/div[2]/div/div/ng-select/div/div/div[2]/input')).isDisplayed
+        await driver.findElement(By.xpath('/html/body/app-root/app-dashboard/div[2]/div[2]/div/app-detailprojet/div[2]/div/app-root/app-contributor/div[1]/div/div/button')).click()
+        let  isPresent = driver.findElements(By.xpath('/html/body/app-root/app-dashboard/div[2]/div[2]/'+
+                                                      'div/app-detailprojet/div[2]/div/app-root/app-contributor'+
+                                                      '/div[2]/div/div/div[2]/div/div/ng-select/div/div/div[2]/input')).isDisplayed
         expect(isPresent).to.equal(true);
     });
 
@@ -65,7 +69,5 @@ describe('Contributor tests', () => {
         });
         driver.quit()
     });
-
-
 
 });

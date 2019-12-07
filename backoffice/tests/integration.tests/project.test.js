@@ -1,5 +1,4 @@
 let params = require('./params')
-let mongoose = require("mongoose");
 let User = require('../../models/user');
 let Project = require('../../models/project');
 
@@ -9,7 +8,6 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../../app');
 let expect = chai.expect;
-let should = chai.should();
 
 chai.use(chaiHttp);
 
@@ -50,7 +48,7 @@ describe('Get project test, add a project', () => {
                             res.body.should.have.property('idlogged');
                             let nb_projects = res.body.result.length;
                             let idUser = res.body.idlogged;
-                            project_details_test = params.project_details
+                            let project_details_test = params.project_details
 
                             project_details_test.creator = idUser;
 

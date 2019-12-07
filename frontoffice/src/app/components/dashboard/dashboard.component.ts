@@ -16,11 +16,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.userService.getDashboard().subscribe(
       res => {
-        this.userService.setToken(res['user']);
-        this.userInfos = res['user'];
+        const user = 'user';
+        this.userService.setToken(res[user]);
+        this.userInfos = res[user];
       },
       err => { }
-    )
+    );
   }
 
   /**
@@ -33,6 +34,6 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['login']);
       },
       err => { }
-    )
+    );
   }
 }

@@ -14,12 +14,12 @@ class MockActivatedRoute {
     paramMap: convertToParamMap({
       id: '1'
     })
-  }
+  };
   parent = {
     routeConfig: { children: { filter: () => {} } },
     params: { subscribe: jasmine.createSpy('subscribe')
     .and
-    .returnValue(of(<Params>{id: 1}))
+    .returnValue(of({id: 1} as Params))
   }
   };
 }
@@ -47,8 +47,4 @@ describe('DetailsprintComponent', () => {
     fixture.detectChanges();
   });
 
-  /*
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });*/
 });
