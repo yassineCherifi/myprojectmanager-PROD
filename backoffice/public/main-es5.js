@@ -783,17 +783,6 @@
             ], AuthInterceptor);
             /***/ 
         }),
-        /***/ "./src/app/components/accept/accept.component.scss": 
-        /*!*********************************************************!*\
-          !*** ./src/app/components/accept/accept.component.scss ***!
-          \*********************************************************/
-        /*! exports provided: default */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYWNjZXB0L2FjY2VwdC5jb21wb25lbnQuc2NzcyJ9 */");
-            /***/ 
-        }),
         /***/ "./src/app/components/accept/accept.component.ts": 
         /*!*******************************************************!*\
           !*** ./src/app/components/accept/accept.component.ts ***!
@@ -815,8 +804,7 @@
             AcceptComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-accept',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./accept.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/accept/accept.component.html")).default,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./accept.component.scss */ "./src/app/components/accept/accept.component.scss")).default]
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./accept.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/accept/accept.component.html")).default
                 })
             ], AcceptComponent);
             /***/ 
@@ -942,8 +930,8 @@
                     });
                 };
                 /**
-                  * Get pending invitations for the current user and project.
-                  */
+                 * Get pending invitations for the current user and project.
+                 */
                 ContributorComponent.prototype.deleteInvitation = function (id) {
                     var _this = this;
                     this.contributorService.deleteInvitation(this.projectId, id).subscribe(function (data) { return _this.getInvitations(); });
@@ -2407,10 +2395,10 @@
                     return this.httpClient.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/projects/' + idProject + '/contributors/' + idUser);
                 };
                 /**
-                  * Remove a contributor from the project.
-                  * @param idProject id of the project.
-                  * @param idInvitation id of the invitation.
-                  */
+                 * Remove a contributor from the project.
+                 * @param idProject id of the project.
+                 * @param idInvitation id of the invitation.
+                 */
                 ContributorService.prototype.deleteInvitation = function (idProject, idInvitation) {
                     return this.httpClient.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/projects/' + idProject + '/invitations/' + idInvitation);
                 };
@@ -2966,8 +2954,12 @@
                  */
                 UserService.prototype.getIDOflogged = function () {
                     var user = localStorage.getItem('userinfos');
-                    if (user !== null)
+                    if (user !== null) {
                         return JSON.parse(user).infos._id;
+                    }
+                    else {
+                        return null;
+                    }
                 };
                 return UserService;
             }());
@@ -3034,7 +3026,7 @@
           \***************************/
         /*! no static exports found */
         /***/ (function (module, exports, __webpack_require__) {
-            module.exports = __webpack_require__(/*! /home/computeruser/Desktop/myprojectmanager-DEV/frontoffice/src/main.ts */ "./src/main.ts");
+            module.exports = __webpack_require__(/*! /home/computeruser/Desktop/myprojectmanager-PROD/frontoffice/src/main.ts */ "./src/main.ts");
             /***/ 
         })
     }, [[0, "runtime", "vendor"]]]);

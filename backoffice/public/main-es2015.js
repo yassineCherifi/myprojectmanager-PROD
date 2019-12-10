@@ -822,19 +822,6 @@ AuthInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/components/accept/accept.component.scss":
-/*!*********************************************************!*\
-  !*** ./src/app/components/accept/accept.component.scss ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYWNjZXB0L2FjY2VwdC5jb21wb25lbnQuc2NzcyJ9 */");
-
-/***/ }),
-
 /***/ "./src/app/components/accept/accept.component.ts":
 /*!*******************************************************!*\
   !*** ./src/app/components/accept/accept.component.ts ***!
@@ -857,8 +844,7 @@ let AcceptComponent = class AcceptComponent {
 AcceptComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-accept',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./accept.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/accept/accept.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./accept.component.scss */ "./src/app/components/accept/accept.component.scss")).default]
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./accept.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/accept/accept.component.html")).default
     })
 ], AcceptComponent);
 
@@ -996,8 +982,8 @@ let ContributorComponent = class ContributorComponent {
         });
     }
     /**
-      * Get pending invitations for the current user and project.
-      */
+     * Get pending invitations for the current user and project.
+     */
     deleteInvitation(id) {
         this.contributorService.deleteInvitation(this.projectId, id).subscribe(data => this.getInvitations());
     }
@@ -2510,10 +2496,10 @@ let ContributorService = class ContributorService {
         return this.httpClient.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/projects/' + idProject + '/contributors/' + idUser);
     }
     /**
-      * Remove a contributor from the project.
-      * @param idProject id of the project.
-      * @param idInvitation id of the invitation.
-      */
+     * Remove a contributor from the project.
+     * @param idProject id of the project.
+     * @param idInvitation id of the invitation.
+     */
     deleteInvitation(idProject, idInvitation) {
         return this.httpClient.delete(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].API_URL + '/projects/' + idProject + '/invitations/' + idInvitation);
     }
@@ -3126,8 +3112,12 @@ let UserService = class UserService {
      */
     getIDOflogged() {
         const user = localStorage.getItem('userinfos');
-        if (user !== null)
+        if (user !== null) {
             return JSON.parse(user).infos._id;
+        }
+        else {
+            return null;
+        }
     }
 };
 UserService.ctorParameters = () => [
@@ -3209,7 +3199,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/computeruser/Desktop/myprojectmanager-DEV/frontoffice/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/computeruser/Desktop/myprojectmanager-PROD/frontoffice/src/main.ts */"./src/main.ts");
 
 
 /***/ })
